@@ -65,18 +65,17 @@
        		</div>
         	<div class ="container-login">
 				<div class ="form">
-					<h2> Accedi </h2>		
-					<div id = "messageError"></div>
-					<form name = "login">
+					<h2> Accedi </h2>				
+					<form name = "login" action="Login" method="get">
 						<label for="uname"><b>Nome utente</b></label>
-					    <input type="text" placeholder="Inserisci nome utente" name="NomeUtente" id="myName" required>
+					    <input type="text" placeholder="Inserisci nome utente" name="NomeUtente" required>
 					
 					    <label for="psw"><b>Password</b></label>  
 					    <div class="input-with-icon">
-							<input type="password" placeholder="Inserisci password" name="Password" id="myPass" required>
+							<input type="password" placeholder="Inserisci password" name="Password" id="myInput" required>
 							<i class="fas fa-eye-slash" onclick="togglePassword(event)"></i>
 						</div>
-					    <span class="dim" onclick="mostraRecuperoPassword()">Password dimenticata ?</span> 	
+					    <span class="dim"><a href="#">Password dimenticata ?</a></span> 	
 					    	    
 					    <button type="submit">Accedi</button>
 					    <span class = "remb"><label> <input type="checkbox" checked="checked" name="remember">Ricordami</label></span>
@@ -100,26 +99,24 @@
    			<div class="container-login registrazione">
 				<div class ="form">
 					<h2> Registrati</h2>
-					<div id = "signUpMessageError"></div>
 							
-					<form name="sign-up">
+					<form action="Registration" method="get">
 					<label for="surname"><b>Nome Utente</b></label><br>
-					<input type="text" placeholder="Inserisci nome utente" name="NomeUtente" required id = "newName">
+					<input type="text" placeholder="Inserisci nome utente" name="NomeUtente" required onSelect="allLetter(document.form1.text1)">
 						    	
 					<label for="email"><b>Email</b></label><br>
-					<input type="email" placeholder="Inserisci email" name="Email" required id = "newEmail">
-					
+					<input type="email" placeholder="Inserisci email" name="Email" required onSelect="ValidateEmail(document.form1.text1)">
+						    	
 					<label for="password" class="control-label"><b>Password</b></label>
 					<div class="input-with-icon">
-					<input type="password" placeholder="Inserisci password" name="Password" id="regPass" required>
+					<input type="password" placeholder="Inserisci password" name="Password" id="myInput" required>
 					<i class="fas fa-eye-slash" onclick="togglePassword(event)"></i>
-
 					</div>
 						    	
 					<label for="confPass"><b>Conferma password</b></label>
 						    	
 					<div class="input-with-icon">
-						<input type="password" placeholder="Reinserisci password" name="Conf_Password" id="regPassRepeat" required>
+						<input type="password" placeholder="Reinserisci password" name="Conf_Password" id="myInput2" required>
 						<i class="fas fa-eye-slash" onclick="togglePassword(event)"></i>
 					</div>
 						    	
@@ -133,26 +130,6 @@
 				</div>	
 		   	 </div>
 		</div>
-
-		<!-- RECUPERO PASSWORD -->
-		<div class = "sfondo-login recuperoPassword">
-			<div id = "close-icon" onClick = "nascondi()">
-	       			<i class="far fa-times-circle"></i>
-	       	</div>
-	       	
-   			<div class="container-login recuperoPassword">
-				<div class ="form">
-					<h2>Recupero password</h2>
-					
-					<form name="sign-up">
-						<label for="email"><b>Inserisci la tua mail</b></label><br>
-						<input type="email" placeholder="es: marioRossi@libero.it" name="Email" required id = "emailF">
-						<button type="submit">Invio</button>
-					</form>	   
-		   		</div>
-		    </div>
-		</div>
-			
         <div class = "barraCategorie">
             <a href = "#"> 
                 <span class = "cartaCategoria" style="background: url('img/category/sviluppo2.png') no-repeat;">
@@ -304,7 +281,7 @@
                 <div class = "cell odd">
                     <i class="far fa-envelope small-font">
                         <p>
-                            <a href = "mailto: info@studyme.com">tsw.studyMe@gmail.com</a> <!-- Email da sostituire -->
+                            <a href = "mailto: info@studyme.com">info@studyme.com</a> <!-- Email da sostituire -->
                         </p>
                     </i>
                 </div>
@@ -312,8 +289,9 @@
         </div>
     </div>
     
+  	<script src="validation.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  	<script src="loginManager.js"></script>
     <script type="text/javascript" src="showSlides.js"></script>
+    <script type="text/javascript" src="mostraPassword.js"></script>
     <script src="jquery.nicescroll.min.js"></script>
 </body>
