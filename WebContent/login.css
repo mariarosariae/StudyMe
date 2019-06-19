@@ -23,13 +23,39 @@ body, html {
 	display: none;
 }
 
+.sfondo-login.recuperoPassword{
+	display: none;
+}
+
 #pulsante-accedi{
 	cursor: pointer;
+}
+
+#messageError {
+	font-weight: bold;
+    text-align: center;
+    color: red;
+    opacity: 0;
+    transition: opacity .5s;
+    text-shadow: 2px 2px 4px black;
+}
+
+#signUpMessageError {
+	font-weight: bold;
+    text-align: center;
+    color: red;
+    opacity: 0;
+    transition: opacity .5s;
+    text-shadow: 2px 2px 4px black;
 }
 
 #pulsante-registrati{
 	cursor: pointer;
 	color: blue;
+}
+
+.dim{
+	cursor: pointer;
 }
 
 #close-icon i{
@@ -58,6 +84,10 @@ body, html {
 	display: none;
 }
 
+.container-login.recuperoPassword{
+	display: none;
+}
+
 #new-pulsante-accedi{
 	cursor: pointer;
 	color: blue;
@@ -68,14 +98,13 @@ body, html {
 	font-size: 10px;
 	font-family: 'Karma', serif;
 	width: 100%;
-	margin: 0px;
+	margin: 0;
 	padding: 15px 20px;
 	display: inline-block;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 	border-radius: 5px 5px 5px 5px;
 	line-height: 150%;
-	margin-bottom: 15px;
 }
 
 .input-with-icon{

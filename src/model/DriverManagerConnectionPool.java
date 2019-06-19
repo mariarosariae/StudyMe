@@ -18,11 +18,11 @@ public class DriverManagerConnectionPool  {
 		Connection newConnection = null;
 		String ip = "127.0.0.1";
 		String port = "3306";
-		String db = "storage";
+		String db = "studyme";
 		String username = "root";
 		String password = "Mariarosaria)(";
 
-		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+ "/"+db, username, password);
+		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+ "/"+ db + "?useSSL=false", username, password);
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}

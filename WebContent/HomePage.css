@@ -31,6 +31,10 @@ body, html{
     margin-left: auto;
 }
 
+#pulsanteAccedi{
+	desktop: block;
+}
+
 .nav li {
     list-style: none;
     float: left;
