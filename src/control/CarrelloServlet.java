@@ -12,44 +12,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.bean.Carrello;
-import model.bean.Pacchetto;
+import model.bean.CarrelloBean;
 import model.bean.PacchettoBean;
 import model.dao.PacchettoDS;
 
-
-/**
- * Servlet implementation class CarrelloServlet
- */
 @WebServlet("/CarrelloServlet")
 public class CarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static PacchettoDS pacchettods= new PacchettoDS();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public CarrelloServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request,response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);
 		HttpSession session = request.getSession();
 		String action=request.getParameter("action");
-		Carrello carrello =((Carrello)session.getAttribute("carrello"));
+		CarrelloBean carrello =((CarrelloBean)session.getAttribute("carrello"));
 		
 		System.out.println("ciao");
 		
@@ -59,7 +44,7 @@ public class CarrelloServlet extends HttpServlet {
 				boolean presente=false;  //diventerà true quando il carrello conterr� gi� prodotti con quell'id
 				String codiceP	= request.getParameter("codiceProdotto");
 			
-				ArrayList<Pacchetto>pacchetticarrello=carrello.getOggettiCarrello();
+				ArrayList<PacchettoBean>pacchetticarrello=carrello.getOggettiCarrello();
 
 				for(int i=0; i<pacchetticarrello.size(); i++){
 					if(codiceP==pacchetticarrello.get(i).getCodicePacchetto()){
@@ -68,7 +53,7 @@ public class CarrelloServlet extends HttpServlet {
 					}
 				}
 				if(!presente) {
-					Pacchetto pacchetto=null;
+					PacchettoBean pacchetto=null;
 					try {
 						pacchetto=pacchettods.findByKey(codiceP);
 						
@@ -101,6 +86,5 @@ public class CarrelloServlet extends HttpServlet {
 				}
 			}else System.out.println("String action nulla");
 				session.setAttribute("carrello", carrello);
-		
 	}
 }

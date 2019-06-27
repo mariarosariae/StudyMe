@@ -3,10 +3,10 @@ package model.bean;
 import java.util.ArrayList;
 import model.bean.PacchettoBean;
 
-public class Carrello {
+public class CarrelloBean {
 	 ArrayList<PacchettoBean> oggetti_carrello;
      
-	    public Carrello() {
+	    public CarrelloBean() {
 	            oggetti_carrello = new ArrayList<PacchettoBean>();
 	    }
 	         
