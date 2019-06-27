@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 			out.print(gson.toJson(jsonResponse));
 			return;
 		}
-		
+
 		String passwordBase64format  = Base64.getEncoder().encodeToString(password.getBytes()); 
 	
 		UserManager manager = new UserManager();
@@ -51,14 +51,13 @@ public class LoginServlet extends HttpServlet {
 		UserBean user = manager.login(nomeUtente, passwordBase64format);
 				
 		if(user == null) {
-			System.out.println("NESSUN UTENTE");
 			JSONResponse jsonResponse = new JSONResponse(false, NO_USER);
 			out.print(gson.toJson(jsonResponse));
 			return;	
 		}
-		else {	
-			System.out.println("utente ok");
-			request.getSession().setAttribute("User", user);
+		else {
+			HttpSession session = request.getSession();
+			session.setAttribute("User", user);
 			JSONResponse jsonResponse = new JSONResponse(true, "OK", user.getNomeUtente());
 			out.print(gson.toJson(jsonResponse));
 		}

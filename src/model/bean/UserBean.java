@@ -40,5 +40,5 @@ public class UserBean {
 	}
 	
 	//VARIABILI D'ISTANZA
-	public String nomeUtente, password, confPassword, email;
+	private String nomeUtente, password, confPassword, email;
 }

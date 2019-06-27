@@ -23,13 +23,42 @@ body, html {
 	display: none;
 }
 
+.sfondo-login.recuperoPassword{
+	display: none;
+}
+
+#formRecovery{
+	display: block;
+}
+
 #pulsante-accedi{
 	cursor: pointer;
+}
+
+#messageError {
+	font-weight: bold;
+    text-align: center;
+    color: red;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+#signUpMessageError {
+	font-weight: bold;
+    text-align: center;
+    color: red;
+    opacity: 0;
+    transition: opacity .5s;
+    text-shadow: 2px 2px 4px black;
 }
 
 #pulsante-registrati{
 	cursor: pointer;
 	color: blue;
+}
+
+.dim{
+	cursor: pointer;
 }
 
 #close-icon i{
@@ -58,6 +87,10 @@ body, html {
 	display: none;
 }
 
+.container-login.recuperoPassword{
+	display: none;
+}
+
 #new-pulsante-accedi{
 	cursor: pointer;
 	color: blue;
@@ -65,17 +98,16 @@ body, html {
 
 .container-login input[type=text], input[type=password], input[type=email] {
 	position: relative;
-	font-size: 10px;
-	font-family: 'Karma', serif;
+	font-size: 12px;
+	font-family: 'Mali', cursive;
 	width: 100%;
-	margin: 0px;
+	margin: 0;
 	padding: 15px 20px;
 	display: inline-block;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 	border-radius: 5px 5px 5px 5px;
 	line-height: 150%;
-	margin-bottom: 15px;
 }
 
 .input-with-icon{
@@ -111,7 +143,7 @@ a:hover {
 }
 
 button {
-	font-family: 'Karma', serif;
+	font-family: 'Mali', cursive;
 	background-color: #4CAF50;
 	color: white;
 	padding: 14px 20px;
@@ -136,20 +168,20 @@ button:hover {
 	padding: 25px 30px;
 	width: 250px;
 	text-align: left;
-	font-family: 'Karma', serif;
+	font-family: 'Mali', cursive;
 	transform: translate(-50%, -50%);
 	background: linear-gradient(to bottom, #546c7cCC 0%, #2890b9CC 100%);
 }
 
 span.remb {
-	font-size: 11px;
+	font-size: 12px;
 	float: center;
 	padding: 10;
 	margin: 45;
 }
 
 span.dim {
-	font-size: 10px;
+	font-size: 12px;
 	text-align: right;
 }
 
@@ -158,7 +190,42 @@ span.dim {
 	text-align: center;
 }
 
+.cerchio {
+	position: relative;
+	width: 50px;
+    height: 50px;
+    display: block;
+    font-size: 6px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 37.5px;
+    border-radius: 50px;
+    background: linear-gradient(to bottom, #2C5364 0%, #13364D 100%);
+    border: 1px solid white;
+    margin: auto;
+    color: white;
+}
+
+.cerchio h1{
+	font-size: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-family: 'Mali', cursive;
+}
+
+.navbar-item.libreria img{
+	position: relative;
+	width: 50px;
+    height: 50px;
+    display: block;
+}
+
 @media only screen and (max-width: 728px){
     .form{
         padding: 5px 10px; !important
     }
+
+    

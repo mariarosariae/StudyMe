@@ -21,14 +21,26 @@ body, html{
     align-items: center; /*c’entra gli elementi verticalmente*/
 }
 
-#logo {
-    width: 200px;
-    margin-right: auto;
+#logo, #carrello {
+	width: 275px;
 }
 
-#carrello{
-    width: 200px;
-    margin-left: auto;
+#logo {
+	margin-right: auto;
+}
+
+#carrello {
+	margin-left: auto;
+    display: block;
+}
+
+#carrello nav {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#pulsanteAccedi{
+	desktop: block;
 }
 
 .nav li {
@@ -52,6 +64,7 @@ body, html{
 .navbar-item-image {
     margin-bottom: 5px;
     text-align: center;
+    cursor: pointer;
 }
 
 .navbar-item-image img {
@@ -72,10 +85,10 @@ body, html{
 
 .navbar-item-description {
     color: white;
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
 }
 
-.navbar-item#logo-item .navbar-item-description {
+.navbar-item#logo-item .navbar-item-description{
     display: flex;
     align-items: center;
     color: black;
@@ -90,6 +103,7 @@ a {
 
 #ricerca {
     position: relative;
+    display: block;
 }
 
 #ricerca i {
@@ -104,7 +118,7 @@ a {
     padding: 15px 30px 15px 60px;
     border: none;
     border-radius: 30px;
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
 }
 
 .barraCategorie{
@@ -143,7 +157,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
 }
 
 #nomeCategoria{
@@ -153,7 +167,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
 }
 
 .sfondo{
@@ -170,12 +184,18 @@ a {
 }
 
 .slideshow {
+	position: relative;
     width: 100%;
     height: 100%;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     opacity: 1;
+}
+
+.text-wrapper{
+	position: absolute;
+	bottom: 50px;
 }
 
 .fade {
@@ -196,11 +216,9 @@ a {
 }
 
 .slideshow-frase{
-    position: relative;
     font-size: 30px;
     font-family: 'Courgette', cursive;
     color: white;
-    top: 300px;
     margin-left: 15px;
 }
 
@@ -208,8 +226,7 @@ a {
     size: 10px;
     color: white;
     font-family: 'Courgette', cursive;
-    margin-top: 300px;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 
@@ -220,7 +237,7 @@ a {
 
 .listaVantaggi-container h1{
     text-align: center;
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
     color: #585961;
 }
 
@@ -238,7 +255,7 @@ a {
     height: auto;
     display: inline-block;
     margin: 0 2%; 
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
 }
 
 .cell.medium {
@@ -273,7 +290,7 @@ a {
 
 .whoWeAre h1{
     text-align: center;
-    font-family: 'Coming Soon', cursive;
+    font-family: 'Mali', cursive;
     color:white;
     margin: 0;
 }
@@ -305,6 +322,59 @@ a {
     color: white;
 }
 
+.fas.fa-bars{
+	color: black;
+	font-size: 30px;
+	display: none;
+}
+
+#responsive-bar {
+    height: 100%;
+    width: 100%;
+    background: #000000AA;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+}
+
+#lateral{
+    height: 100%;
+    margin-right: 0px;
+    width: 150px;
+    position: fixed;
+    right: 0;
+    background-color: #3490cd;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.navLateral{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.closebtn{
+	font-size: 70px;
+}
+
+#lateral .fas.fa-search{
+	font-size: 50px;
+}
+
+#lateral .navbar-item-image img{
+	height: 50px;
+}
+
+#lateral li{
+	display: block;
+	padding: 8px 0;
+	text-decoration: none;
+}
+
 @media only screen and (min-width: 1440px){
     .barraCategorie{
         justify-content: center;
@@ -325,4 +395,34 @@ a {
     .cell {
         grid-column: span 12 !important;
     }
+}
+
+@media only screen and (max-width: 600px){
+	.slideshow-frase{
+  		top: 200px
+  	}
+  
+  	.slideshow-sottofrase{
+ 		top: 200px;
+  	}
+  	
+  	.cartaCategoria{
+  		width: 130px;
+	  	height:30px;
+  	}
+}
+
+@media only screen and (max-width: 1024px) {
+  #carrello{
+  	display: none;
+  }
+  
+  #ricerca{
+  	display:none;
+  }
+
+  .fas.fa-bars{
+    float: right;
+    display: block;
+  }
 }
