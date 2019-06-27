@@ -1,0 +1,105 @@
+@charset "ISO-8859-1";
+
+.grid-generale{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+
+}
+
+.pacchetto{
+    position: relative;
+    grid-column: span 3;
+    border: 1px solid;
+    margin: 10px 2px 15px 2px;
+    background-color:/*#F2F3F4*/ white;
+    transition: .5s all ease;
+}
+.pacchetto :hover{
+    color:#0076a3;
+}
+
+.pacchetto h1{
+    font-size: 20px;
+    text-align: center;
+    font-family:'Coming Soon', cursive;
+  }
+
+.foto-categoria{
+    width: 230px;
+    height: 150px;
+    background-size: cover;
+    display: block;
+    margin: 0px auto;
+    background-position: center;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px black;
+    transition-property: all;
+    transition-delay: 1s;
+    transition-duration: 2s;
+}
+
+
+.pacchetto p{
+    text-align: center;
+    font-size: 15px;
+    font-family:'Coming Soon', cursive;
+    margin: 15px 10px 80px 10px;
+}
+
+.pacchetto .buy-now {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pacchetto .buy-now input{
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    padding: 10px 15px;
+    border: solid 1px  #0076a3;
+    background: #0095cd;
+    border-radius: 20px;
+    font-family:'Coming Soon', cursive;
+}
+
+.cat1{
+    background:/*#13364D*/ white; 
+}
+.cat1 h1{
+    font-family:'Coming Soon', cursive;
+    font-size: x-large;
+    margin: 0px 0px 0px 0px;
+}
+.cat2{
+    background:/*#2980b9*/ white ;
+}
+.cat2 h1{
+    font-family:'Coming Soon', cursive;
+    font-size: x-large;
+    margin: 0px 0px 0px 0px;
+}
+  
+@media only screen and (min-width: 1440px){
+    .barraCategorie{
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  .cell {
+      grid-column: span 6 !important;
+  }
+  
+  .cell.odd {
+      grid-column: span 12 !important;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+    .cell {
+        grid-column: span 12 !important;
+    }
+}
