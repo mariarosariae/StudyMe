@@ -13,5 +13,5 @@ public class CategoriaBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String nomeCategoria;
+	private String nomeCategoria;
 }

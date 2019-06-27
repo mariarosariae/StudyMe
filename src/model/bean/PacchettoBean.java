@@ -49,6 +49,6 @@ public class PacchettoBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String codicePacchetto, descrizione, titolo, catagoria, sottocategoria;
-	public double prezzo;
+	private String codicePacchetto, descrizione, titolo, catagoria, sottocategoria;
+	private double prezzo;
 }

@@ -39,6 +39,6 @@ public class LezioniBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String url, titolo, pacchetto;
-	public Time durata;
+	private String url, titolo, pacchetto;
+	private Time durata;
 }

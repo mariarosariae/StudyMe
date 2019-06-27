@@ -21,5 +21,5 @@ public class SottocategoriaBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String idSottoCat, nomeSott;
+	private String idSottoCat, nomeSott;
 }

@@ -46,7 +46,7 @@ public class AcquistoBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public int fattura;
-	public String pacchetto, modalitaPagamento, idAcquisto;
-	public double importo;
+	private int fattura;
+	private String pacchetto, modalitaPagamento, idAcquisto;
+	private double importo;
 }

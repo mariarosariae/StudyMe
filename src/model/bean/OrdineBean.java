@@ -63,8 +63,8 @@ public class OrdineBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String cliente;
-	public int numFattura, quantita;
-	public double iva, imponibile, prezzoTot;
-	public Date data;
+	private String cliente;
+	private int numFattura, quantita;
+	private double iva, imponibile, prezzoTot;
+	private Date data;
 }

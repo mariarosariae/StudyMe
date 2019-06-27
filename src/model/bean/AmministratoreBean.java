@@ -40,5 +40,5 @@ public class AmministratoreBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String nomeAmministratore, password, confPassword, email;
+	private String nomeAmministratore, password, confPassword, email;
 }

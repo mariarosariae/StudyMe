@@ -37,5 +37,5 @@ public class RecensioneBean {
 	}
 
 	//VARIABILI D'ISTANZA
-	public String Cliente, Pacchetto, commento, idRecensione;
+	private String Cliente, Pacchetto, commento, idRecensione;
 }
