@@ -66,10 +66,16 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 	}
 
 	@Override
-	public synchronized boolean remove(String codiceP) throws SQLException {
+	public synchronized boolean remove(Object codiceP) throws SQLException {
+		if(!(codiceP instanceof String))
+			throw new IllegalArgumentException("La chiave primaria deve essere di tipo String");
+		
+		String key = (String) codiceP;
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		
+		
 		int result = 0;
 
 		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE codicePacchetto = ?";
@@ -77,7 +83,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setString(1, codiceP);
+			preparedStatement.setString(1, key);
 
 			result = preparedStatement.executeUpdate();
 
@@ -94,7 +100,12 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 	}
 
 	@Override
-	public synchronized PacchettoBean findByKey(String codiceP) throws SQLException {
+	public synchronized PacchettoBean findByKey(Object codiceP) throws SQLException {
+		if(!(codiceP instanceof String))
+			throw new IllegalArgumentException("La chiave primaria deve essere di tipo String");
+		
+		String key = (String) codiceP;
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -105,7 +116,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, codiceP);
+			preparedStatement.setString(1, key);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -269,7 +280,8 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 	}
 	
 	public Map<String,ArrayList<PacchettoBean>> getCategoriaRaggruppato(String categoria) {
-		Map result = new HashMap<String, ArrayList<PacchettoBean>>();
+		Map<String, ArrayList<PacchettoBean>> result = new HashMap<String, ArrayList<PacchettoBean>>();
+		Map<String, String>  sottocategorie = new HashMap<String, String>();
 		
 		try {
 			java.sql.Connection conn = DriverManagerConnectionPool.getConnection();
@@ -281,6 +293,8 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 			ResultSet res = stm.executeQuery();
 			conn.commit();
 
+			SottocategoriaManager manager = new SottocategoriaManager();
+			
 			while (res.next()) {
 				PacchettoBean pacchetto1 = new PacchettoBean();
 				pacchetto1.setCodicePacchetto(res.getString(1));
@@ -290,7 +304,21 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pacchetto1.setDescrizione(res.getString(5));
 				pacchetto1.setTitolo(res.getString(6));
 
-				/*da compleatare con mappa;*/
+				String valueSottocategoria = null;
+				
+				//Se ho già estratto il valore della sottocategoria dal db lo vado a prendere dalla mappa
+				//altrimenti lo vado dal db
+				if(sottocategorie.containsKey(pacchetto1.getSottocategoria())) {
+					valueSottocategoria = sottocategorie.get(pacchetto1.getSottocategoria());
+				} else {
+					valueSottocategoria = manager.findByKey(pacchetto1.getSottocategoria()).getNomeSott();
+				}
+				
+				if(!result.containsKey(valueSottocategoria)) {
+					result.put(valueSottocategoria, new ArrayList<PacchettoBean>());
+				}
+				
+				result.get(valueSottocategoria).add(pacchetto1);
 			}
 			
 		} catch (SQLException e) {

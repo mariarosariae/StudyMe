@@ -5,6 +5,7 @@ package control;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,13 +27,13 @@ public class ServletCatalogo extends HttpServlet {
 		String categoria=request.getParameter("categoria");
 		System.out.println(categoria);
 		
-		ArrayList<PacchettoBean> pacchetti= new ArrayList<PacchettoBean>();
+		Map<String,ArrayList<PacchettoBean>> pacchetti = null;
 		
 		
 		PacchettoDS dao = new PacchettoDS();
-		pacchetti = dao.getCategoria(categoria);
+		pacchetti = dao.getCategoriaRaggruppato(categoria);
 		
-		if(pacchetti.size()==0) {
+		if(pacchetti == null || pacchetti.size()==0) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}

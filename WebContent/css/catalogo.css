@@ -6,6 +6,16 @@
 
 }
 
+.categoria {
+    padding: 50px 0;
+    background-position: center;
+    background-size: cover;
+}
+
+.categoria h1 {
+	margin: 0;
+}
+
 .pacchetto{
     position: relative;
     grid-column: span 3;
@@ -65,18 +75,15 @@
     font-family:'Coming Soon', cursive;
 }
 
-.cat1{
-    background:/*#13364D*/ white; 
+.sottocat:nth-child(odd){
+    background: #13364D; 
 }
-.cat1 h1{
-    font-family:'Coming Soon', cursive;
-    font-size: x-large;
-    margin: 0px 0px 0px 0px;
+
+.sottocat:nth-child(even) {
+	background: #2980b9;
 }
-.cat2{
-    background:/*#2980b9*/ white ;
-}
-.cat2 h1{
+
+.sottocat h1{
     font-family:'Coming Soon', cursive;
     font-size: x-large;
     margin: 0px 0px 0px 0px;
