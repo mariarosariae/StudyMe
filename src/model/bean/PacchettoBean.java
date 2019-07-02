@@ -23,6 +23,9 @@ public class PacchettoBean {
 	public double getPrezzo() {
 		return prezzo;
 	}
+	public String getFoto() {
+		return foto;
+	}
 
 	public void setCodicePacchetto(String codicePacchetto) {
 		this.codicePacchetto = codicePacchetto;
@@ -47,8 +50,10 @@ public class PacchettoBean {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-
+	public void setFoto(String foto) {
+		this.foto=foto;
+	}
 	//VARIABILI D'ISTANZA
-	private String codicePacchetto, descrizione, titolo, catagoria, sottocategoria;
+	private String codicePacchetto, descrizione, titolo, catagoria, sottocategoria,foto;
 	private double prezzo;
 }

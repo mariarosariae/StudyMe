@@ -17,6 +17,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.DriverManagerConnectionPool;
+import model.bean.CategoriaBean;
 import model.bean.PacchettoBean;
 
 public class PacchettoDS implements Model_interface<PacchettoBean> {
@@ -40,7 +41,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + TABLE_NAME
-				+ " (codicePacchetto, categoria, idSott, prezzo,descrizione,titolo) VALUES (?, ?, ?, ?,?,?)";
+				+ " (codicePacchetto, categoria, idSott, prezzo,descrizione,titolo,foto) VALUES (?, ?, ?, ?,?,?,?)";
 
 		try {
 			connection = ds.getConnection();
@@ -51,6 +52,8 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 			preparedStatement.setDouble(4, pacchetto.getPrezzo());
 			preparedStatement.setString(5, pacchetto.getDescrizione());
 			preparedStatement.setString(6, pacchetto.getTitolo());
+			preparedStatement.setString(7, pacchetto.getFoto());
+			
 
 			preparedStatement.executeUpdate();
 			connection.commit();
@@ -127,6 +130,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pacchetto.setPrezzo(rs.getDouble("prezzo"));
 				pacchetto.setDescrizione(rs.getString("descrizione"));
 				pacchetto.setTitolo(rs.getString("titolo"));
+				pacchetto.setFoto(rs.getString("foto"));
 
 			}
 
@@ -164,6 +168,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pa.setPrezzo(rs.getDouble("prezzo"));
 				pa.setDescrizione(rs.getString("descrizione"));
 				pa.setTitolo(rs.getString("titolo"));
+				pa.setFoto(rs.getString("foto"));
 
 				pacchetto.add(pa);
 			}
@@ -189,7 +194,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSql = "UPDATE " + TABLE_NAME
-				+ " SET categoria= ?, idSott= ? ,prezzo= ? , descrizione = ? , titolo=?  WHERE codicePacchetto = ? ";
+				+ " SET categoria= ?, idSott= ? ,prezzo= ? , descrizione = ? , titolo=? ,foto=?  WHERE codicePacchetto = ? ";
 
 		try {
 			connection = ds.getConnection();
@@ -200,6 +205,8 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 			preparedStatement.setDouble(3, pacchetto.getPrezzo());
 			preparedStatement.setString(4, pacchetto.getDescrizione());
 			preparedStatement.setString(5, pacchetto.getTitolo());
+			preparedStatement.setString(7, pacchetto.getFoto());
+			
 			preparedStatement.executeUpdate();
 			connection.commit();
 
@@ -219,7 +226,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		try {
 			Connection conn = DriverManagerConnectionPool.getConnection();
 
-			String sql = "SELECT *" + "FROM pacchetto" + "WHERE codicePacchetto = ?";
+			String sql = "SELECT * " + "FROM pacchetto " + "WHERE codicePacchetto = ?";
 
 			PreparedStatement stm = (PreparedStatement) conn.prepareStatement(sql);
 			stm.setString(1, codicePacchetto);
@@ -236,6 +243,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pacchetto.setPrezzo(res.getDouble(4));
 				pacchetto.setDescrizione(res.getString(5));
 				pacchetto.setTitolo(res.getString(6));
+				pacchetto.setFoto(res.getString(7));
 
 				return pacchetto;
 			} else
@@ -267,6 +275,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pacchetto1.setPrezzo(res.getDouble(4));
 				pacchetto1.setDescrizione(res.getString(5));
 				pacchetto1.setTitolo(res.getString(6));
+				pacchetto1.setFoto(res.getString(7));
 
 				pac.add(pacchetto1);
 			}
@@ -303,6 +312,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pacchetto1.setPrezzo(res.getDouble(4));
 				pacchetto1.setDescrizione(res.getString(5));
 				pacchetto1.setTitolo(res.getString(6));
+				pacchetto1.setFoto(res.getString(7));
 
 				String valueSottocategoria = null;
 				
@@ -329,4 +339,28 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		return result;
 	}
 
+	
+	public CategoriaBean getBeanCategoria(String categoria) {
+		
+		try {
+			java.sql.Connection conn = DriverManagerConnectionPool.getConnection();
+
+			String sql = "SELECT * " + "FROM categoria " + "WHERE nomeCategoria = ? ";
+
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setString(1,categoria);
+			ResultSet res = stm.executeQuery();
+			conn.commit();
+			
+		if(res.next()) {
+				CategoriaBean  cate = new CategoriaBean();
+				cate.setFotoCategoria(res.getString(2));
+					return cate;
+		}else 
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+	}
+}
 }
