@@ -5,19 +5,23 @@
 
 <% 	Map<String, ArrayList<PacchettoBean>> result =(Map<String, ArrayList<PacchettoBean>>) request.getAttribute("pacchetti"); 
 	String categoria = (String) request.getAttribute("categoria");
+	
+	CategoriaBean cat= (CategoriaBean) request.getAttribute("fotoCat");
 %>
-
 <!DOCTYPE html>
 <html>
 	<head >
-		<link rel="stylesheet" href="css/catalogo.css">
+		<link rel="stylesheet"  type="text/css" href="css/catalogo.css">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<script src="./js/catalogo.js" type="text/javascript"></script>
 	</head>
     <%@ include file = "header.jsp" %>
 <body>
      <div class ="container">
  	<%@ include file="NavigationBar.jsp"%>  
-       
-	<div class="categoria" style = "background-image: url('./img/category/sviluppo2.png')">
+    <%@ include file="BarCategory.jsp"%>   
+    
+	<div class="categoria" style = "background-image: url(<%= cat.getFotoCategoria()%>)">
 		<h1> <%=categoria.toUpperCase()%> </h1>
 	</div>
 	
@@ -30,9 +34,10 @@
    		<% 
    		ArrayList<PacchettoBean> pacchetti = result.get(categoryName);
    		for(PacchettoBean pacchetto : pacchetti) {%>	
-        <div class= "pacchetto">
+        <div class= "pacchetto" onmouseover="Zoomin()">
             <h1><%=pacchetto.getTitolo() %></h1><br>
-	        <div class = "foto-categoria" style="background-image: url(./img/immaginipacchetti/C1.jpg)"></div>
+           
+	        <div class = "foto-categoria" style = "background-image: url(<%= pacchetto.getFoto()%>)"></div>
 	            <p><%=pacchetto.getDescrizione()%></p>
 	        <div class="buy-now">
 	            <input type = "submit" value = "Vai alle lezioni">

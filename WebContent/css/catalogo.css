@@ -1,42 +1,90 @@
 @charset "ISO-8859-1";
 
+#nomeCategoria{
+	font-size: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-family: 'Coming Soon', cursive;
+}
+
+.sfondo{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 7.5px;
+    background: linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.8) 100%); 
+}
+
+.slideshow-container{
+    max-width: 1000px;
+    position: relative;
+}
+
+.slideshow {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    opacity: 1;
+}
+
+.categoria {
+    width: 100%;
+    height: 200px;
+    font-family:'Coming Soon', cursive;
+    font-size: 10px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+}
+
+.categoria h1{
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    background-size: contain;
+    font-family:'Coming Soon', cursive;
+    font-size: 70px;
+    color: black;
+    position: absolute;
+    text-align:center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
 .grid-generale{
     display: grid;
     grid-template-columns: repeat(12,1fr);
 
 }
 
-.categoria {
-    padding: 50px 0;
-    background-position: center;
-    background-size: cover;
-}
-
-.categoria h1 {
-	margin: 0;
-}
-
 .pacchetto{
     position: relative;
     grid-column: span 3;
     border: 1px solid;
-    margin: 10px 2px 15px 2px;
-    background-color:/*#F2F3F4*/ white;
+    margin: 10px 15px 15px 15px;
+    background-color:#F2F3F4;
     transition: .5s all ease;
 }
-.pacchetto :hover{
-    color:#0076a3;
-}
+
 
 .pacchetto h1{
     font-size: 20px;
     text-align: center;
     font-family:'Coming Soon', cursive;
-  }
+}
 
 .foto-categoria{
-    width: 230px;
-    height: 150px;
+    max-width: 90%;
+    height: 185px;
     background-size: cover;
     display: block;
     margin: 0px auto;
@@ -48,12 +96,17 @@
     transition-duration: 2s;
 }
 
-
 .pacchetto p{
     text-align: center;
     font-size: 15px;
     font-family:'Coming Soon', cursive;
     margin: 15px 10px 80px 10px;
+}
+
+.pacchetto h1{
+	 font-family:'Coming Soon', cursive;
+	 margin: 0px 0px 0px 0px;
+	 color: black !important;
 }
 
 .pacchetto .buy-now {
@@ -86,8 +139,10 @@
 .sottocat h1{
     font-family:'Coming Soon', cursive;
     font-size: x-large;
-    margin: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 17px;
+    color: white;
 }
+
   
 @media only screen and (min-width: 1440px){
     .barraCategorie{
@@ -103,10 +158,21 @@
   .cell.odd {
       grid-column: span 12 !important;
   }
+  
+  .pacchetto {
+  	grid-column: span 6 !important;
+  }
+ 
 }
 
 @media only screen and (max-width: 425px) {
     .cell {
         grid-column: span 12 !important;
     }
+    .pacchetto {
+  	grid-column: span 12 !important;
+ 
 }
+
+
+

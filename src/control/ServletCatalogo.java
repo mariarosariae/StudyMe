@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.CategoriaBean;
 import model.bean.PacchettoBean;
 import model.dao.PacchettoDS;
 
@@ -27,11 +28,14 @@ public class ServletCatalogo extends HttpServlet {
 		String categoria=request.getParameter("categoria");
 		System.out.println(categoria);
 		
-		Map<String,ArrayList<PacchettoBean>> pacchetti = null;
 		
+		Map<String,ArrayList<PacchettoBean>> pacchetti = null;
+		CategoriaBean fotoCat= null;
 		
 		PacchettoDS dao = new PacchettoDS();
 		pacchetti = dao.getCategoriaRaggruppato(categoria);
+		fotoCat= dao.getBeanCategoria(categoria);
+		
 		
 		if(pacchetti == null || pacchetti.size()==0) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -40,6 +44,7 @@ public class ServletCatalogo extends HttpServlet {
 		
 		request.setAttribute("categoria", categoria);
 		request.setAttribute("pacchetti", pacchetti);
+		request.setAttribute("fotoCat", fotoCat);
 
 		RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/Catalogo.jsp");
 		dispatcher.forward(request, response);
