@@ -18,7 +18,8 @@ email varchar(50) not null);
 
 DROP DATABASE IF EXISTS categoria;
 CREATE TABLE categoria(
- nomeCategoria varchar(30) primary key
+ nomeCategoria varchar(30) primary key,
+ foto varchar(300) not null
 );
 
 DROP DATABASE IF EXISTS sottoCategoria;
