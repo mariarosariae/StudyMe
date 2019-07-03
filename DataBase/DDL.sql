@@ -47,7 +47,7 @@ DROP DATABASE IF EXISTS lezioni;
 CREATE TABLE lezioni(
 url  varchar(100) primary key,
 titolo varchar(200) not null,
-durata time not null,
+durata varchar(20)not null,
 codiceP varchar(6),
 foreign key (codiceP) references pacchetto(codicePacchetto)
 		on update cascade
@@ -85,7 +85,8 @@ CREATE TABLE recensione(
 idRecensione varchar(15) primary key,
 userCliente varchar(20) not null,
 codiceP varchar(6) not null,
-commento varchar(50) not null,
+commento varchar(500) not null,
+titolo varchar(300) not null,
 foreign key (userCliente) references cliente(nomeUtente)
 	on update cascade
     on delete cascade,

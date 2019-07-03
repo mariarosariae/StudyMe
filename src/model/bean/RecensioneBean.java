@@ -19,6 +19,10 @@ public class RecensioneBean {
 	public String getIdRecensione() {
 		return idRecensione;
 	}
+	
+	public String getTitolo() {
+		return titolo;
+	}
 
 	public void setCliente(String cliente) {
 		Cliente = cliente;
@@ -35,7 +39,11 @@ public class RecensioneBean {
 	public void setIdRecensione(String idRecensione) {
 		this.idRecensione = idRecensione;
 	}
+	
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
 
 	//VARIABILI D'ISTANZA
-	private String Cliente, Pacchetto, commento, idRecensione;
+	private String Cliente, Pacchetto, commento, idRecensione, titolo;
 }

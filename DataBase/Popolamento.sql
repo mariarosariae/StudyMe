@@ -4,6 +4,9 @@ INSERT into amministratore(nomeAmministratore,password,confPassword,email)
 			('xChicca','baymax','baymax','xchicca@hotmail.it'),
             ('mRachele','mariarachele','mariarachele','mariaRachele@outlook.it');
             
+INSERT into cliente(nomeUtente ,password,email)
+	values ('Fiore', 'ZmlvcmU=', 'fiorellaesp@gmail.com');
+  
  /*CATEGORIA*/
  INSERT  into categoria(nomeCategoria,foto)
 	values	('Sviluppo','img/category/sviluppo2.png'),
@@ -98,15 +101,19 @@ INSERT into sottoCategoria(idSottocat,nomeSott)
 
 /*LEZIONI*/
 INSERT INTO lezioni(url,titolo,durata,codiceP)
-	values	('https://www.youtube.com/watch?v=4ynmgioiuJU&list=PLkX4wWMyzbftBUmT3Lvxf46OwYmDzRWwQ','Lezione 1-introduzione alla programmazione in C','7:11','pac001'),
-			('https://www.youtube.com/watch?v=cQBIHAEcjxw&list=PLkX4wWMyzbftBUmT3Lvxf46OwYmDzRWwQ&index=3','Lezione 2-Variabili cosa sono e come si usano','34:19','pac001'),
-            ('https://www.youtube.com/watch?v=AehEtQ3XVV4&list=PL0qAPtx8YtJfZpJD7uFxAXglkiHSEhktG','Lezione 1- Presentazione del corso C++','8:58','pac002'),
-            ('https://www.youtube.com/watch?v=sTT9veneQIU&list=PL0qAPtx8YtJfZpJD7uFxAXglkiHSEhktG&index=3','Lezione 2 - configuriamo gli ambienti di lavoro ','12:12','pac002'),
-            ('https://www.youtube.com/watch?v=7PGPLqFpDMc&list=PL0qAPtx8YtJe2dpE7di4aPJwrQuRD6IDD','Lezione 1 - Introduzione al corso Java','9:17','pac003'),
-            ('https://www.youtube.com/watch?v=2tILwFBOPj0&list=PL0qAPtx8YtJe2dpE7di4aPJwrQuRD6IDD&index=2','Lezione 2 - Una marea di sigle. Diamo il giusto significato a ciascuna ed iniziamo ad installare quello che ci serve.','10:22','pac003'),
-            ('https://www.youtube.com/watch?v=mXWXUzgok_I&list=PLHUQL6-_n9Zes1VLMgJbLa8IIOHT9x4Nu','Lezione 1 - Introduzione a  Python e istallazione su windows','4:09','pac004'),
-            ('https://www.youtube.com/watch?v=7HS_XYUYsm0&list=PLHUQL6-_n9Zes1VLMgJbLa8IIOHT9x4Nu&index=2','Lezione 2 - Come Usare IDLE e Fare Operazioni Numeriche','6:22','pac004'),
-            ('https://www.youtube.com/watch?v=aM5aDsipBzs&list=PLBEBB93C692220379','Lezione 1 - introduzione a MySql(part1)','6:32','pac005'),
-            ('https://www.youtube.com/watch?v=wAjteSIeT9Y&list=PLBEBB93C692220379&index=2','Lezione 2 - Imparate mysql ','4:16','pac005'),
-            ('https://www.youtube.com/watch?v=jM55Fb9YTfE&list=PLE555DB6188C967AC','Lezione 1 - Introduzione linguaggio SQL','16:12','pac006'),
-            ('https://www.youtube.com/watch?v=lwol3ceznag&list=PLE555DB6188C967AC&index=2','Lezione 2 - Creare una data base con SQL Server e Visual Studio','37:29','pac006');
+	values	('https://www.youtube.com/embed/4ynmgioiuJU','Lezione 1-introduzione alla programmazione in C','7:11','pac001'),
+			('https://www.youtube.com/embed/cQBIHAEcjxw','Lezione 2-Variabili cosa sono e come si usano','34:19','pac001'),
+            ('https://www.youtube.com/embed/AehEtQ3XVV4','Lezione 1- Presentazione del corso C++','8:58','pac002'),
+            ('https://www.youtube.com/embed/sTT9veneQIU','Lezione 2 - configuriamo gli ambienti di lavoro ','12:12','pac002'),
+            ('https://www.youtube.com/embed/7PGPLqFpDMc','Lezione 1 - Introduzione al corso Java','9:17','pac003'),
+            ('https://www.youtube.com/embed/2tILwFBOPj0','Lezione 2 - Una marea di sigle. Diamo il giusto significato a ciascuna ed iniziamo ad installare quello che ci serve.','10:22','pac003'),
+            ('https://www.youtube.com/embed/mXWXUzgok_I','Lezione 1 - Introduzione a  Python e istallazione su windows','4:09','pac004'),
+            ('https://www.youtube.com/embed/7HS_XYUYsm0','Lezione 2 - Come Usare IDLE e Fare Operazioni Numeriche','6:22','pac004'),
+            ('https://www.youtube.com/embed/aM5aDsipBzs','Lezione 1 - introduzione a MySql(part1)','6:32','pac005'),
+            ('https://www.youtube.com/embed/wAjteSIeT9Y','Lezione 2 - Imparate mysql ','4:16','pac005'),
+            ('https://www.youtube.com/embed/jM55Fb9YTfE','Lezione 1 - Introduzione linguaggio SQL','16:12','pac006'),
+            ('https://www.youtube.com/embed/lwol3ceznag','Lezione 2 - Creare una data base con SQL Server e Visual Studio','37:29','pac006');
+            
+/*RECENSIONI*/
+INSERT INTO recensione(idRecensione,userCliente,codiceP, commento, titolo)
+	values ('rec01', 'Fiore', 'pac001',  'Corso ottimo per chi vuole apprendere il linguaggio C partendo da 0, consigliatissimo!', 'Ottimo per principianti!');

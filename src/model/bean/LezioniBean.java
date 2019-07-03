@@ -1,7 +1,5 @@
 package model.bean;
 
-import java.sql.Time;
-
 public class LezioniBean {
 
 	public LezioniBean() {}
@@ -18,7 +16,7 @@ public class LezioniBean {
 		return pacchetto;
 	}
 	
-	public Time getDurata() {
+	public String getDurata() {
 		return durata;
 	}
 
@@ -34,11 +32,10 @@ public class LezioniBean {
 		this.pacchetto = pacchetto;
 	}
 
-	public void setDurata(Time durata) {
+	public void setDurata(String durata) {
 		this.durata = durata;
 	}
 
 	//VARIABILI D'ISTANZA
-	private String url, titolo, pacchetto;
-	private Time durata;
+	private String url, titolo, pacchetto, durata;
 }

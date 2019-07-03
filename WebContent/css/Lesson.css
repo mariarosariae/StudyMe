@@ -1,0 +1,116 @@
+@charset "ISO-8859-1";
+.containerLezioni{
+	margin: 0 auto;
+    font-family: 'Mali', cursive;
+    color: white;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#pacchetto{
+	height: 350px;	
+ 	background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+ 	padding: 60px 0px 0px 100px;
+}
+
+#titoloPacchetto{
+	margin-top: 0;
+	font-size: 40px;
+	color: white;
+}
+
+#descrizione{
+	margin-top: 0;
+	font-size: 20px;
+}
+
+#videoIntroduzione{
+	font-family: 'Mali', cursive;
+    background-color: #13364D;
+    color: white;
+    padding: 14px 20px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+}
+
+#aggiungiAlCarrello{
+	font-family: 'Mali', cursive;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+}
+
+#recensioni{
+	margin: 20px 20px 0 20px;
+	grid-column: span 12;
+	background: white;
+	color: black;
+	text-align:center;
+	border-radius: 0 50px;	
+	border: 5px solid #3490cd;
+	font-size: 15px;
+}
+
+.fas.fa-quote-left{
+	font-size: 20px;
+}
+
+#topIcon{
+	position: relative;
+    top: 10px;
+    right: 600px;
+}
+
+#bottomIcon{
+	position: relative;
+    left: 600px;
+    bottom: 10px;
+}
+
+#avviso{
+	text-align: center;
+	font-size: 15px;
+	color: red;
+	grid-column: span 12;
+}
+
+@media only screen and (max-width: 425px){
+	#pacchetto{
+		padding: 5px;
+	}
+	
+	#titoloPacchetto{
+		font-size: 20px;
+	}
+	
+	#descrizione{
+		font-size: 15px;
+		width: 400px;
+	}
+	
+	#videoIntroduzione, #aggiungiAlCarrello{
+		padding: 10px 15px;
+		margin: 2px;
+	}	
+	
+	#bottoni{
+		display: grid;
+	}	
+}
+
+@media only screen and (min-width: 768px){
+	#pacchetto{
+		padding: 30px 0px 0px 50px;
+	}
+	
+	#descrizione{
+		width: 600px;
+	}
+}

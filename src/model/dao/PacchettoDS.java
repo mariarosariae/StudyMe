@@ -18,7 +18,9 @@ import javax.sql.DataSource;
 
 import model.DriverManagerConnectionPool;
 import model.bean.CategoriaBean;
+import model.bean.LezioniBean;
 import model.bean.PacchettoBean;
+import model.bean.RecensioneBean;
 
 public class PacchettoDS implements Model_interface<PacchettoBean> {
 	private static DataSource ds;
@@ -361,6 +363,96 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
 	}
-}
+	
+	public ArrayList<PacchettoBean> searchPackage(String word){
+		try {
+			java.sql.Connection conn = DriverManagerConnectionPool.getConnection();
+
+			String sql = "SELECT * " + "FROM pacchetto " + "WHERE titolo like ?";
+
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setString(1, "%" + word + "%");
+			ResultSet res = stm.executeQuery();
+			conn.commit();
+
+			ArrayList<PacchettoBean> pacchetti = new ArrayList<PacchettoBean>();
+
+			while (res.next()) {
+				PacchettoBean pacchetto = new PacchettoBean();
+				pacchetto.setCodicePacchetto(res.getString(1));
+				pacchetto.setCatagoria(res.getString(2));
+				pacchetto.setSottocategoria(res.getString(3));
+				pacchetto.setPrezzo(res.getDouble(4));
+				pacchetto.setDescrizione(res.getString(5));
+				pacchetto.setTitolo(res.getString(6));
+
+				pacchetti.add(pacchetto);
+			}
+			return pacchetti;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<LezioniBean> getLezioni(String codicePacchetto){
+		try {
+			java.sql.Connection conn = DriverManagerConnectionPool.getConnection();
+
+			String sql = "SELECT * " + "FROM lezioni " + "WHERE codiceP = ?";
+
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setString(1, codicePacchetto);
+			ResultSet res = stm.executeQuery();
+			conn.commit();
+
+			ArrayList<LezioniBean> lezioni = new ArrayList<LezioniBean>();
+			
+			while (res.next()) {
+				LezioniBean lezione = new LezioniBean();
+				lezione.setUrl(res.getString(1));
+				lezione.setTitolo(res.getString(2));
+				lezione.setDurata(res.getString(3));
+				lezione.setPacchetto(res.getString(4));
+
+				lezioni.add(lezione);
+			}
+			return lezioni;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<RecensioneBean> getRecensioni(String codicePacchetto){
+		try {
+			java.sql.Connection conn = DriverManagerConnectionPool.getConnection();
+
+			String sql = "SELECT * " + "FROM recensione " + "WHERE codiceP = ?";
+
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setString(1, codicePacchetto);
+			ResultSet res = stm.executeQuery();
+			conn.commit();
+
+			ArrayList<RecensioneBean> recensioni = new ArrayList<RecensioneBean>();
+			
+			while (res.next()) {
+				RecensioneBean recensione = new RecensioneBean();
+				recensione.setIdRecensione(res.getString(1));
+				recensione.setCliente(res.getString(2));
+				recensione.setPacchetto(res.getString(3));
+				recensione.setCommento(res.getString(4));
+				recensione.setTitolo(res.getString(5));
+
+				recensioni.add(recensione);
+			}
+			return recensioni;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
