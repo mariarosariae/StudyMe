@@ -32,8 +32,8 @@
    					<p id  ="prezzo"><strong>Prezzo:</strong> <%=pacchetto.getPrezzo()%>&euro;</p>
    					<div id="bottoni">
 	   					<div id="videoIntroduzione" onClick = "mostraLezioneGratis()"> Guarda prima lezione gratis <i class="far fa-play-circle"></i></div>
-	   					<div id ="aggiungiAlCarrello">Aggiungi al carrello <i class="fas fa-cart-plus"></i></div>
-   					</div>
+	   						<div id ="aggiungiAlCarrello" action="false" data="<%=pacchetto.getCodicePacchetto()%>" onClick = "aggiungiAlCarrello()">Aggiungi al carrello <i class="fas fa-cart-plus"></i></div>
+   						</div>
    				</div>
    								
 				<div id = "recensioni">
@@ -56,7 +56,7 @@
 						<i class="far fa-times-circle"></i>
 					</div>
 				    <div id ="video">
-				    	<iframe src = "<%=result.get(0).getUrl()%>"></iframe>
+				    	<iframe src ="<%=result.get(0).getUrl()%>"></iframe>
 				    </div>
 			    </div>				
     	<%}%>

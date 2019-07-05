@@ -22,9 +22,9 @@
         </div>
     </div>
             
-    <form id="ricerca">
+    <form id = "ricerca" method ="GET" action ="SearchServlet" >
         <i class="fas fa-search"></i>
-        <input type = "Text" placeholder="Cosa vuoi imparare oggi ?" >
+        <input type = "Text" name = "argument" placeholder="Cosa vuoi imparare oggi ?" >
     </form>
                 
     <div id = "carrello">
@@ -71,7 +71,7 @@
                     	<div class = "navbar-item-image">
                     		<a href = "Cart.jsp"><img src="./Icons/carrello.png" alt = "logo"></a>
                     	</div>
-                        <div class="navbar-item-description">Carrello</div> 
+                        <a href = "CarrelloServlet"><div class="navbar-item-description">Carrello</div></a>
                     </div>
                 </li>
            </ul>
@@ -97,9 +97,31 @@
 	                         </div>
                          </li>
                          <li>
-	                          <i class="fas fa-search"></i>
-		                      <div class="navbar-item-description">Cerca</div> 
+	                         <div class = "navbar-item login">
+			                          <div class = "navbar-item-image">
+			                              <i class="fas fa-money-check-alt" onClick = "showOrders()"></i>
+			                          </div>
+			                          <div class = "navbar-item-description">
+		                                <div id = "pulsante-accedi" onClick="showOrders()">
+		                                    Ordini
+		                                 </div>
+		                             </div>
+			                      </div>
                          </li>
+                         <li>
+	                         <div id = "formSearch">
+		                         <i class="fas fa-search" onClick ="ShowSearchBar()"></i>
+			                     <div class="navbar-item-description search" onClick ="ShowSearchBar()">
+			                     	Cerca
+			                     </div> 
+			                 </div>
+			                 <div id = "formSearchResponse">
+				                 <form id = "ricercaResponsive" method ="GET" action ="SearchServlet" >
+	        							<i class="fas fa-times" onClick = "HideSearchBar()"></i>
+	       								<input type = "Text" name = "argument" placeholder="Cerca pacchetti" >
+	   							 </form>
+   							 </div>
+                       	 </li>
                          <li>
 	                         <div class = "navbar-item login">
 		                          <div class = "navbar-item-image">
@@ -114,9 +136,19 @@
 	                    </li>
                         <%}else{%>                     
                         <li>
-	                         <i class="fas fa-search"></i>
-		                     <div class="navbar-item-description">Cerca</div> 
-                       	</li>
+	                        <div id = "formSearch">
+		                        <i class="fas fa-search" onClick ="ShowSearchBar()"></i>
+			                    <div class="navbar-item-description search" onClick ="ShowSearchBar()">
+			                    	Cerca
+			                    </div> 
+			                 </div>
+			                 <div id = "formSearchResponse">
+				                 <form id = "ricercaResponsive" method ="GET" action ="SearchServlet" >
+	        						<i class="fas fa-times" onClick = "HideSearchBar()"></i>
+	       							<input type = "Text" name = "argument" placeholder="Cerca pacchetti" >
+	   							 </form>
+	   						 </div>
+                       	 </li>
                         <li>
 	                    	<div class = "navbar-item login">
 		                         <div class = "navbar-item-image">
@@ -138,6 +170,14 @@
 	                               <div class="navbar-item-description">Carrello</div> 
 	                         </div>
                         </li>
+                        <%if(loggedUser != null ){%>
+                        <a href = "LogoutServlet">  
+	                         <li>                	
+			                     <i class="fas fa-sign-out-alt"></i>
+				                 <div class="navbar-item-description">Logout</div>                
+	                         </li>
+                        </a>
+                        <%}%>
                     </ul>
                	</nav>
           </div>

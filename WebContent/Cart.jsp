@@ -34,11 +34,9 @@ import = "java.util.*, model.bean.*"%>
         		<td>Foto</td>
 	            <td>Nome</td>
 	            <td>Prezzo</td>
-	            <form action="CarrelloServlet" method="post">
- 			 
-				 <input type="hidden" name="action" value="rimuovitutto"/>
-				 <td><button type="submit" class="waves-effect waves-light btn">  
-				Rimuovi Tutto</button></td>
+				 <td>
+				 	<button class="waves-effect waves-light btn" onClick = "onClearCartClick()">Rimuovi Tutto</button>
+			 	</td>
 			</form>
 	          
           	</tr>
@@ -53,14 +51,10 @@ import = "java.util.*, model.bean.*"%>
  			 <td><%=carrello.get(i).getTitolo()%></td>	
  			 <td><%=carrello.get(i).getPrezzo()%></td>
  			 
- 			 <form action="CarrelloServlet" method="post">
- 			 
-				 <input type="hidden" name="action" value="rimuoviDalCarrello"/>
-			     <input type="hidden" name="codiceP" value="<%=carrello.get(i).getCodicePacchetto()%>"/>
-				 <td><button type="submit" class="waves-effect waves-light btn">  
+ 			 <td><button type="submit" class="waves-effect waves-light btn" data = "<%=carrello.get(i).getCodicePacchetto()%>" onClick = "onRemoveClick()">  
 				Rimuovi</button></td> 
-			</form>	
-				  </tbody>
+				
+			</tbody>
 		<%sum=sum+carrello.get(i).getPrezzo();%>
 			<%}%>									
 			<tr>
@@ -85,27 +79,16 @@ import = "java.util.*, model.bean.*"%>
         	
         <h1>Non ci sono prodotti aggiunti al carrello</h1>
        	<%}%>	
-       
-       
-            <form action="CarrelloServlet" method="post">
-			  <input type="hidden" name="action" value="aggiungiAlCarrello"/>
-			 codice pacchetto : <input type="text" name="codiceP">
-			 
-			 <button type="submit">Aggiungi al carrello</button>
-			  
-	  
-       	
-       	
-       	</form>
-       	 	
-       	
-       	
-       	
        	</div>       	
      	</div>
    
    <%@ include file="Footer.jsp"%> 
-     
+ 
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+ <script src = "js/Cart.js"></script>
 </body>
 </html>

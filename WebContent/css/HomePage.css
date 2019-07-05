@@ -97,7 +97,7 @@ body, html{
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: white;
 }
 
@@ -360,7 +360,7 @@ a {
 	font-size: 70px;
 }
 
-#lateral .fas.fa-search{
+#formSearch .fas.fa-search{
 	font-size: 50px;
 }
 
@@ -373,6 +373,41 @@ a {
 	padding: 8px 0;
 	text-decoration: none;
 }
+
+.fas.fa-sign-out-alt{
+	font-size: 50px;
+}
+
+.fas.fa-money-check-alt{
+	font-size: 50px;
+}
+
+#lateral a{
+	color: black;
+}
+
+#ricercaResponsive{
+	display: none;
+}
+
+#ricercaResponsive input{
+	width: 150px;
+    padding: 15px 30px 15px 60px;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Mali', cursive;
+}
+
+#ricercaResponsive i {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+ 
+ #formSearchResponse{
+ 	position: relative;
+ }
 
 @media only screen and (min-width: 1440px){
     .barraCategorie{

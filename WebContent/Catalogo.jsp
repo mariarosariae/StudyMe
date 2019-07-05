@@ -36,12 +36,11 @@
             <h1><%=pacchetto.getTitolo() %></h1><br>
            
 	        <div class = "foto-categoria" style = "background-image: url(<%= pacchetto.getFoto()%>)"></div>
-	            <p><%=pacchetto.getDescrizione()%></p>
-	            <p><%=pacchetto.getPrezzo()%>&euro;</p>
+	            <p><%=pacchetto.getDescrizione().substring(0, 100)%>...</p>
 	        <div class="buy-now">
 	       		<a href = "LessonServlet?codicePacchetto=<%=pacchetto.getCodicePacchetto()%>"> 
 		        	<span class ="catalogo">
-		        		Vai alle lezioni
+		        		Anteprima corso
 		        	</span>
 	        	</a>
 	        </div>

@@ -134,11 +134,15 @@
     cursor: pointer;
     text-align: center;
     color: #fff;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border: solid 1px  #0076a3;
     background: #0095cd;
     border-radius: 20px;
     font-family:'Coming Soon', cursive;
+}
+
+.catalogo{
+	text-decoration: none;
 }
   
 @media only screen and (min-width: 1440px){
