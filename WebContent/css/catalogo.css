@@ -10,11 +10,10 @@
     font-family: 'Coming Soon', cursive;
 }
 
-.sfondo{
+.sfondoCategoria{
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 7.5px;
     background: linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.8) 100%); 
 }
 
@@ -52,7 +51,7 @@
     background-size: contain;
     font-family:'Coming Soon', cursive;
     font-size: 70px;
-    color: black;
+    color: white;
     position: absolute;
     text-align:center;
     left: 50%;
@@ -63,7 +62,6 @@
 .grid-generale{
     display: grid;
     grid-template-columns: repeat(12,1fr);
-
 }
 
 .pacchetto{
@@ -116,18 +114,6 @@
     transform: translate(-50%, -50%);
 }
 
-.pacchetto .buy-now input{
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    color: #fff;
-    padding: 10px 15px;
-    border: solid 1px  #0076a3;
-    background: #0095cd;
-    border-radius: 20px;
-    font-family:'Coming Soon', cursive;
-}
-
 .sottocat:nth-child(odd){
     background: #13364D; 
 }
@@ -143,6 +129,17 @@
     color: white;
 }
 
+.catalogo{
+	outline: none;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    padding: 10px 15px;
+    border: solid 1px  #0076a3;
+    background: #0095cd;
+    border-radius: 20px;
+    font-family:'Coming Soon', cursive;
+}
   
 @media only screen and (min-width: 1440px){
     .barraCategorie{

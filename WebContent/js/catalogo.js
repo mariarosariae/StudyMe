@@ -1,6 +1,9 @@
-$(document).ready(function Zoomin(){
-      var div = $("pacchetto");  
-    div.animate({left: '100px'}, "slow");
-    div.animate({fontSize: '3em'}, "slow");
- });
+function mostraLezioneGratis(){
+	document.getElementById("sfondoVideo").style.display = "block";
+	document.getElementById("video").style.display = "block";
+}
 
+function nascondiLezioneGratis(){
+	document.getElementById("sfondoVideo").style.display = "none";
+	document.getElementById("video").style.display = "none";
+}

@@ -13,7 +13,6 @@
 	<head >
 		<link rel="stylesheet"  type="text/css" href="css/catalogo.css">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<script src="./js/catalogo.js" type="text/javascript"></script>
 	</head>
     <%@ include file = "header.jsp" %>
 <body>
@@ -23,9 +22,8 @@
     
 	<div class="categoria" style = "background-image: url(<%= cat.getFotoCategoria()%>)">
 		<h1> <%=categoria.toUpperCase()%> </h1>
+		<span class = "sfondoCategoria"></span>
 	</div>
-	
-	
 	
 	<% for(String categoryName : result.keySet()) { %>
 	<div class="sottocat">
@@ -34,13 +32,18 @@
    		<% 
    		ArrayList<PacchettoBean> pacchetti = result.get(categoryName);
    		for(PacchettoBean pacchetto : pacchetti) {%>	
-        <div class= "pacchetto" onmouseover="Zoomin()">
+        <div class= "pacchetto">
             <h1><%=pacchetto.getTitolo() %></h1><br>
            
 	        <div class = "foto-categoria" style = "background-image: url(<%= pacchetto.getFoto()%>)"></div>
 	            <p><%=pacchetto.getDescrizione()%></p>
+	            <p><%=pacchetto.getPrezzo()%>&euro;</p>
 	        <div class="buy-now">
-	            <input type = "submit" value = "Vai alle lezioni">
+	       		<a href = "LessonServlet?codicePacchetto=<%=pacchetto.getCodicePacchetto()%>"> 
+		        	<span class ="catalogo">
+		        		Vai alle lezioni
+		        	</span>
+	        	</a>
 	        </div>
     	</div>
     	<%}%>
@@ -49,6 +52,6 @@
 <%}%>
 <%@ include file="Footer.jsp"%> 
 </div> 
- 
+ 	<script type="text/javascript" src="./js/catalogo.js"></script>
  </body>
 </html>
