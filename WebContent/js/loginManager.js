@@ -78,6 +78,8 @@ function mostraRegistrazione(){
 	
 	console.log("Mostra registrazione");
 	
+	
+	
 	x[0].style.display = "none";
 	
 	y[0].style.display = "none";
@@ -89,6 +91,17 @@ function mostraRegistrazione(){
 	x[2].style.display = "none";
 	
 	y[2].style.display = "none";
+	
+	x[3].style.display = "none";
+	
+	y[3].style.display = "none";
+	
+	x[4].style.display="none";
+	y[4].style.display="none";
+	
+	
+	
+
 }
 
 function mostraRecuperoPassword(){
@@ -194,6 +207,9 @@ const onLoginSubmit = event => {
 const onSignUpSubmit = event => {
 	 event.preventDefault();
 	
+	 
+	 let userNome=document.getElementById("nome");
+	 let userCognome=document.getElementById("cognome");
 	 let userInput = document.getElementById("newName");
 	 let userEmail = document.getElementById("newEmail");
 	 let userPassword = document.getElementById("regPass");
@@ -204,6 +220,8 @@ const onSignUpSubmit = event => {
 	       url: "SignUpServlet",
 	       method: 'POST',
 	       data: {
+	    	   Nome:userNome.value,
+	    	   Cogmome:userCognome.value,
 	           NomeUtente: userInput.value,
 	           Email : userEmail.value,
 	           Password: userPassword.value,
@@ -223,7 +241,9 @@ const onSignUpSubmit = event => {
 		        userConfPassword.style.border = "1px solid red";
 		        userPassword.value = null;
 		        userConfPassword.value = null;
-	       }         
+		        userNome.value=null;
+		        userCognome.value=null
+		        }         
 	 })
 }
 
