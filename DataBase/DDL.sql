@@ -7,7 +7,6 @@ DROP DATABASE IF EXISTS amministratore;
 CREATE TABLE amministratore(
 nomeAmministratore varchar(30) primary key,
 password varchar(30) not null,
-confPassword varchar(30) not null,
 email varchar(50) not null);
 
 DROP DATABASE IF EXISTS cliente;
