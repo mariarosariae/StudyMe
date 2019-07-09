@@ -52,32 +52,30 @@ foreign key (codiceP) references pacchetto(codicePacchetto)
 		on update cascade
         on delete cascade);
 
+
 DROP DATABASE IF EXISTS ordine;
 CREATE TABLE ordine(
-numFattura int primary key,
+numOrdine int auto_increment primary key,
 nomeCliente varchar(20) not null,
-iva double not null,
-imponibile double not null,
-prezzoTot double not null,
-data date not null,
-quantità int not null,
+titoloPacchetto varchar(100) not null,
+dataOdierna date not null,
 foreign key(nomeCliente) references cliente(nomeUtente)
 		on update cascade
         on delete cascade);
-
+        
 DROP DATABASE IF EXISTS acquisto;
 CREATE TABLE acquisto(
-idAcquisto varchar(15) primary key,
-numFattura int,
-codiceP varchar(6),
-importo double not null,
-modaltàPagamento varchar(30) not null,
-foreign key (numFattura) references ordine(numFattura)
+numOrdine int  primary key,
+codiceP varchar(6) not null,
+titoloPacchetto varchar(50) not null,
+prezzo double not null,             
+foreign key (numOrdine) references ordine(numOrdine)
 	on update cascade
     on delete cascade,
 foreign key (codiceP) references pacchetto(codicePacchetto)
 	on update cascade
     on delete cascade);
+
 
 DROP DATABASE IF EXISTS recensione;
 CREATE TABLE recensione(
