@@ -97,11 +97,8 @@ function mostraRegistrazione(){
 	y[3].style.display = "none";
 	
 	x[4].style.display="none";
+	
 	y[4].style.display="none";
-	
-	
-	
-
 }
 
 function mostraRecuperoPassword(){

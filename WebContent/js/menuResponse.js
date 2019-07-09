@@ -8,3 +8,14 @@ function openNav() {
 	document.getElementById('responsive-bar').style.display = "block";
 }
 
+function ShowSearchBar(){
+	document.getElementById('formSearch').style.display ="none";
+	document.getElementById('ricercaResponsive').style.display = "block";
+	document.getElementById('lateral').style.width= "250px";
+}
+
+function HideSearchBar(){
+	document.getElementById('formSearch').style.display ="block";
+	document.getElementById('ricercaResponsive').style.display = "none";
+	document.getElementById('lateral').style.width= "150px";
+}

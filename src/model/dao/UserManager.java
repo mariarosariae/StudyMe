@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.DriverManagerConnectionPool;
+import model.bean.AmministratoreBean;
+import model.bean.PacchettoBean;
 import model.bean.UserBean;
 
 public class UserManager {
@@ -39,6 +42,34 @@ public class UserManager {
 			return null;
 		}
 		return user;
+	}
+	
+	public AmministratoreBean loginAmministratore(String nomeUtente, String password) {
+		AmministratoreBean amministratore = null;
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+	
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM amministratore WHERE nomeAmministratore = ? AND password = ?");
+			stm.setString(1, nomeUtente);
+			stm.setString(2, password);
+			ResultSet res = stm.executeQuery();
+			
+			amministratore = new AmministratoreBean();
+			
+			//Se esiste l'amminitratore
+			if(res.next()) {
+				amministratore.setNomeAmministratore(res.getString(1));
+				amministratore.setPassword(res.getString(2));
+				amministratore.setEmail(res.getString(3));
+			}	
+			else
+				return null;
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return amministratore;
 	}
 	
 	public boolean registration(String email, String nomeUtente, String password){

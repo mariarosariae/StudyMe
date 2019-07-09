@@ -27,6 +27,7 @@ public class LessonServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String codicePacchetto = request.getParameter("codicePacchetto");
+		String nomeAmministratore = request.getParameter("nomeAmministratore");
 
 		ArrayList<LezioniBean> lezioni = null;
 		PacchettoBean pacchetto = null;
@@ -37,13 +38,17 @@ public class LessonServlet extends HttpServlet {
 		pacchetto = manager.getPacchetto(codicePacchetto);
 		recensioni = manager.getRecensioni(codicePacchetto);
 		
-		
 		request.setAttribute("lezioni", lezioni);
 		request.setAttribute("pacchetto", pacchetto);
 		request.setAttribute("recensioni", recensioni);
 		
-		RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/Lesson.jsp");
-		dispatcher.forward(request, response);			
+		if(nomeAmministratore != null) {
+			RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/LessonAdministrator.jsp");
+			dispatcher.forward(request, response);	
+		} else {
+			RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/Lesson.jsp");
+			dispatcher.forward(request, response);	
+		}	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

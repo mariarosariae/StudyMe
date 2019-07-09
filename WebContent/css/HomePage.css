@@ -360,7 +360,11 @@ a {
 	font-size: 70px;
 }
 
-#formSearch .fas.fa-search{
+#formSearch .fas.fa-search {
+	font-size: 50px;
+}
+
+.fas.fa-plus-square{
 	font-size: 50px;
 }
 

@@ -21,18 +21,16 @@
 	 	<%@ include file="NavigationBar.jsp"%>  
 	 	<%@ include file="BarCategory.jsp"%> 	
 	 
-	 	<%if(result == null || result.size() == 0){ System.out.println("Ciao");%>
-	 		<div id = "costruzione">
-	 			<img src = "./img/utility/InCostruzione2.png" alt ="Sito in costruzione"></img>
-	 		</div>
+	 	<%if(result == null || result.size() == 0){%>
+	 		<h1>Nessuna lezione trovata</h1>
    		<%}else{%>			
    				<div id = "pacchetto">
    					<h1 id = "titoloPacchetto"><%=pacchetto.getTitolo()%>*</h1>
    					<p id = "descrizione"><%=pacchetto.getDescrizione()%>.</p>
    					<p id  ="prezzo"><strong>Prezzo:</strong> <%=pacchetto.getPrezzo()%>&euro;</p>
    					<div id="bottoni">
-	   					<div id="videoIntroduzione" onClick = "mostraLezioneGratis()"> Guarda prima lezione gratis <i class="far fa-play-circle"></i></div>
-	   						<div id ="aggiungiAlCarrello" action="false" data="<%=pacchetto.getCodicePacchetto()%>" onClick = "aggiungiAlCarrello()">Aggiungi al carrello <i class="fas fa-cart-plus"></i></div>
+	   					<div id="videoIntroduzione" onClick = "mostraLezioneGratis('<%=result.get(0).getUrl()%>')"> Guarda prima lezione gratis <i class="far fa-play-circle"></i></div>	
+	   							<div id ="aggiungiAlCarrello" action="false" data="<%=pacchetto.getCodicePacchetto()%>" onClick = "aggiungiAlCarrello()">Aggiungi al carrello <i class="fas fa-cart-plus"></i></div>
    						</div>
    				</div>
    								
@@ -56,7 +54,6 @@
 						<i class="far fa-times-circle"></i>
 					</div>
 				    <div id ="video">
-				    	<iframe src ="<%=result.get(0).getUrl()%>"></iframe>
 				    </div>
 			    </div>				
     	<%}%>

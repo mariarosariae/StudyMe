@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import control.util.JSONResponse;
+import model.bean.AmministratoreBean;
 import model.bean.UserBean;
 import model.dao.UserManager;
 
@@ -51,9 +52,17 @@ public class LoginServlet extends HttpServlet {
 		UserBean user = manager.login(nomeUtente, passwordBase64format);
 				
 		if(user == null) {
-			JSONResponse jsonResponse = new JSONResponse(false, NO_USER);
-			out.print(gson.toJson(jsonResponse));
-			return;	
+			AmministratoreBean amministratore = manager.loginAmministratore(nomeUtente, passwordBase64format);
+			if(amministratore == null) {
+				JSONResponse jsonResponse = new JSONResponse(false, NO_USER);
+				out.print(gson.toJson(jsonResponse));
+				return;	
+			} else {
+				HttpSession session = request.getSession();
+				session.setAttribute("Amministratore", amministratore);
+				JSONResponse jsonResponse = new JSONResponse(true, "OK", amministratore.getNomeAmministratore());
+				out.print(gson.toJson(jsonResponse));
+			}
 		}
 		else {
 			HttpSession session = request.getSession();
