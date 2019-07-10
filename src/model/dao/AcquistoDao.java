@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import model.DriverManagerConnectionPool;
 import model.bean.AcquistoBean;
+import model.bean.OrdineBean;
 
 public class AcquistoDao {
 	
@@ -13,24 +14,19 @@ public class AcquistoDao {
 		
 	}
 	
-	
-	public void insertAcquisto(AcquistoBean acquisto) {
-		Connection conn;
+	public void insertAcquisto(int numOrd, String codiceP, String titoloPacchetto, Double prezzo) {
 		 try {
-			 	conn = DriverManagerConnectionPool.getConnection();
-				PreparedStatement stm = conn.prepareStatement("INSERT INTO acquisto(numOrdine,codiceP,titoloPacchetto,prezzo) values(?,?,?,?)");
-				stm.setInt(1,acquisto.getNumOrdine());
-				stm.setString(1, acquisto.getCodiceP());
-				stm.setString(3,acquisto.getTitoloPacchetto());
-				stm.setDouble(4,acquisto.getImporto());
+			 	Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement stm = conn.prepareStatement("INSERT INTO acquisto(numOrdine, codiceP,titoloPacchetto,prezzo) values(?,?,?,?)");
+				stm.setInt(1, numOrd);
+				stm.setString(2,codiceP);
+				stm.setString(3, titoloPacchetto);
+				stm.setDouble(4, prezzo);
 				
 				stm.executeUpdate();
-				conn.commit();
-				
+				conn.commit();		
 		 }catch (SQLException e) {
 			 e.printStackTrace();
 		 }
-	
-
 	}
 }

@@ -2,13 +2,7 @@ package model.bean;
 
 public class AcquistoBean {
 
-	public AcquistoBean(int numOrdine,String codiceP,String titoloPacchetto,Double prezzo) {
-		this.numOrdine=numOrdine;
-		this.codiceP=codiceP;
-		this.titoloPacchetto=titoloPacchetto;
-		this.importo=prezzo;
-		
-		
+	public AcquistoBean() {
 	}
 	
 	public int getNumOrdine() {
@@ -47,10 +41,7 @@ public class AcquistoBean {
 	public void setTitoloPacchetto(String titoloPacchetto) {
 		this.titoloPacchetto = titoloPacchetto;
 	}
-
-
-
-
+	
 	//VARIABILI D'ISTANZA
 	private int numOrdine;
 	private String codiceP,titoloPacchetto;

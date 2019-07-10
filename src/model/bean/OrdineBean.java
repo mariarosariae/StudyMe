@@ -1,7 +1,5 @@
 package model.bean;
 
-import java.sql.Date;
-
 public class OrdineBean {
 
 	public OrdineBean() {}
@@ -14,7 +12,7 @@ public class OrdineBean {
 		return numOrdine;
 	}
 	
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
@@ -23,7 +21,7 @@ public class OrdineBean {
 	}
 
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
@@ -39,20 +37,10 @@ public class OrdineBean {
 	public void setTitoloPacchetto(String titoloPacchetto) {
 		this.titoloPacchetto = titoloPacchetto;
 	}
-	
-	public String getCodiceP() {
-		return codiceP;
-	}
-
-	public void setCodiceP(String codiceP) {
-		this.codiceP = codiceP;
-	}
-
-
 
 	//VARIABILI D'ISTANZA
-	private String cliente,codiceP;
+	private String cliente;
 	private int numOrdine;
 	private String titoloPacchetto;
-	private Date data;
+	private String data;
 }

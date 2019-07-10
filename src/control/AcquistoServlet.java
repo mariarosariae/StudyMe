@@ -34,9 +34,6 @@ import model.dao.UserManager;
 @WebServlet("/AcquistoServlet")
 public class AcquistoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private OrdineDao ordineDao = new OrdineDao();
-	private UserManager userDao = new UserManager();
-	private AcquistoDao acq = new AcquistoDao();
 
 	public AcquistoServlet() {
 		super();
@@ -45,58 +42,44 @@ public class AcquistoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+			throws ServletException, IOException {		
 		HttpSession session = request.getSession();
 		UserBean user = (UserBean) session.getAttribute("User");
 		ArrayList<PacchettoBean> carrello = (ArrayList<PacchettoBean>) session.getAttribute("carrello");
-		OrdineBean ordine = new OrdineBean();
-
+		OrdineBean ordineBean = new OrdineBean();
+		AcquistoBean acquistoBean = new AcquistoBean();
+		OrdineDao ordine = new OrdineDao();
+		AcquistoDao acquisto = new AcquistoDao();
 		String userName = user.getNomeUtente();
 
 		GregorianCalendar gc = new GregorianCalendar();
 		int ggoggi = gc.get(Calendar.DAY_OF_MONTH);
-		int mmoggi = gc.get(Calendar.MONTH);
-		int aaoggi = gc.get(Calendar.YEAR) - 1900;
+		int mmoggi = gc.get(Calendar.MONTH) + 1;
+		int aaoggi = gc.get(Calendar.YEAR);
 
-		Date dataOdierna = new Date(aaoggi, mmoggi, ggoggi);
+		String dataOdierna = ggoggi + "/" + mmoggi + "/" + aaoggi;
 
+		int numOrd = 0;
 		for (PacchettoBean p : carrello) {
-			ordine.setTitoloPacchetto(p.getTitolo());
-		}
+			ordineBean.setTitoloPacchetto(p.getTitolo());
+			ordineBean.setCliente(userName);
+			ordineBean.setData(dataOdierna);
 
-		ordine.setCliente(userName);
-		ordine.setData(dataOdierna);
+			numOrd = ordine.insert(ordineBean);
+			String codiceP = p.getCodicePacchetto();
+			String titoloPacchetto = p.getTitolo();
+			double prezzo = p.getPrezzo();
 
-		ordineDao.insert(ordine);
-
-		ArrayList<PacchettoBean> pacchetti = new ArrayList<PacchettoBean>();
-
-		pacchetti = carrello;
-		String codiceP;
-		double prezzo = 0;
-		String titoloPacchetto = "";
-		int numOrdine = 0;
-
-		for (int i = 0; i < pacchetti.size(); i++) {
-			codiceP = pacchetti.get(i).getCodicePacchetto();
-			titoloPacchetto = pacchetti.get(i).getTitolo();
-			prezzo = pacchetti.get(i).getPrezzo();
-
-			AcquistoBean acquisto = new AcquistoBean(numOrdine, codiceP, titoloPacchetto, prezzo);
-
-			acq.insertAcquisto(acquisto);
-
+			acquistoBean.setCodiceP(codiceP);
+			acquistoBean.setTitoloPacchetto(titoloPacchetto);
+			acquistoBean.setImporto(prezzo);
+			acquisto.insertAcquisto(numOrd, codiceP, titoloPacchetto, prezzo);
 		}
 		carrello.clear();
 		session.setAttribute("carrello", carrello);
-		session.setAttribute("User", user);
-
 	}
-
 }

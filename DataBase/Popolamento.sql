@@ -195,7 +195,6 @@ INSERT INTO lezioni(url,titolo,durata,codiceP)
             ('https://www.youtube.com/embed/GI5Q0QKR-vM','Lezione 2 - Corso inDesign :   File nuovo e pagine mastro','9:27','pac024'),
 			('https://www.youtube.com/embed/m7AcNU9dbPg','Lezione 3 - Corso inDesign : Strumenti forma e testo','10:30','pac024'),
             ('https://www.youtube.com/embed/GfJ4UPCz_fo','Lezione 4 - Corso inDesign : Testo e pannello di controllo','11:48','pac024'),
-            ('https://www.youtube.com/embed/43OOiSBlNzQ','Lezione 1 - Unreal Engine 4 : Introduzione, Nascita Versioni Precedenti ed Evoluzione','16:49','pac026'),
             ('https://www.youtube.com/embed/0PdW6nqE4w4','Lezione 2 - Unreal Engine 4 : Istallare Unreal Engine 4 Gratuitamente dal Sito Ufficiale','20:07','pac026'),
             ('https://www.youtube.com/embed/y5yL_h8QAOk','Lezione 3 - Unreal Engine 4 : Scarica ed Installa Ultima Versione UE4, Problemi e Soluzioni','5:18','pac026'),
             ('https://www.youtube.com/embed/5tEsMLk01T8','Lezione 4 - Unreal Engine 4 : Schermata Benvenuto del Launcher in ModalitÃ  Off Line','17:55','pac026'),

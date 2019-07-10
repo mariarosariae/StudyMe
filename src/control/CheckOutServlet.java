@@ -51,15 +51,17 @@ public class CheckOutServlet extends HttpServlet {
 		HashMap<String, Object> content = new HashMap<String, Object>();
 		
 		String total = "";
+		double totale = 0;
 		for(PacchettoBean pacchettoAcquistato : carrello) {
-			total += pacchettoAcquistato.getPrezzo();
+			totale = (pacchettoAcquistato.getPrezzo() + totale);
 		}
+		
+		total += totale;
 		
 		content.put("totale", total);
 		content.put("pacchetti", carrello);
 		
-		JSONResponse respons = new JSONResponse(true, "OK", content);
-		out.println(respons);
-     
+		JSONResponse jsonResponse = new JSONResponse(true, "OK", content);
+		out.print(gson.toJson(jsonResponse));
         }
 }	

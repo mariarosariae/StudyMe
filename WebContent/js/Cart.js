@@ -7,7 +7,7 @@ function onClearCartClick() {
 			action: "rimuovitutto"
 		}
 	}).done(data => {
-		window.location.reload();
+		alert("Prodotti rimossi");
 	})
 }
 
@@ -23,21 +23,21 @@ function onRemoveClick() {
 			action: "rimuoviDalCarrello"
 		}
 	}).done(data =>{
-		alert("Prodotto rimosso");
-		window.location.reload();
+		alert("Prodotti rimossi");
 	})
 }
 
 const ajaxCallbackFunction = data => {
+	
     const response = JSON.parse(data);
-
+    
     if(!response.ok) {
         alert("Errore interno al server. Riprova più tardi");
         return null;
     }
 
     const responseContent = response.content;
-    const totalPrice = responseContent.total;
+    const totalPrice = responseContent.totale;
     const products = [];
     responseContent.pacchetti.forEach(product => {
         let result = {
@@ -59,16 +59,18 @@ const ajaxCallbackFunction = data => {
 }
 
 //Paypal
-//Ottienere gli oggetti attualmente nel carrello e passarli a paypal
+//Ottenere gli oggetti attualmente nel carrello e passarli a paypal
 const createOrderFunction = (data, actions) => {
-    let orderInfo;
 
-    $.ajax({
-      url: "CheckOutServlet",
-      method: 'POST'
-    }).done(data => {
-        orderInfo = ajaxCallbackFunction(data);
-        // Set up the transaction
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: "CheckOutServlet",
+            method: 'POST'
+          }).done(datas => {
+              let orderInfo = ajaxCallbackFunction(datas);
+              resolve(orderInfo);
+          })
+    }).then(orderInfo => {
         return actions.order.create({
             purchase_units: [{
                 amount: {
@@ -84,30 +86,24 @@ const createOrderFunction = (data, actions) => {
                 items: orderInfo.products
             }]
         });
-    });
-
+    })
 }
 //fare una funzione ajax che richiama la servlet che consiste nel registrare l'ordine nel db
 const successFunction = (data, actions) => {	
-/*
-{function paypalCheckOut(){
-	$.ajax({
-		url:"AcquistoServlet",
-		method:'POST',
-	}).done(data =>{
-			alert("Prodotto Acquistato");
-			window.location.reload();
-		})
-	}
-	*/
     return actions.order.capture().then(function (details) {
-        alert('Transaction completed by ' + details.payer.name.given_name);
+    	$.ajax({
+            url: "AcquistoServlet",
+            method: 'POST'
+          }).done(data => {
+             alert("Prodotto acquistato");
+          })
     })
 }
 
 const errorFunction = (err) => {
 	if(document.querySelector(".paypalCheckOut") != null)
 		alert("Problema con il pagamento. Riprova più tardi");
+		console.log(err);
 }
 
 paypal.Buttons({
