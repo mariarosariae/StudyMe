@@ -10,24 +10,8 @@ public class OrdineBean {
 		return cliente;
 	}
 	
-	public int getNumFattura() {
-		return numFattura;
-	}
-	
-	public int getQuantita() {
-		return quantita;
-	}
-	
-	public double getIva() {
-		return iva;
-	}
-	
-	public double getImponibile() {
-		return imponibile;
-	}
-	
-	public double getPrezzoTot() {
-		return prezzoTot;
+	public int getNumOrdine() {
+		return numOrdine;
 	}
 	
 	public Date getData() {
@@ -38,33 +22,37 @@ public class OrdineBean {
 		this.cliente = cliente;
 	}
 
-	public void setNumFattura(int numFattura) {
-		this.numFattura = numFattura;
-	}
-
-	public void setQuantita(int quantita) {
-		this.quantita = quantita;
-	}
-
-	public void setIva(double iva) {
-		this.iva = iva;
-	}
-
-	public void setImponibile(double imponibile) {
-		this.imponibile = imponibile;
-	}
-
-	public void setPrezzoTot(double prezzoTot) {
-		this.prezzoTot = prezzoTot;
-	}
 
 	public void setData(Date data) {
 		this.data = data;
 	}
 
+	
+	public void setNumOrdine(int numOrdine) {
+		this.numOrdine = numOrdine;
+	}
+
+	public String getTitoloPacchetto() {
+		return titoloPacchetto;
+	}
+
+	public void setTitoloPacchetto(String titoloPacchetto) {
+		this.titoloPacchetto = titoloPacchetto;
+	}
+	
+	public String getCodiceP() {
+		return codiceP;
+	}
+
+	public void setCodiceP(String codiceP) {
+		this.codiceP = codiceP;
+	}
+
+
+
 	//VARIABILI D'ISTANZA
-	private String cliente;
-	private int numFattura, quantita;
-	private double iva, imponibile, prezzoTot;
+	private String cliente,codiceP;
+	private int numOrdine;
+	private String titoloPacchetto;
 	private Date data;
 }

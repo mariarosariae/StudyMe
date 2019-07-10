@@ -41,12 +41,10 @@ public class CarrelloServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		String codiceP = request.getParameter("codiceP");
+		
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
-		
-		/* CarrelloBean carrello =((CarrelloBean)session.getAttribute("carrello")); */
-		System.out.println(action);
-		System.out.println("sei nella servlet");
+
 		ArrayList<PacchettoBean> carrello = (ArrayList<PacchettoBean>) session.getAttribute("carrello");
 
 		if (carrello == null) {

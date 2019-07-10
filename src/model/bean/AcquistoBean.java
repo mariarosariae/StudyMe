@@ -2,51 +2,57 @@ package model.bean;
 
 public class AcquistoBean {
 
-	public AcquistoBean() {}
-	
-	public int getFattura() {
-		return fattura;
+	public AcquistoBean(int numOrdine,String codiceP,String titoloPacchetto,Double prezzo) {
+		this.numOrdine=numOrdine;
+		this.codiceP=codiceP;
+		this.titoloPacchetto=titoloPacchetto;
+		this.importo=prezzo;
+		
+		
 	}
 	
-	public String getPacchetto() {
-		return pacchetto;
+	public int getNumOrdine() {
+		return numOrdine;
 	}
 	
-	public String getModalitaPagamento() {
-		return modalitaPagamento;
-	}
 	
 	public double getImporto() {
 		return importo;
 	}
 
-	public String getIdAcquisto() {
-		return idAcquisto;
+
+	public String getCodiceP() {
+		return codiceP;
 	}
 
-	public void setFattura(int fattura) {
-		this.fattura = fattura;
+	public void setCodiceP(String codiceP) {
+		this.codiceP = codiceP;
 	}
 
-	public void setPacchetto(String pacchetto) {
-		this.pacchetto = pacchetto;
+	public void setNumOrdine(int numOrdine) {
+		this.numOrdine = numOrdine;
 	}
 
-	public void setModalitaPagamento(String modalitaPagamento) {
-		this.modalitaPagamento = modalitaPagamento;
-	}
-
-
+	
 	public void setImporto(double importo) {
 		this.importo = importo;
 	}
 	
-	public void setIdAcquisto(String idAcquisto) {
-		this.idAcquisto = idAcquisto;
+	
+
+	public String getTitoloPacchetto() {
+		return titoloPacchetto;
 	}
 
+	public void setTitoloPacchetto(String titoloPacchetto) {
+		this.titoloPacchetto = titoloPacchetto;
+	}
+
+
+
+
 	//VARIABILI D'ISTANZA
-	private int fattura;
-	private String pacchetto, modalitaPagamento, idAcquisto;
+	private int numOrdine;
+	private String codiceP,titoloPacchetto;
 	private double importo;
 }
