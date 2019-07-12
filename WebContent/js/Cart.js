@@ -58,8 +58,8 @@ const ajaxCallbackFunction = data => {
     };
 }
 
-//Paypal
-//Ottenere gli oggetti attualmente nel carrello e passarli a paypal
+// Paypal
+// Ottenere gli oggetti attualmente nel carrello e passarli a paypal
 const createOrderFunction = (data, actions) => {
 
     return new Promise((resolve, reject) => {
@@ -74,28 +74,34 @@ const createOrderFunction = (data, actions) => {
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: orderInfo.total, //Costo totale
-                    breakdown: { //Informazioni sulle spese
-                        item_total: { //Costo totale dei prodotti
-                            currency_code: "EUR", //Valuta
-                            value: orderInfo.total //Costo
+                    value: orderInfo.total, // Costo totale
+                    breakdown: { // Informazioni sulle spese
+                        item_total: { // Costo totale dei prodotti
+                            currency_code: "EUR", // Valuta
+                            value: orderInfo.total // Costo
                         }
                     }
                 },
-                description: "Ordine su StudyMe", //Riepilogo dell'ordine
+                description: "Ordine su StudyMe", // Riepilogo dell'ordine
                 items: orderInfo.products
             }]
         });
     })
 }
-//fare una funzione ajax che richiama la servlet che consiste nel registrare l'ordine nel db
+// fare una funzione ajax che richiama la servlet che consiste nel registrare
+// l'ordine nel db
 const successFunction = (data, actions) => {	
     return actions.order.capture().then(function (details) {
     	$.ajax({
             url: "AcquistoServlet",
             method: 'POST'
           }).done(data => {
-             alert("Prodotto acquistato");
+				const noProduct = "<h1>Non ci sono prodotti aggiunti al carrello</h1>";
+				const cartContainer = document.querySelector(".containerCart");
+				
+				cartContainer.innerHTML = noProduct;
+				
+				alert("Pagamento effettuato");
           })
     })
 }

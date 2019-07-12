@@ -15,99 +15,69 @@
 %>
 
 <body>
-	<div class="container">
 		<%@ include file="NavigationBar.jsp"%>
 		<%@ include file="BarCategory.jsp"%>
-
-		<div class="divTable greyGridTable">
-			<div class="divTableHeading">
-				<%
-					if (carrello.size() != 0) {
-				%>
-
-				<div class="divTableRow">
-					<div class="divTableHead">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;">Foto</span></span>
-					</div>
-					<div class="divTableHead">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;">Nome</span></span>
-					</div>
-					<div class="divTableHead">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;">Prezzo</span></span>
-					</div>
-					<div class="divTableHead">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;"><button
-									class="waves-effect waves-light btn"
-									onClick="onClearCartClick()">Rimuovi Tutto</button></span></span>
-					</div>
-				</div>
+		
+		<div class="containerCart">
+			<%
+				if (carrello.size() != 0) {
+			%>
+			
+			<div class = "nameColumn">
+					<h1 class = "cellCart">Foto</h1>
+					<h1 class = "cellCart">Nome</h1>
+					<h1 class = "cellCart">Prezzo</h1>
 			</div>
-
-			<div class="divTableBody">
-				<div class="divTableRow">
+	
+			<div class="containerProduct">		
 					<%
 						double sum = 0;
-					%>
-					<%
 						for (int i = 0; i < carrello.size(); i++) {
 					%>
-					<div class="divTableCell">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;"><img
-								src="<%=carrello.get(i).getFoto()%>"
-								style="width: 65px; height: 90px;"></span></span>
+					<div class="product">
+						<div class= "cellCart photo">
+							<img src="<%=carrello.get(i).getFoto()%>">
+						</div>
+						<div class="cellCart title">
+							<%=carrello.get(i).getTitolo()%>
+						</div>
+						<div class="cellCart price">
+							<%=carrello.get(i).getPrezzo()%>
+						</div>
+						<div class="cellCart botton">
+							<div id="removeProduct" data="<%=carrello.get(i).getCodicePacchetto()%>" onClick="onRemoveClick()"><i class='fas fa-trash-alt'></i></div>
+						</div>
 					</div>
-					<div class="divTableCell">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;"><%=carrello.get(i).getTitolo()%></span></span>
-					</div>
-					<div class="divTableCell">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;"><%=carrello.get(i).getPrezzo()%></span></span>
-					</div>
-					<div class="divTableCell">
-						<span style="vertical-align: inherit;"><span
-							style="vertical-align: inherit;"><button type="submit"
-									class="waves-effect waves-light btn"
-									data="<%=carrello.get(i).getCodicePacchetto()%>"
-									onClick="onRemoveClick()">Rimuovi</button></span></span>
-					</div>
+					
+					<%
+						sum = sum + carrello.get(i).getPrezzo();
+						}
+					%>
+					
 				</div>
+				
+				<div class="priceTotal">
+					<strong>Prezzo Totale: <%=sum%></strong>
+				</div>
+				
+				<div class="divTableHead">
+					<button class="waves-effect waves-light btn" onClick="onClearCartClick()">Rimuovi Tutto</button>
+				</div>
+		
 				<%
-					sum = sum + carrello.get(i).getPrezzo();
+					if (loggedUser == null) {
 				%>
+				
+				<h1>EFFETTUARE PRIMA L'ACCESSO</h1>
+				<button type="submit" onClick="mostraLogin()">ACCEDI</button>
+	
+				<%
+					} else {
+				%>
+					<div class="paypalCheckOut"></div>
 				<%
 					}
 				%>
-				<div class="divTableFoot tableFootStyle">
-					<div class="divTableRow">
-						<div class="prezzo">
-							<span style="vertical-align: inherit;"><span
-								style="vertical-align: inherit;">Prezzo Totale:<%=sum%></span></span>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<%
-				if (loggedUser == null) {
-			%>
-			<h1 text-align="center">EFFETTUARE PRIMA L'ACCESSO</h1>
-			<button type="submit" onClick="mostraLogin()">ACCEDI</button>
-
-			<%
-				} else {
-			%>
-			<div class="paypalCheckOut"></div>
-			<%
-				}
-			%>
-
-
 			<%
 				} else {
 			%>
@@ -116,9 +86,7 @@
 			<%
 				}
 			%>
-		</div>
 	</div>
-
 	<%@ include file="Footer.jsp"%>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

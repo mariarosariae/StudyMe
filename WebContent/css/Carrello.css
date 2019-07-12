@@ -1,79 +1,42 @@
- .paypalCheckOut{
-  	width: 100%;
-  	height: 100px;
-  }
-  
-
-  border: 2px solid #FFFFFF;
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
+.nameColumn{
+	display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    text-align: center;
 }
 
-
-.divTable.greyGridTable .divTableCell, .divTable.greyGridTable .divTableHead {
-  border: 1px solid #FFFFFF;
-  padding: 3px 4px;
-}
-.divTable.greyGridTable .divTableBody .divTableCell {
-  font-size: 23px;
-}
-.divTable.greyGridTable .divTableCell:nth-child(even) {
-  background: #EBEBEB;
-}
-.divTable.greyGridTable .divTableHeading {
-  background: #FFFFFF;
-  border-bottom: 4px solid #333333;
-}
-.divTable.greyGridTable .divTableHeading .divTableHead {
-  font-size: 15px;
-  font-weight: bold;
-  color: #333333;
-  text-align: center;
-  border-left: 2px solid #333333;
-}
-.divTable.greyGridTable .divTableHeading .divTableHead:first-child {
-  border-left: none;
+.product{
+	display: grid;
+    grid-template-columns: repeat(12, 1fr);
 }
 
-.greyGridTable .tableFootStyle {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333333;
-  border-top: 4px solid #333333;
-}
-.greyGridTable .tableFootStyle {
-  font-size: 14px;
-  margin-right: 200px;
-}
-/* DivTable.com */
-.divTable {
-	display: table;
+.cellCart{
+	grid-column: span 3;
 }
 
-.divTableRow {
-	display: table-row;
+.photo img{
+	width: 150px;
+    height: auto;
+    margin-left: 25%;
 }
 
-.divTableHeading {
-	display: table-header-group;
+.title{
+	margin-top: 15%;
+    text-align: center;
 }
 
-.divTableCell, .divTableHead {
-	display: table-cell;
+.price{
+	text-align: center;
+	margin-top: 15%;
 }
 
-.divTableHeading {
-	display: table-header-group;
+#removeProduct{
+	font-size: 30px;
+	color: red; 
+	margin-top: 10%;
 }
 
-.divTableFoot {
-	display: table-footer-group;
-}
-
-.divTableBody {
-	display: table-row-group;
-}
-.prezzo{
-	margin-right: 200px;
+.priceTotal{
+	position: relative;
+    left: 70%;
+    margin: 5px;
 }
