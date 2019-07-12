@@ -55,10 +55,10 @@ foreign key (codiceP) references pacchetto(codicePacchetto)
 
 DROP DATABASE IF EXISTS ordine;
 CREATE TABLE ordine(
-numOrdine int auto_increment primary key,
+numOrdine int primary key not null auto_increment,
 nomeCliente varchar(20) not null,
 titoloPacchetto varchar(100) not null,
-dataOdierna date not null,
+dataOdierna varchar(10)not null,
 foreign key(nomeCliente) references cliente(nomeUtente)
 		on update cascade
         on delete cascade);
