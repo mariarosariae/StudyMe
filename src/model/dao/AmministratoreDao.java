@@ -140,18 +140,9 @@ public class AmministratoreDao {
 			conn.commit();
 			
 			ArrayList <OrdineBean> ordini= new ArrayList<OrdineBean>();
+		
 			
-			while(res.next()) {
-			OrdineBean ordine= new OrdineBean();
-			ordine.setNumFattura(res.getInt(1));
-			ordine.setCliente(res.getString(2));
-			ordine.setIva(res.getDouble(3));
-			ordine.setImponibile(res.getDouble(4));
-			ordine.setPrezzoTot(res.getDouble(5));
-			ordine.setQuantita(res.getInt(6));
 			
-			ordini.add(ordine);
-			}
 			return ordini;
 		} catch (SQLException e) {
 			e.printStackTrace();

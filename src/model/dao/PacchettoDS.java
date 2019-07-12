@@ -387,6 +387,7 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 				pacchetto.setPrezzo(res.getDouble(4));
 				pacchetto.setDescrizione(res.getString(5));
 				pacchetto.setTitolo(res.getString(6));
+				pacchetto.setFoto(res.getString(7));
 
 				pacchetti.add(pacchetto);
 			}

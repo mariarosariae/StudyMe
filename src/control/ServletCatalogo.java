@@ -1,8 +1,5 @@
 package control;
 
-
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -48,12 +45,9 @@ public class ServletCatalogo extends HttpServlet {
 
 		RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/Catalogo.jsp");
 		dispatcher.forward(request, response);
-	
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request,response);
-		
-		}
-
 	}
+}

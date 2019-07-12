@@ -41,11 +41,7 @@ public class PacchettoDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
-		}
-		
-		
-		
-		
+		}	
 	}
 	
 	//prende un singolo pacchetto dal database
