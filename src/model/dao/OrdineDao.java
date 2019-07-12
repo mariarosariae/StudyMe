@@ -4,41 +4,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import model.DriverManagerConnectionPool;
 import model.bean.OrdineBean;
 
 public class OrdineDao {
-	 public OrdineDao() {
-		 
-	 }
+	 public OrdineDao() {}
 	  
 	 public int insert(OrdineBean ordine){
 		 OrdineBean ord = null;
 		 try {
 			 	Connection conn = DriverManagerConnectionPool.getConnection();
-				PreparedStatement stm = conn.prepareStatement("INSERT INTO ordine(nomeCliente,titoloPacchetto, dataOdierna) VALUES(?,?,?)");
+				PreparedStatement stm = conn.prepareStatement("INSERT INTO ordine(nomeCliente, dataOdierna) VALUES(?,?)", Statement.RETURN_GENERATED_KEYS);
 				stm.setString(1,ordine.getCliente());
-				stm.setString(2,ordine.getTitoloPacchetto());
-				stm.setString(3,ordine.getData());
+				stm.setDate(2,ordine.getData());				
 				stm.executeUpdate();
 				
+				ResultSet res = stm.getGeneratedKeys();
+				
+				int auto_id = -1;
+				
+				if(res.next())
+					auto_id = res.getInt(1);
+				
+				System.out.println(auto_id);
 				ord = new OrdineBean();
-				stm = conn.prepareStatement("SELECT numOrdine FROM ordine WHERE titoloPacchetto = ?");
-				stm.setString(1,ordine.getTitoloPacchetto());
-				ResultSet res = stm.executeQuery();
+				ord.setNumOrdine(auto_id);
+	
+				conn.commit();
 				
-				if(res.next()) {
-					ord.setNumOrdine(res.getInt(1));
-				}
-				
-				int numOrdine = res.getInt(1);
-				
-				conn.commit();	
-				return numOrdine;
+				return auto_id;
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return 0;
+				return -1;
 			}
 	 }
 }

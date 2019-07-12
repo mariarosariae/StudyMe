@@ -5,6 +5,14 @@ public class AcquistoBean {
 	public AcquistoBean() {
 	}
 	
+	public void setNumAcquisto(int numAcquisto) {
+		this.numAcquisto = numAcquisto;
+	}
+
+	public int getNumAcquisto() {
+		return numAcquisto;
+	}
+	
 	public int getNumOrdine() {
 		return numOrdine;
 	}
@@ -43,7 +51,7 @@ public class AcquistoBean {
 	}
 	
 	//VARIABILI D'ISTANZA
-	private int numOrdine;
+	private int numOrdine, numAcquisto;
 	private String codiceP,titoloPacchetto;
 	private double importo;
 }

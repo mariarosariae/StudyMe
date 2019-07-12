@@ -57,15 +57,15 @@ DROP DATABASE IF EXISTS ordine;
 CREATE TABLE ordine(
 numOrdine int primary key not null auto_increment,
 nomeCliente varchar(20) not null,
-titoloPacchetto varchar(100) not null,
-dataOdierna varchar(10)not null,
+dataOdierna date not null,
 foreign key(nomeCliente) references cliente(nomeUtente)
 		on update cascade
         on delete cascade);
         
 DROP DATABASE IF EXISTS acquisto;
 CREATE TABLE acquisto(
-numOrdine int  primary key,
+numAcquisto int auto_increment primary key,
+numOrdine int not null,
 codiceP varchar(6) not null,
 titoloPacchetto varchar(50) not null,
 prezzo double not null,             
