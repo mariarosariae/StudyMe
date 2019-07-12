@@ -6,6 +6,8 @@
 	ArrayList<LezioniBean> result = (ArrayList<LezioniBean>)request.getAttribute("lezioni");
 	PacchettoBean pacchetto = (PacchettoBean)request.getAttribute("pacchetto");
 	ArrayList<RecensioneBean> recensioni = (ArrayList<RecensioneBean>)request.getAttribute("recensioni");
+	boolean comprato = (boolean) request.getAttribute("comprato");
+	boolean nelCarrello = (boolean) request.getAttribute("nelCarrello");
 %>
 
 <!DOCTYPE html>
@@ -29,8 +31,19 @@
    					<p id = "descrizione"><%=pacchetto.getDescrizione()%>.</p>
    					<p id  ="prezzo"><strong>Prezzo:</strong> <%=pacchetto.getPrezzo()%>&euro;</p>
    					<div id="bottoni">
-	   					<div id="videoIntroduzione" onClick = "mostraLezioneGratis('<%=result.get(0).getUrl()%>')"> Guarda prima lezione gratis <i class="far fa-play-circle"></i></div>	
+   						<%
+   							if(comprato) {
+   						%>
+   							<div id="videoIntroduzione" onClick = "mostraLezioneGratis('<%=result.get(0).getUrl()%>')"> Guarda il corso <i class="far fa-play-circle"></i></div>
+						<%	} else {
+   						%>
+							<div id="videoIntroduzione" onClick = "mostraLezioneGratis('<%=result.get(0).getUrl()%>')"> Guarda prima lezione gratis <i class="far fa-play-circle"></i></div>
+							<%if(nelCarrello) { %>
+								<div id ="aggiungiAlCarrello" action="false" data="<%=pacchetto.getCodicePacchetto()%>" onClick = "aggiungiAlCarrello()" style="background: red;">Rimuovi dal carrello <i class="fas fa-trash-alt"></i></div>
+   							<%} else { %>
 	   							<div id ="aggiungiAlCarrello" action="false" data="<%=pacchetto.getCodicePacchetto()%>" onClick = "aggiungiAlCarrello()">Aggiungi al carrello <i class="fas fa-cart-plus"></i></div>
+   							<%} %>
+						<%} %>
    						</div>
    				</div>
    								
@@ -46,7 +59,7 @@
 					}%>
 					<i class="fas fa-quote-left" id = "bottomIcon"></i>		
 				</div>
-				<p id="avviso">*Aquistando questo pacchetto avrai accesso a tutte le sue lezioni direttamente dalla tua libreria</p>	
+				<p id="avviso">*Acquistando questo pacchetto avrai accesso a tutte le sue lezioni direttamente dalla tua libreria</p>	
 				
 				<!-- Video -->
 			    <div id = "sfondoVideo">
