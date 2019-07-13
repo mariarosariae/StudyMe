@@ -1,5 +1,6 @@
 function showUpdateAccount(){
 	document.getElementById("UpdateUserName").style.display = ("block");
+	document.getElementById("ordini").style.display = "none";
 	var name = event.target;
 	name.classList.add("active");
 	document.getElementById("myOrder").classList.remove("active");
@@ -15,6 +16,7 @@ function showUpdateAccount(){
 
 function showOrders(){	
 	document.getElementById("UpdateUserName").style.display = ("none");
+	document.getElementById("ordini").style.display = "block";
 	var name = event.target;
 	name.classList.add("active");
 	document.getElementById("updateAccount").classList.remove("active");
@@ -26,6 +28,44 @@ function showOrders(){
 	$("#updateAccount").animate({
 		padding: "0"
 	}, 500);
+	
+	const checkElement = document.querySelector(".orderHeader");
+	
+	if(checkElement != null)
+		return;
+	
+	$.ajax({
+		url: "GetListaProdottiUtente",
+		method : 'POST',
+	}).done( data => {
+		const response = JSON.parse(data);
+		
+		if(response.ok == true) {
+			const element = document.querySelector(".divTableHeading");
+			const content = response.content;
+			
+			content.forEach(ordine => {
+				let div = "<div class='divTableRow'><div class='orderHeader'>";
+				div += "<span class='nOrdine'><b>Numero ordine:</b> " + ordine.numOrdine + " </span><span class='data'><b>Data Ordine:</b> " + ordine.data+"</span>";
+				div += "</div><div class = 'orderInfo'>";
+				
+				const pacchettiAcquistati = ordine.pacchettiAcquistati;
+				pacchettiAcquistati.forEach(dettOrdine => {
+					let sottoOrdine = "<div class='pacchettoOrdine'>";
+					sottoOrdine += "<img src='" + dettOrdine.foto + "'/>";
+					sottoOrdine += "<span class='titolo'>"+ dettOrdine.titolo + "</span>";
+					sottoOrdine += "<span class='prezzo'> " + dettOrdine.prezzo + "&euro;</span>";
+					sottoOrdine += "</div>";
+					
+					div += sottoOrdine;
+				})
+				
+				div += "</div></div>";
+				
+				element.innerHTML = element.innerHTML + div;
+			})
+		}
+	})
 }
 
 $(document).ready(() => {

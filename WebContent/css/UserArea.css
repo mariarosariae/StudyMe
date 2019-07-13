@@ -161,6 +161,79 @@ textarea{
 	height: 50px;
 }
 
+
+#MyOrder h1{
+	text-align: center;
+	font-family: 'Mali', cursive;
+}
+
+
+#ordini{
+	display: none;
+}
+
+.orderHeader {
+	font-size: 20px;
+	color:white;
+	padding:10px 0;
+	background-color: #13364D;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+	
+}
+.orderHeader .nOrdine{
+    grid-column: span 6;
+    padding-left: 10px;
+	
+}
+
+.orderHeader .data{
+	
+    grid-column: span 6;
+    text-align: right;
+    padding-right: 10px;
+	
+}
+
+
+.orderInfo{
+	padding:10px 0;
+	
+}
+
+
+.pacchettoOrdine{
+	display:grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+.pacchettoOrdine .titolo{
+	
+    grid-column: span 8;
+    text-align: center;
+    align-self: center;
+	
+}
+
+.pacchettoOrdine .prezzo{
+	
+    grid-column: span 2;
+    text-align: center;
+    width: 100%;
+    align-self: center;
+	
+}
+
+.pacchettoOrdine img {
+	width: 100%;
+    grid-column: span 2;
+	
+}
+.divTableRow{
+	padding:0 10px;
+}
+
 @media screen and (max-width: 1024px){
 	#navUser{
 		display: none;

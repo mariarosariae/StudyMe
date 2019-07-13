@@ -1,3 +1,7 @@
+<%@page import="model.dao.OrdineDao"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" import="java.util.*, model.bean.*"%>
+
 <!DOCTYPE html>
 	<%@ include file = "header.jsp" %>
 	    <link rel="stylesheet" href="css/UserArea.css">
@@ -121,9 +125,24 @@
 										<button type="submit">Invio</button>
 								</form>
 								</div>
-								<%}%>
+							<%}%>
+							
+							<div id = "ordini">
+								<!-- Ordini -->
+								<div id="MyOrder">
+								<h1>I MIEI ORDINI</h1>
+								</div>
+				
+							
+							<div class="divTableHeading">
+								
+							</div>
 					</div>
-				</div>
+							
+							</div>
+							
+							
+			</div>
 			</div>
 		</div>
 		<%@ include file="Footer.jsp"%>  
