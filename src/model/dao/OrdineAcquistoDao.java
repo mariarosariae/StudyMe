@@ -37,7 +37,7 @@ public class OrdineAcquistoDao {
 			OrdineAcquistoBean ordine= new OrdineAcquistoBean();
 			ordine.setNumOrdine(res.getInt(1));
 			ordine.setCliente(res.getString(2));
-			ordine.setData(res.getDate(4));
+			ordine.setData(res.getDate(3));
 			
 			ArrayList<PacchettoBean> listaPacchetti = new ArrayList<PacchettoBean>();
 			
@@ -49,13 +49,13 @@ public class OrdineAcquistoDao {
 			
 			//Estraggo i dettagli dell'ordine in base al numero d'ordine
 			while(ris1.next()) {
-				String codiceP = ris1.getString(2);
+				String codiceP = ris1.getString(3);
 				
 				PacchettoBean pacchetto = new PacchettoBean();
 				
 				pacchetto.setCodicePacchetto(codiceP);
-				pacchetto.setTitolo(ris1.getString(3));
-				pacchetto.setPrezzo(ris1.getDouble(4));
+				pacchetto.setTitolo(ris1.getString(4));
+				pacchetto.setPrezzo(ris1.getDouble(5));
 				
 				PacchettoBean pacchettoCompleto = pacchettoDao.getPacchetto(codiceP);
 				
