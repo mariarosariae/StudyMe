@@ -36,10 +36,9 @@ public class ServletAmministratore extends HttpServlet {
 		System.out.println("sei nella servelet");
 		System.out.println(action);
 		
-		
 		if(action !=null) {
 			if(action.equalsIgnoreCase("inserisciPacchetto")) {
-				
+		System.out.println("sono qua");
 		ArrayList<PacchettoBean> lista=new ArrayList<PacchettoBean>();
 		boolean test=false;
 		PacchettoBean pacchetto=new PacchettoBean();
@@ -67,10 +66,12 @@ public class ServletAmministratore extends HttpServlet {
 		}else if (action.equalsIgnoreCase("modificaPacchetto")) {
 				String codicePacchetto= request.getParameter("codicePacchetto");
 				double prezzo=Double.parseDouble(request.getParameter("prezzo"));
+				String titolo=request.getParameter("titolo");
+				String descrizione=request.getParameter("descrzione");				
 				
 				System.out.println("pacchetto modificato");
 				AmministratoreDao PacchettoModificato= new AmministratoreDao();
-				PacchettoModificato.updatePacchetto(codicePacchetto,prezzo);
+				
 				
 		}else if (action.equalsIgnoreCase("eliminaPacchetto") ) {
 			System.out.println("sono qui");
@@ -79,25 +80,43 @@ public class ServletAmministratore extends HttpServlet {
 			System.out.println("Pacchetto eliminato");
 			AmministratoreDao pacchettoEliminato= new AmministratoreDao();
 			pacchettoEliminato.deletePacchetto(codicePacchetto);
-			
 		
-		}else if(action.equalsIgnoreCase("inseriscilezione")) {
+		
+		}else if(action.equalsIgnoreCase("inserisciLezione")) {
 			String url=request.getParameter("url");
 			String titolo=request.getParameter("titolo");
 			String durata=request.getParameter("durata");
-			String codiceP=request.getParameter("codiceP");
+			String codicePacchetto = request.getParameter("codicePacchetto");
 			
-			System.out.println("Lezione inserita");
 			AmministratoreDao nuovaLezione= new AmministratoreDao();
-			nuovaLezione.insertLezione(url, titolo, durata, codiceP);
-			
+			nuovaLezione.insertLezione(url, titolo, durata,codicePacchetto);
+			System.out.println("Lezione inserita");
 			
 		}else if(action.equalsIgnoreCase("eliminalezione")) {
 			String url=request.getParameter("url");
 			
-			System.out.println("Lezione eliminata");
+			System.out.println(url);
+			
+		
 			AmministratoreDao lezioneEliminata= new AmministratoreDao();
 			lezioneEliminata.deleteLezione(url);
+			System.out.println("Lezione eliminata");
+			
+		}else if(action.equalsIgnoreCase("modificaTitolo")) {
+			System.out.println("sei nella funzione modifica titolo");
+			String titolo=request.getParameter("titolo");
+			String newTitolo=request.getParameter("newTitolo");
+			
+			AmministratoreDao nuovoTitolo=new AmministratoreDao();
+			
+			System.out.println("Titolo sostituito");
+			
+		}else if(action.equalsIgnoreCase("modificaUrl")) {
+			String url=request.getParameter("url");
+			
+			AmministratoreDao nuovoTitolo=new AmministratoreDao();
+			
+			System.out.println("Url sostituito");
 			
 		}else if(action.equalsIgnoreCase("informazionicliente")) {
 			String nomeCliente=request.getParameter("nomeCliente");

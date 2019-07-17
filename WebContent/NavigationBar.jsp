@@ -63,7 +63,7 @@
 				<li>
 					<div class="navbar-item login">
 						<div class="navbar-item-image">
-							<img src="./Icons/libreria.png" alt="logo" onClick="">
+							<a href="LibreriaServlet"><img src="./Icons/libreria.png" alt="logo"></a>
 						</div>
 						<div class="navbar-item-description">
 							<div id="pulsante-accedi" onClick="">Lezioni</div>
@@ -189,10 +189,10 @@
 				<li>
 					<div class="navbar-item login">
 						<div class="navbar-item-image">
-							<img src="./Icons/libreria.png" alt="logo" onClick="">
+							<a href="LibreriaServlet"><img src="./Icons/libreria.png" alt="logo"></a>
 						</div>
 						<div class="navbar-item-description">
-							<div id="pulsante-accedi" onClick="">Lezioni</div>
+						<div id="pulsante-accedi" >Lezioni</div>
 						</div>
 					</div>
 				</li>
