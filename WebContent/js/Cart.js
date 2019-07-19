@@ -7,7 +7,9 @@ function onClearCartClick() {
 			action: "rimuovitutto"
 		}
 	}).done(data => {
-		alert("Prodotti rimossi");
+		document.getElementById("cart").style.display = "none";	
+		document.getElementById("emptyCart").style.display = "block";
+		updateCartCounter(data);
 	})
 }
 
@@ -22,9 +24,34 @@ function onRemoveClick() {
 			codiceP: pacchetto,
 			action: "rimuoviDalCarrello"
 		}
-	}).done(data =>{
-		alert("Prodotti rimossi");
+	}).done(data => {
+		const parent = $(caller).parent().parent();
+		parent.fadeOut( "slow", () => {
+			parent.remove();
+			updateTotal(data);
+		})
+		updateCartCounter(data);
 	})
+}
+
+function updateCartCounter(data) {
+	const response = JSON.parse(data);
+	const cartCounters = document.querySelectorAll("#numberIncrement");
+	cartCounters.forEach(element => {
+		element.innerHTML = response.content.qta;
+	});
+	
+	if(response.content.qta <= 0){
+		document.getElementById("cart").style.display = "none";	
+		document.getElementById("emptyCart").style.display = "block";
+	}
+}
+
+function updateTotal(data) {
+	const response = JSON.parse(data);
+	const total = response.content.total;
+	
+	$(".priceTotal strong").html("Prezzo Totale: " + total +"&euro;");
 }
 
 const ajaxCallbackFunction = data => {

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -74,6 +76,7 @@ public class CarrelloServlet extends HttpServlet {
 				for (int i = 0; i < carrello.size(); i++) {
 					if (codiceP.equalsIgnoreCase(carrello.get(i).getCodicePacchetto())) {
 						carrello.remove(i);
+						break;
 					}
 				}
 
@@ -81,8 +84,22 @@ public class CarrelloServlet extends HttpServlet {
 				carrello.clear();
 			}
 		
-		JSONResponse jsonResponse = new JSONResponse(true);
+		Map<String, Object> responseContent = new HashMap<String, Object>();
+		responseContent.put("qta", carrello.size());
+		responseContent.put("total", getCartTotal(carrello));
+		
+		JSONResponse jsonResponse = new JSONResponse(true, "ok", responseContent);
 		out.print(gson.toJson(jsonResponse));
 		session.setAttribute("carrello", carrello);
+	}
+	
+	private double getCartTotal(ArrayList<PacchettoBean> cart) {
+		double total = 0;
+		
+		for(PacchettoBean pacchetto : cart) {
+			total += pacchetto.getPrezzo();
+		}
+		
+		return total;
 	}
 }
