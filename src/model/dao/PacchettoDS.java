@@ -297,10 +297,11 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 		try {
 			java.sql.Connection conn = DriverManagerConnectionPool.getConnection();
 
-			String sql = "SELECT * " + "FROM pacchetto " + "WHERE categoria = ?";
+			String sql = "SELECT * " + "FROM pacchetto " + "WHERE categoria = ? AND nelCatalogo = ?";
 
 			PreparedStatement stm = conn.prepareStatement(sql);
 			stm.setString(1, categoria);
+			stm.setBoolean(2, true);
 			ResultSet res = stm.executeQuery();
 			conn.commit();
 

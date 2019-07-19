@@ -20,7 +20,8 @@ public class PacchettoDao {
 		try {
 			
 			Connection conn = DriverManagerConnectionPool.getConnection();
-			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto ");
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto");
+			stm.setBoolean(1, true);
 			ResultSet res = stm.executeQuery();
 			ArrayList<PacchettoBean> pacchetti= new ArrayList<PacchettoBean>();
 			while(res.next()) {
@@ -94,10 +95,7 @@ public class PacchettoDao {
 			}
 			else {
 				return true;
-			}
-			
-			
-			
+			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

@@ -10,9 +10,7 @@ public class OrdineAcquistoBean extends OrdineBean {
 	public ArrayList<PacchettoBean> getPacchettiAcquistati() {
 		return pacchettiAcquistati;
 	}
-
-
-
+	
 	public void setPacchettiAcquistati(ArrayList<PacchettoBean> pacchettiAcquistati) {
 		this.pacchettiAcquistati = pacchettiAcquistati;
 	}
