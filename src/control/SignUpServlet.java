@@ -50,6 +50,12 @@ public class SignUpServlet extends HttpServlet {
 			return;
 		}
 		
+		if(password.length() < 8) {
+			JSONResponse jsonResponse = new JSONResponse(false, INVALID_PASSWORD);
+			out.print(gson.toJson(jsonResponse));
+			return;
+		}
+		
 		if(!password.equals(confPassword)) {
 			System.out.println("PASSWORD ERRATA");
 			JSONResponse jsonResponse = new JSONResponse(false, NO_PASSWORD);
@@ -78,7 +84,7 @@ public class SignUpServlet extends HttpServlet {
 			}
 		}
 	}
-	
+	private static final String INVALID_PASSWORD = "Inserire una password da almeno 8 caratteri";
 	private static final String NO_ARGUMENT = "Tutti i parametri devono essere passati";
 	private static final String NO_PASSWORD = "Le password non coincidono";
 	private static final String NO_USER = "Utente già esistente";
