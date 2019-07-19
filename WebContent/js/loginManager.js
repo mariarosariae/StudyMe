@@ -91,14 +91,6 @@ function mostraRegistrazione(){
 	x[2].style.display = "none";
 	
 	y[2].style.display = "none";
-	
-	x[3].style.display = "none";
-	
-	y[3].style.display = "none";
-	
-	x[4].style.display="none";
-	
-	y[4].style.display="none";
 }
 
 function mostraRecuperoPassword(){
@@ -203,22 +195,17 @@ const onLoginSubmit = event => {
 
 const onSignUpSubmit = event => {
 	 event.preventDefault();
-	
-	 
-	 let userNome=document.getElementById("nome");
-	 let userCognome=document.getElementById("cognome");
+ 
 	 let userInput = document.getElementById("newName");
 	 let userEmail = document.getElementById("newEmail");
 	 let userPassword = document.getElementById("regPass");
 	 let userConfPassword = document.getElementById("regPassRepeat");
 	 let formRegEff = document.getElementsByClassName("registrazioneEffettuata");
-
+	 
 	 $.ajax({
 	       url: "SignUpServlet",
 	       method: 'POST',
 	       data: {
-	    	   Nome:userNome.value,
-	    	   Cogmome:userCognome.value,
 	           NomeUtente: userInput.value,
 	           Email : userEmail.value,
 	           Password: userPassword.value,
@@ -277,6 +264,7 @@ const recoveryPassword = event => {
 function redirectUserArea(){
 	window.location = "UserArea.jsp";
 }
+
 /*
 //Funzione per ricordare i dati utente
 function rememberMe(){

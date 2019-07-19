@@ -1,11 +1,17 @@
 <!-- Barra di navigazione -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="model.bean.UserBean"
+	pageEncoding="ISO-8859-1" import="java.util.*" import="model.bean.UserBean" import="model.bean.PacchettoBean"
 	import="model.bean.AmministratoreBean"%>
 <%
 	UserBean loggedUser = (UserBean) session.getAttribute("User");
 	AmministratoreBean administrator = (AmministratoreBean) session.getAttribute("Amministratore");
 
+	HttpSession sessione = request.getSession();
+	ArrayList<PacchettoBean> carrello = (ArrayList<PacchettoBean>) sessione.getAttribute("carrello");
+	if(carrello == null){
+		carrello = new ArrayList<PacchettoBean>();
+	}
+	
 	String initial = null;
 
 	if (loggedUser != null) {
@@ -73,7 +79,10 @@
 				<li>
 					<div class="navbar-item">
 						<div class="navbar-item-image">
-							<a href="Cart.jsp"><img src="./Icons/carrello.png" alt="logo"></a>
+							<a href = "Cart.jsp">
+								<div id = "numberIncrement" style = "right: 10px;"><%=carrello.size()%></div>
+								<img src = "./Icons/carrello.png" alt="logo">
+							</a>			
 						</div>
 						<a href="CarrelloServlet"><div class="navbar-item-description">Carrello</div></a>
 					</div>
@@ -96,7 +105,8 @@
 					<div class="navbar-item">
 						<div class="navbar-item-image">
 							<a href="Cart.jsp"><img src="./Icons/carrello.png" alt="logo"></a>
-						</div>
+						</div>			
+						<div id = "numberIncrement" style = "right: 10px;"><%=carrello.size()%></div>
 						<a href="CarrelloServlet"><div class="navbar-item-description">Carrello</div></a>
 					</div>
 				</li>
@@ -142,14 +152,16 @@
 					</div>
 				</li>
 				<li>
-					<div class="navbar-item login">
+				<%if(request.getRequestURI().equals("/StudyMe/UserArea.jsp")){%>
+					<div class="navbar-item login ordini">
 						<div class="navbar-item-image">
-							<i class="fas fa-money-check-alt" onClick="showOrders()"></i>
+							<i class="fas fa-money-check-alt" onClick= "showOrdersAdministrator()"></i>
 						</div>
 						<div class="navbar-item-description">
-							<div id="pulsante-accedi" onClick="showOrders()">Ordini</div>
+							<div id="pulsante-accedi" onClick= "showOrdersAdministrator()">Ordini</div>
 						</div>
 					</div>
+				<%}%>
 				</li>
 				<%
 					} else if (loggedUser != null) {
@@ -163,16 +175,19 @@
 						</div>
 					</div>
 				</li>
-				<li>
-					<div class="navbar-item login">
+				<%if(request.getRequestURI().equals("/StudyMe/UserArea.jsp")){%>
+					
+				<li>			
+					<div class="navbar-item">		
 						<div class="navbar-item-image">
-							<i class="fas fa-money-check-alt" onClick="showOrders()"></i>
+							<i class="fas fa-money-check-alt" onClick= "showOrders()"></i>
 						</div>
 						<div class="navbar-item-description">
-							<div id="pulsante-accedi" onClick="showOrders()">Ordini</div>
+							<div id="pulsante-accedi" onClick= "showOrders()">Ordini</div>
 						</div>
 					</div>
 				</li>
+				<%}%>
 				<li>
 					<div id="formSearch">
 						<i class="fas fa-search" onClick="ShowSearchBar()"></i>
@@ -199,7 +214,10 @@
 				<li>
 					<div class="navbar-item">
 						<div class="navbar-item-image">
-							<a href="Cart.jsp"><img src="./Icons/carrello.png" alt="logo"></a>
+							<a href = "Cart.jsp">
+								<div id = "numberIncrement" style = "right: 30px;"><%=carrello.size()%></div>
+								<img src = "./Icons/carrello.png" alt="logo">
+							</a>
 						</div>
 						<div class="navbar-item-description">Carrello</div>
 					</div>
@@ -234,7 +252,10 @@
 				<li>
 					<div class="navbar-item">
 						<div class="navbar-item-image">
-							<a href="Cart.jsp"><img src="./Icons/carrello.png" alt="logo"></a>
+							<a href = "Cart.jsp">
+								<div id = "numberIncrement" style = "right: 30px;"><%=carrello.size()%></div>
+								<img src = "./Icons/carrello.png" alt="logo">
+							</a>
 						</div>
 						<div class="navbar-item-description">Carrello</div>
 					</div>
@@ -308,10 +329,10 @@
 					type="text" placeholder="Inserisci nome utente" name="NomeUtente"
 					required id="newName"> <label for="email"><b>Email</b></label><br>
 				<input type="email" placeholder="Inserisci email" name="Email"
-					required id="newEmail"> <label for="password"
+				required id="newEmail"> <label for="password"
 					class="control-label"><b>Password</b></label>
 				<div class="input-with-icon">
-					<input type="password" placeholder="Inserisci password"
+					<input type="password" minlength="8" placeholder="Inserisci password"
 						name="Password" id="regPass" required> <i
 						class="fas fa-eye-slash" onclick="togglePassword(event)"></i>
 				</div>
@@ -319,7 +340,7 @@
 				<label for="confPass"><b>Conferma password</b></label>
 
 				<div class="input-with-icon">
-					<input type="password" placeholder="Reinserisci password"
+					<input type="password" minlength="8" placeholder="Reinserisci password"
 						name="Conf_Password" id="regPassRepeat" required> <i
 						class="fas fa-eye-slash" onclick="togglePassword(event)"></i>
 				</div>

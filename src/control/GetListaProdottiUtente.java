@@ -20,34 +20,23 @@ import model.bean.OrdineAcquistoBean;
 import model.bean.UserBean;
 import model.dao.OrdineAcquistoDao;
 
-
 @WebServlet("/GetListaProdottiUtente")
 public class GetListaProdottiUtente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public GetListaProdottiUtente() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<OrdineAcquistoBean> listaOrdine = new ArrayList<OrdineAcquistoBean>();
 		
 		OrdineAcquistoDao ordineAcquistoDao = new OrdineAcquistoDao();
-		System.out.println("sono nella servlet");
 		HttpSession session = request.getSession();
 		UserBean user =(UserBean)session.getAttribute("User");
 		
@@ -55,11 +44,12 @@ public class GetListaProdottiUtente extends HttpServlet {
 		
 		JSONResponse result;
 		
-		try {
-		
-			listaOrdine= ordineAcquistoDao.findByNomeCliente(nomeUtente);
+		try {	
+			listaOrdine = ordineAcquistoDao.findByNomeCliente(nomeUtente);
 			result = new JSONResponse(true, "ok" , listaOrdine);
-		
+			if(listaOrdine.size() == 0) {
+				result = new JSONResponse(false, "Non ci sono ordini");
+			}
 		}
 		catch(SQLException e) {
 			result = new JSONResponse(false, "Problema con il database");
