@@ -167,6 +167,10 @@ textarea{
 	font-family: 'Mali', cursive;
 }
 
+.divTableHeading h1{
+	text-align: center;
+	font-family: 'Mali', cursive;
+}
 
 #ordini{
 	display: none;
@@ -203,13 +207,13 @@ textarea{
 	
 }
 
-
 .pacchettoOrdine{
 	display:grid;
 	grid-template-columns: repeat(12, 1fr);
+	margin: 5px 0;
 }
+
 .pacchettoOrdine .titolo{
-	
     grid-column: span 8;
     text-align: center;
     align-self: center;
@@ -228,10 +232,50 @@ textarea{
 .pacchettoOrdine img {
 	width: 100%;
     grid-column: span 2;
+    border-radius: 5px;
 	
 }
+
+.pacchettoOrdineAmministratore{
+	display:grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+
+.pacchettoOrdineAmministratore .titolo{
+    grid-column: span 4;
+    text-align: center;
+    align-self: center;
+	
+}
+
+.pacchettoOrdineAmministratore .prezzo{	
+    grid-column: span 3;
+    text-align: center;
+    width: 100%;
+    align-self: center;
+	
+}
+
+.pacchettoOrdineAmministratore img {
+	width: 100%;
+    grid-column: span 2;
+    border-radius: 5px;
+	
+}
+
+.pacchettoOrdineAmministratore .cliente {
+	grid-column: span 3;
+    text-align: center;
+    width: 100%;
+    align-self: center;
+}
+
 .divTableRow{
 	padding:0 10px;
+}
+
+#success{
+	display: none;
 }
 
 @media screen and (max-width: 1024px){
@@ -249,10 +293,10 @@ textarea{
 	}
 	
 	#UpdateUserName h1{
-	color: black;
+		color: black;
 	}
 	
 	#UpdateUserName h2{
-	color: black;
-	}
+		color: black;
+	}	
 }

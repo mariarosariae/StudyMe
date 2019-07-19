@@ -1,42 +1,227 @@
+#containerCart{
+	margin: 0 auto;
+    color: black;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+	font-family: 'Mali', cursive;
+	background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+	display: block;
+}
+
+#yourCart{
+	text-align: center;
+	color: white;
+	margin-top: 5%;
+}
+
 .nameColumn{
 	display: grid;
     grid-template-columns: repeat(12, 1fr);
-    text-align: center;
+    margin-left: 15%;
+    border-radius: 10px;
+    width: 70%;
+    color: white;
+    background: #3490cd;
+    margim-bottom: 5px;
+}
+
+.containerProduct{
+    margin-top: 15px;
+    margin-left: 15%;
+    border-radius: 10px;
+    width: 70%;
+    color: black;
+    background: white;
+    margim-bottom: 5px;
+}
+
+.containerProduct h1{
+	font-size: 20px;
 }
 
 .product{
+	display: block;
 	display: grid;
     grid-template-columns: repeat(12, 1fr);
 }
 
 .cellCart{
+	font-size: 20px;
 	grid-column: span 3;
+	text-align: center;
 }
 
+	
+.cellCart.foto{
+	display: block;
+}
+	
+.cellCart.nome{
+	display: block;
+}
+	
+.cellCart.prezzo{
+	display: block;
+}
+	
+.cellCart.divTableHead{
+	display: block;
+}
+	
 .photo img{
-	width: 150px;
+	width: 100px;
     height: auto;
     margin-left: 25%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    border-radius: 5px;
 }
 
 .title{
-	margin-top: 15%;
+	margin: 15px;
     text-align: center;
 }
 
 .price{
 	text-align: center;
-	margin-top: 15%;
+	margin: 15px;
 }
 
-#removeProduct{
+.removeProduct{
 	font-size: 30px;
 	color: red; 
-	margin-top: 10%;
+	margin: 15px;
+	cursor: pointer;
+}
+
+.removeProduct i {
+	pointer-events: none;
 }
 
 .priceTotal{
 	position: relative;
-    left: 70%;
+    left: 65%;
+    font-size: 20px;
     margin: 5px;
+    display: inline;
+    color: white;
+}
+
+.divTableHead{
+	display: inline;
+	color: red;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#accedi{
+	text-align: center;
+	font-weight: bold;
+	color: white;
+}
+
+#access{
+	width: 150px;
+}
+
+.paypalCheckOut{
+	width: 500px;
+    margin: 20px auto;
+}
+
+#noProduct{
+	text-align: center;
+	color: white;
+}
+
+#buyNow{
+	width: 30%;
+    margin-left: 35%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#emptyCart{
+	display: none;
+}
+
+#immagineCarrelloVuoto{
+	width: 20%;
+    margin-left: 40%;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 425px){
+	#immagineCarrelloVuoto{
+		width: 40%;
+	    margin-left: 30%;
+	    margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 768px){
+	#containerCart{
+		background: white;
+	}
+	
+	.cellCart.foto{
+		display: none;
+	}
+	
+	.cellCart.photo{
+		display: none;
+	}
+	
+	.nameColumn{
+	    margin-left: 0;
+	    width: 100% !important;
+	}
+	
+	.cellCart{
+		grid-column: span 12;
+	}
+	
+	.cellCart.foto{
+		display: none !important;
+	}
+	
+	.cellCart.nome{
+		display: none !important;
+	}
+	
+	.cellCart.prezzo{
+		display: none !important;
+	}
+	
+	.cellCart.divTableHead{
+		display: none !important;
+	}
+	
+	.containerProduct{
+	    margin-top: 0;
+	    margin-left:0;
+	    margin-bottom: 0;
+	    width: 100% !important;
+	}
+	
+	#yourCart{
+		color: black;
+	}
+	
+	.priceTotal{
+		color: black !important;
+		left: 20% !important;
+	}
+	
+	.paypalCheckOut{
+		width: 300px;
+	    height: 300px;
+	    margin: 0 auto;
+	    margin-top: 10px;
+	}
+	
+	#noProduct{
+		color: black;
+	}
 }
