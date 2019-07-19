@@ -15,32 +15,42 @@ public class AmministratoreDao {
 
 	public AmministratoreDao() {}
 	
-	public void inserPacchetto(String codicePacchetto, String categoria, String idsott, double prezzo, String descrizione,String titolo, String foto) {
+	//Aggiungi pacchetto
+	public boolean inserPacchetto(String nuovoCodice, String nuovaCategoria, String nuovaSottocategoria, double nuovoPrezzo, String nuovaDescrizione, String nuovoTitolo, String nuovaFoto) {
 		
 		try {
 			Connection conn = DriverManagerConnectionPool.getConnection();
 			
-			PreparedStatement stm = conn.prepareStatement("INSERT into pacchetto(codicePacchetto,categoria,idSott,prezzo,descrizione,titolo,foto) VALUES (?,?,?,?,?,?,?)");
+			PreparedStatement stm = conn.prepareStatement("INSERT into pacchetto (codicePacchetto, categoria, idSott, prezzo, descrizione, titolo, foto, nelCatalogo) VALUES (?,?,?,?,?,?,?, true)");
 			
-			stm.setString(1, codicePacchetto );
-			stm.setString(2,categoria);
-			stm.setString(3, idsott);
-			stm.setDouble(4, prezzo);
-			stm.setString(5,descrizione);
-			stm.setString(6, titolo);
-			stm.setString(7,foto);
+			stm.setString(1, nuovoCodice);
+			stm.setString(2, nuovaCategoria);
+			stm.setString(3, nuovaSottocategoria);
+			stm.setDouble(4, nuovoPrezzo);
+			stm.setString(5, nuovaDescrizione);
+			stm.setString(6, nuovoTitolo);
+			stm.setString(7, nuovaFoto);
 			
 			stm.executeUpdate();
 			
+			stm = conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto= ?");
+			stm.setString(1, nuovoCodice);
+			ResultSet res = stm.executeQuery();
 			conn.commit();
+			
+			if(res.next()) {
+				return true;
+			} else
+				return false;
 		}catch (SQLException e) {
 			e.printStackTrace();			
 		}
+		return false;
 		
 	}
 	
-	public boolean deletePacchetto(String codicePacchetto) {
-		
+	//Rimuovi pacchetto
+	public void  deletePacchetto(String codicePacchetto) {	
 		try {
 			Connection conn= DriverManagerConnectionPool.getConnection();
 			
@@ -48,50 +58,107 @@ public class AmministratoreDao {
 			stm.setString(1,codicePacchetto);
 			ResultSet res = stm.executeQuery();
 			if(res.next()) {
-				stm = conn.prepareStatement("DELETE FROM pacchetto WHERE codicePacchetto = ?");
-				stm.setString(1, codicePacchetto);
+				stm = conn.prepareStatement("UPDATE pacchetto SET nelCatalogo = ? WHERE codicePacchetto = ?");
+				stm.setBoolean(1, false);
+				stm.setString(2, codicePacchetto);
 				stm.execute();
 				
 				conn.commit();
-				return true;
 			}			
-			else
-				return false;
 		}catch (SQLException e) {
 			e.printStackTrace();			
 		}
-		return false;
 	}
 	
-	public boolean updatePacchetto(String codicePacchetto,double prezzo) {
-		try {
-			Connection conn= DriverManagerConnectionPool.getConnection();
-			
-			PreparedStatement stm= conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto= ? ");
-			stm.setString(1,codicePacchetto);
-			ResultSet res = stm.executeQuery();
-			if(res.next()) {
-				stm = conn.prepareStatement("UPDATE pacchetto SET prezzo = ?  WHERE codicePacchetto= ? ");
-				stm.setDouble(1, prezzo);
-				stm.setString(2, codicePacchetto);
-				stm.executeUpdate();
-				
-				conn.commit();
-				return true;
-			}			
-			else
-				return false;
-		}catch (SQLException e) {
-			e.printStackTrace();			
-		}
-		return false;
-	}
-	
-	public void insertLezione(String url, String titolo, String durata, String codiceP) {
+	//ModificaPacchetto
+	public void updateCode(String vecchioCodice, String nuovoCodice) {
 		try {
 			Connection conn = DriverManagerConnectionPool.getConnection();
 			
-			PreparedStatement stm = conn.prepareStatement("INSERT into lezioni(url,titolo,durata, codiceP) VALUES (?,?,?,?)");
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto = ?");
+			stm.setString(1, vecchioCodice);
+			ResultSet res = stm.executeQuery();
+			
+			if(res.next()) {
+				stm = conn.prepareStatement("UPDATE pacchetto SET codicePacchetto = ? WHERE codicePacchetto = ?");
+				stm.setString(1, nuovoCodice);
+				stm.setString(2, vecchioCodice);
+				stm.executeUpdate();
+				
+				conn.commit();		
+			}			
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+		
+	}
+	
+	public void updateTitle(String vecchioCodice, String nuovoTitolo) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto = ?");
+			stm.setString(1, vecchioCodice);
+			ResultSet res = stm.executeQuery();
+			if(res.next()) {
+				stm = conn.prepareStatement("UPDATE pacchetto SET titolo = ? WHERE codicePacchetto = ?");
+				stm.setString(1, nuovoTitolo);
+				stm.setString(2, vecchioCodice);
+				stm.executeUpdate();
+				
+				conn.commit();			
+			}			
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+	}
+	
+	public void updatePrice(String vecchioCodice, double nuovoPrezzo) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto = ?");
+			stm.setString(1, vecchioCodice);
+			ResultSet res = stm.executeQuery();
+			if(res.next()) {
+				stm = conn.prepareStatement("UPDATE pacchetto SET prezzo = ? WHERE codicePacchetto = ?");
+				stm.setDouble(1, nuovoPrezzo);
+				stm.setString(2, vecchioCodice);
+				stm.executeUpdate();
+				
+				conn.commit();	
+			}			
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+	}
+	
+	public void updateDescr(String vecchioCodice, String nuovaDescrizione) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto = ?");
+			stm.setString(1, vecchioCodice);
+			ResultSet res = stm.executeQuery();
+			if(res.next()) {
+				stm = conn.prepareStatement("UPDATE pacchetto SET descrizione = ? WHERE codicePacchetto = ?");
+				stm.setString(1, nuovaDescrizione);
+				stm.setString(2, vecchioCodice);
+				stm.executeUpdate();
+				
+				conn.commit();			
+			}				
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+	}
+
+	//Aggiungi lezione
+	public boolean insertLesson(String codiceP, String url, String titolo, String durata) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			
+			PreparedStatement stm = conn.prepareStatement("INSERT into lezioni (url, titolo, durata, codiceP) VALUES (?,?,?,?)");
 			
 			stm.setString(1, url);
 			stm.setString(2, titolo);
@@ -100,33 +167,77 @@ public class AmministratoreDao {
 			
 			stm.executeUpdate();
 			
-			conn.commit();
-		}catch (SQLException e) {
-			e.printStackTrace();			
-		}
-	}
-	public boolean deleteLezione(String url) {
-		
-		try {
-			Connection conn= DriverManagerConnectionPool.getConnection();
-			
-			PreparedStatement stm= conn.prepareStatement("SELECT * FROM lezioni WHERE url = ?");
-			stm.setString(1,url);
+			stm = conn.prepareStatement("SELECT * FROM lezioni WHERE titolo = ?");
+			stm.setString(1, titolo);
 			ResultSet res = stm.executeQuery();
+			conn.commit();
+			
 			if(res.next()) {
-				stm = conn.prepareStatement("DELETE FROM lezioni WHERE url = ?");
-				stm.setString(1, url);
-				stm.execute();
-				
-				conn.commit();
 				return true;
-			}			
-			else
+			} else
 				return false;
 		}catch (SQLException e) {
 			e.printStackTrace();			
 		}
 		return false;
+	}
+	
+	//Modifica lezione
+	public void updateTitleLesson(String vecchioTitolo, String nuovoTitolo) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			PreparedStatement stm = conn.prepareStatement("UPDATE lezioni SET titolo = ? WHERE titolo = ? ");
+			stm.setString(1, nuovoTitolo);
+			stm.setString(2, vecchioTitolo);
+			stm.executeUpdate();
+				
+				conn.commit();				
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+	}
+	
+	public void updateUrlLesson(String vecchioTitolo, String nuovoUrl) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			PreparedStatement stm = conn.prepareStatement("UPDATE lezioni SET url = ? WHERE titolo = ?");
+			stm.setString(1, nuovoUrl);
+			stm.setString(2, vecchioTitolo);
+			stm.executeUpdate();
+				
+			conn.commit();				
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+	}
+	
+	public void updateDurationLesson(String vecchioTitolo, String nuovaDurata) {
+		try {
+			Connection conn = DriverManagerConnectionPool.getConnection();
+			PreparedStatement stm = conn.prepareStatement("UPDATE lezioni SET durata = ? WHERE titolo = ?");
+			stm.setString(1, nuovaDurata);
+			stm.setString(2, vecchioTitolo);
+			stm.executeUpdate();
+				
+			conn.commit();				
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
+	}
+	
+	//Cancella lezione
+	public void deleteLesson(String titolo) {	
+		try {
+			System.out.println(titolo);
+			Connection conn= DriverManagerConnectionPool.getConnection();
+			PreparedStatement stm = conn.prepareStatement("DELETE FROM lezioni WHERE titolo = ?");
+			stm.setString(1, titolo);
+			stm.execute();
+				
+			conn.commit();
+		}catch (SQLException e) {
+			e.printStackTrace();			
+		}
 	}
 	
 	public ArrayList<OrdineBean> getOrdine(String nomeCliente) {

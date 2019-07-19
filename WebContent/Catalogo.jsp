@@ -31,11 +31,12 @@
     <div class="grid-generale">
    		<% 
    		ArrayList<PacchettoBean> pacchetti = result.get(categoryName);
-   		for(PacchettoBean pacchetto : pacchetti) {%>	
+   		for(PacchettoBean pacchetto : pacchetti) {
+   		%>	
         <div class= "pacchetto">
-            <h1><%=pacchetto.getTitolo()%></h1><br>
-           
-	        <div class = "foto-categoria" style = "background-image: url(<%= pacchetto.getFoto()%>)"></div>
+        	<div class = "foto-categoria" style = "background-image: url(<%= pacchetto.getFoto()%>)"></div>
+            <h1><%=pacchetto.getTitolo()%></h1>
+
 	            <%if(pacchetto.getDescrizione().length() > 100) { %>
 	            	<p><%= pacchetto.getDescrizione().substring(0, 100)%> ...</p>
 	            <%}else{%>
@@ -44,7 +45,7 @@
 	        <div class="buy-now">
 	       		<%if(administrator != null){ %>
 	       		<div class="amministratore">
-	       		 	<span class ="modifica" onClick = "mostraModifiche('<%=pacchetto.getCodicePacchetto()%>', '<%=pacchetto.getTitolo()%>','<%=pacchetto.getPrezzo()%>','<%=pacchetto.getDescrizione()%>')">
+	       		 	<span class ="modifica" onClick = "mostraModifiche('<%=pacchetto.getCodicePacchetto()%>')">
 			        	Modifica
 			        </span>
 				    <span class ="catalogo catalogoAmministratore">
@@ -76,42 +77,43 @@
 		<div id = "containerModificaPacchetto">
 			<div id="modificaPacchetto">
 				<h2>Modifica pacchetto</h2>
-				<div id="messageError"></div>
+				<div id="insuccess"></div>
 				<form id="update">
+				<div id="updateCod">
+					<input type="hidden" name="oldCodPacc" value= "" id="code" style = "width:100%" required readonly>
 					<div id="updateCod">
-						<label for="uname"><b>Codice pacchetto: </b></label> <input type="text" placeholder="" name="codPacc" required>
-						<div id="updateButton" onClick="">
+						<label for="uname"><b>Nuovo codice pacchetto: </b></label> <input type="text" name="codPacc" id="newCode">
+						<div id="updateButton" data = "cambiaCodice" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updateTitle">
-						<label for="uname"><b>Titolo: </b></label> <input type="text"placeholder="" name="titolo" required>
-						<div id="updateButton" onClick="">
+						<label for="uname"><b>Nuovo titolo: </b></label> <input type="text" name="titolo" id="newTitle">
+						<div id="updateButton" data = "cambiaTitolo" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updatePrice">
-						<label for="uname"><b>Prezzo: </b></label> <input type="text" placeholder="" name="prezzo" required>
-						<div id="updateButton" onClick="">
+						<label for="uname"><b>Nuovo prezzo: </b></label> <input type="text" name="prezzo" id="newPrice">
+						<div id="updateButton" data = "cambiaPrezzo" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updateDescr">
-						<label for="uname"><b>Descrizione: </b></label>
-						<textarea rows="3" cols="45" name = "descrizione"></textarea>
-						<div id="updateButton" onClick="">
+						<label for="uname"><b>Nuova descrizione: </b></label>
+						<textarea rows="3" cols="45" name = "descrizione" id="newDesc"></textarea>
+						<div id="updateButton" data = "cambiaDescrizione" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
-					<span id = "delete">Rimuovi dal catalogo</span>
+					<span id = "delete" data = "rimuovi" onClick="updatePackage()">Rimuovi dal catalogo</span>
 				</form>
 			</div>
 		</div>
-	</div>	
-	
-	<%@ include file="Footer.jsp"%>
-	
-	</div> 
+	</div>
+</div> 
+
+		<%@ include file="Footer.jsp"%>
 		<script type="text/javascript" src="./js/catalogo.js"></script>
 	</body>
 </html>

@@ -17,23 +17,25 @@
 }
 
 .lezione{
-	height: 200px;
     width: auto;
     transition: background-color 0.4s;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .lezione:hover{
 	background: #3490cd;
 }
 
-#dettagli{
-	position: relative;
-	top: 40px;
-}
-
 #TitoloLezione{
 	font-size: 25px;
 	font-family:'Coming Soon', cursive;
+	text-align: center;
+    display: block;
+    margin: 0 auto;
 }
 
 #TitoloLezione i {
@@ -42,36 +44,33 @@
 }
 
 #AggiungiLezione{
-	margin-left: 45%;
 	display: inline-flex;
-	font-family: 'Mali', cursive;
+    justify-content: center;
+    font-family: 'Mali', cursive;
     color: white;
     cursor: pointer;
     text-align: center;
-    width: 200px;
+    width: 100%;
 }
 
 #AggiungiLezione i {
 	font-size: 60px;
 }
 
-#add{
+#addL{
 	margin-left: 5px;
 	display: flex;
     align-items: center;
 }
 
-.rimuovi{
-	width: 45%;
-	margin-left: 220px;
+.modificaLezione{
 	font-family: 'Mali', cursive;
-    background-color: red;
+    background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
     cursor: pointer;
     text-align: center;
     border-radius: 5px 5px 5px 5px;
-    position: relative;
 }
 
 #addLesson:hover{
@@ -81,6 +80,18 @@
 iframe{
 	float: left;
 	margin: 10px;
+}
+
+#dettagli{
+   	grid-column: span 11;
+    align-self: center;
+    justify-self: center;
+    width: 80%;
+    top: 0;
+}
+
+#dettagli i{
+	cursor: pointer;
 }
 
 /*Modifica lezione */
@@ -123,7 +134,7 @@ iframe{
 	display: none;
 }
 
-#modificaLezione{
+#modificaLez{
 	box-shadow: -7px 7px black;
 	border-radius: 20px 20px 20px 20px;
 	position: absolute;
@@ -137,11 +148,11 @@ iframe{
 	background: linear-gradient(to bottom, #546c7cCC 0%, #2890b9CC 100%);
 }
 
-#modificaLezione input{
+#modificaLez input{
 	position: relative;
 	font-size: 12px;
 	font-family: 'Mali', cursive;
-	width: 85%;
+	width: 100%;
 	margin: 0;
 	padding: 15px 20px;
 	display: inline-block;
@@ -165,6 +176,10 @@ iframe{
 	background-color: #4CAF50;
 	color: white;
 }
+	
+#updateButton i{
+	pointer-events: none;
+}
 
 #addLesson{
 	text-align: center;
@@ -179,36 +194,33 @@ iframe{
 	border-radius: 5px 5px 5px 5px;
 }
 
+#delete{
+	color: red;
+    font-size: 25px;
+    position: relative;
+    left: 20%;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 768px){
-	.lezione{
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		margin-top: 10px;
-		margin-bottom: 10px;
-		height: auto;
-	}
-	
-	iframe{
-		grid-column: span 12;
+	iframe {
+    	grid-column: span 12;
+    	justify-self: center;
 	}
 	
 	#dettagli{
 		grid-column: span 12;
-		top: 0;
+   		top: 0;
 	}
 	
 	.rimuovi{
-		margin-left: 0;
+		margin: 0 auto;
 		width: 80%;
-	}
-	
-	#AggiungiLezione{
-		margin-left: 20%;
 	}
 }
 
 @media only screen and (max-width: 425px){
-	#modificaLezione{
+	#modificaLez{
   		width: 250px;
   	}
   	
@@ -216,7 +228,7 @@ iframe{
   		width: 85%;
   	}
   	
-  	#modificaLezione input {
-  		width: 80%;
+  	#modificaLez input {
+  		width: 80% !important;
   	}
 }

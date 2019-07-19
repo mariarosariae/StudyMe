@@ -24,7 +24,7 @@
 									<i class="fas fa-plus-square"></i>
 									<span>Aggiungi pacchetti</span>
 								</li>
-								<li  id = "myOrder" onClick = "showOrders()">
+								<li  id = "myOrder" onClick = "showOrdersAdministrator()">
 									<i class="fas fa-money-check-alt"></i>
 									<span>Ordini</span>
 								</li>
@@ -60,43 +60,44 @@
 								<%if(administrator != null){%>
 								<div id = "UpdateUserName">
 								<h1>Inserire dati del nuovo pacchetto da inserire nel catalogo</h1>
+								<h1 id = "success"></h1>
 								
 								<h2>Codice pacchetto: </h2>	
 								<form name="insertCod">
-									<input type="text" placeholder="Inserisci nuovo codice">	
+									<input type="text" id = "newCode" placeholder="Inserisci nuovo codice">	
 								</form>
 										
 								<h2>Categoria: </h2>	
 								<form name="insertCat">
-									<input type="text" placeholder="Inserisci nome categoria">	
+									<input type="text" id = "newCat" placeholder="Inserisci nome categoria">	
 								</form>
 								
 								<h2>Sottocategoria: </h2>	
 								<form name="insertSott">
-									<input type="text" placeholder="Inserisci id sottocategoria">	
+									<input type="text" id = "newSottoCat" placeholder="Inserisci id sottocategoria">	
 								</form>
 								
 								<h2>Titolo: </h2>	
 								<form name="insertTitle">
-									<input type="text" placeholder="Inserisci titolo">	
+									<input type="text" id = "newTitle" placeholder="Inserisci titolo">	
 								</form>
 								
 								<h2>Foto copertina: </h2>	
 								<form name="insertPhoto">
-									<input type="text" placeholder="Inserisci url foto">
+									<input type="text" id = "newPhoto" placeholder="Inserisci url foto">
 								</form>
 								
 								<h2>Prezzo: </h2>	
 								<form name="insertPrice">
-									<input type="text" placeholder="Inserisci prezzo">	
+									<input type="text" id = "newPrice" placeholder="Inserisci prezzo">	
 								</form>
 
 								<h2>Descrizione: </h2>	
 								<form name="insertDes">
-									<textarea placeholder="Inserisci nuovo codice"></textarea>
+									<textarea id = "newDesc" placeholder="Inserisci nuova descrizione"></textarea>
 								</form>
 
-								<button type="submit">Aggiungi</button>
+								<button type="submit" data = "aggiungiPacchetto" onClick="addPackage()">Aggiungi</button>
 								</div>
 								<%}else{%>	
 								<div id = "UpdateUserName">
@@ -128,6 +129,7 @@
 							<%}%>
 							
 							<div id = "ordini">
+								<%if(loggedUser != null){%>
 								<!-- Ordini -->
 								<div id="MyOrder">
 								<h1>I MIEI ORDINI</h1>
@@ -137,12 +139,16 @@
 							<div class="divTableHeading">
 								
 							</div>
+							<%} else if(administrator != null){%>
+								<div id = "MyOrder">
+									<h1>ORDINI UTENTI</h1>
+								</div>
+								
+								<div class="divTableHeading">
+							<%}%>
+							</div>				
 					</div>
-							
-							</div>
-							
-							
-			</div>
+				</div>
 			</div>
 		</div>
 		<%@ include file="Footer.jsp"%>  

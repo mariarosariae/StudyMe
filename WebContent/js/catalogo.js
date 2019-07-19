@@ -1,3 +1,7 @@
+const redirectTo = url => {
+	document.location.href = url;
+}
+
 function mostraLezioneGratis(url){
 	document.getElementById("sfondoVideo").style.display = "block";
 	var iframe = document.createElement('iframe');
@@ -52,19 +56,111 @@ function aggiungiAlCarrello() {
 				document.getElementById("aggiungiAlCarrello").innerHTML = "Aggiungi al carrello" + " <i class='fas fa-cart-plus'></i>";
 			}
 		}
+		
+		updateCartCounter(data);
 	})
 }
 
-function mostraModifiche(codicePacchetto, titolo, prezzo, descrizione){
+function updateCartCounter(data) {
+	const response = JSON.parse(data);
+	const cartCounters = document.querySelectorAll("#numberIncrement");
+	cartCounters.forEach(element => {
+		element.innerHTML = response.content.qta;
+	});
+}
+
+function mostraModifiche(codicePacchetto){
 	document.getElementById("sfondoModificaPacchetto").style.display = "block";
 	document.getElementById("containerModificaPacchetto").style.display = "block";
-	document.getElementsByName('codPacc')[0].placeholder = codicePacchetto;
-	document.getElementsByName('titolo')[0].placeholder = titolo;
-	document.getElementsByName('prezzo')[0].placeholder = prezzo;
-	document.getElementsByName('descrizione')[0].placeholder = descrizione;	
+	document.getElementById('code').value = codicePacchetto;
 }
 
 function nascondiModifiche(){
 	document.getElementById("sfondoModificaPacchetto").style.display = "none";
 	document.getElementById("containerModificaPacchetto").style.display = "none";
+	document.getElementById("code").value = null;
+	document.getElementById("newCode").value = null;
+	document.getElementById("newTitle").value = null;
+	document.getElementById("newPrice").value = null;
+	document.getElementById("newDesc").value = null;
+	const messageError = $("#insuccess");
+    messageError.css("display", "none");
+    document.getElementById("code").style.border = "none";	
+}
+
+function updatePackage(){
+	let caller = event.target;
+	const action = caller.getAttribute("data");
+	let oldCode= document.getElementById("code");
+	let newCode = document.getElementById("newCode");
+	let newTitle = document.getElementById("newTitle");
+	let newPrice = document.getElementById("newPrice");
+	let newDesc = document.getElementById("newDesc");
+	console.log(action);
+	$.ajax({
+        url: "AmministratoreServlet",
+        method: 'POST',
+        data:{
+        	azione: action,
+        	vecchioCodice: oldCode.value,
+        	nuovoCodice: newCode.value,
+        	nuovoTitolo: newTitle.value,
+        	nuovoPrezzo: newPrice.value,
+        	nuovaDescrizione: newDesc.value
+        }
+    }).done(data => {
+    	const response = JSON.parse(data);
+    	 
+    	 if(response.ok == true){
+    		 window.location.reload();
+    	 }else{
+    		const messageError = $("#insuccess");
+    		console.log(messageError);
+    		messageError.text(response.message);
+	        messageError.css("display", "block");
+	        messageError.css("color", "red");
+     		oldCode.style.border = "1px solid red";
+    	 }
+    })
+}
+
+function lasciaUnaRecensione(recensione){
+	document.getElementById("sfondoRecensione").style.display = "block";
+	document.getElementById("containerRecensione").style.display = "block";
+	document.getElementById('nomeUtenteRecensore').value = recensione;
+}
+
+function nascondiAggiuntaRecensione(){
+	document.getElementById("sfondoRecensione").style.display = "none";
+	document.getElementById("containerRecensione").style.display = "none";
+}
+
+function addReview(){
+	
+	let utente = document.getElementById("nomeUtenteRecensore");
+	let codicePacchetto =  document.getElementById("pacchettoDaRecensire");
+	let titoloRecensione = document.getElementById("titoloR");
+	let testoRecensione = document.getElementById("txtRecensione");
+	
+	console.log("Valori:",utente.value, codicePacchetto.value, titoloRecensione.value, testoRecensione.value);
+	
+	$.ajax({
+        url: "RecensioneServlet",
+        method: 'POST',
+        data:{
+        	utente: utente.value,
+        	codicePacchetto: codicePacchetto.value,
+        	titoloRecensione: titoloRecensione.value,
+        	testoRecensione: testoRecensione.value
+        }
+    }).done(data => {
+    	const response = JSON.parse(data);
+      	 
+      	 if(response.ok == true){
+         	console.log("recesione inserita");
+      	 }
+      	 else {
+      		 console.log("Errore");
+      	 }
+     });
 }

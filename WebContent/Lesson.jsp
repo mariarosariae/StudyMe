@@ -8,6 +8,7 @@
 	ArrayList<RecensioneBean> recensioni = (ArrayList<RecensioneBean>)request.getAttribute("recensioni");
 	boolean comprato = (boolean) request.getAttribute("comprato");
 	boolean nelCarrello = (boolean) request.getAttribute("nelCarrello");
+	boolean recensito = (boolean) request.getAttribute("recensito");
 %>
 
 <!DOCTYPE html>
@@ -34,7 +35,10 @@
    						<%
    							if(comprato) {
    						%>
-   							<div id="videoIntroduzione" onClick = "mostraLezioneGratis('<%=result.get(0).getUrl()%>')"> Guarda il corso <i class="far fa-play-circle"></i></div>
+   								<span id="videoIntroduzione" onClick="redirectTo('LibreriaServlet')"> Vai al corso <i class="far fa-play-circle"></i></span>
+   							<%if(!recensito){ %>
+   								<div id="recensione" onClick = "lasciaUnaRecensione('<%=loggedUser.getNomeUtente()%>')"> Lascia una recensione <i class="fas fa-pen-alt"></i></div>
+   							<%}%>
 						<%	} else {
    						%>
 							<div id="videoIntroduzione" onClick = "mostraLezioneGratis('<%=result.get(0).getUrl()%>')"> Guarda prima lezione gratis <i class="far fa-play-circle"></i></div>
@@ -68,7 +72,34 @@
 					</div>
 				    <div id ="video">
 				    </div>
-			    </div>				
+			    </div>		
+			    
+		    <!-- Aggiungi recensione -->	
+			<div id="sfondoRecensione">
+				<div id="close-icon" onClick="nascondiAggiuntaRecensione()">
+				<i class="far fa-times-circle"></i>
+			</div>
+				
+			<div id = "containerRecensione">
+				<div id="aggiungiRecensione">
+					<h2>Lascia una recensione</h2>
+					<div id="messageError"></div> 
+					<input type="hidden" value= "<%=pacchetto.getCodicePacchetto()%>" id="pacchettoDaRecensire" required readonly>
+					<input type="hidden" value= "" id="nomeUtenteRecensore" required readonly>
+					<div id="add">
+						<div id="titoloRecensione">
+							<label for="uname"><b>Titolo recensione: </b></label> 
+							<input id = "titoloR" type="text" required>
+						</div>
+						<div id="testoRecensione">
+							<label for="uname"><b>Recensione: </b></label>
+							<textarea rows="3" cols="55" id="txtRecensione"></textarea>
+						</div>
+						<button data = "aggiungiPacchetto" onClick="addReview()">Aggiungi recensione</button>
+					</div>
+				</div>
+			</div>	
+		</div>	
     	<%}%>
  	<%@ include file="Footer.jsp"%> 
  	</div>
