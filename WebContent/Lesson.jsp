@@ -25,7 +25,8 @@
 	 	<%@ include file="BarCategory.jsp"%> 	
 	 
 	 	<%if(result == null || result.size() == 0){%>
-	 		<h1>Nessuna lezione trovata</h1>
+	 		<img src = "img/utility/no-lesson.svg" id = "immagineNoLezione" alt = "Lezione non trovata">	
+	 		<h1 id = "noLesson"> Nessuna lezione trovata</h1>
    		<%}else{%>			
    				<div id = "pacchetto">
    					<h1 id = "titoloPacchetto"><%=pacchetto.getTitolo()%>*</h1>
@@ -35,7 +36,7 @@
    						<%
    							if(comprato) {
    						%>
-   								<span id="videoIntroduzione" onClick="redirectTo('LibreriaServlet')"> Vai al corso <i class="far fa-play-circle"></i></span>
+   							<span id="videoIntroduzione" onClick="redirectTo('LibreriaServlet')"> Vai al corso <i class="far fa-play-circle"></i></span>
    							<%if(!recensito){ %>
    								<div id="recensione" onClick = "lasciaUnaRecensione('<%=loggedUser.getNomeUtente()%>')"> Lascia una recensione <i class="fas fa-pen-alt"></i></div>
    							<%}%>
@@ -58,7 +59,7 @@
 						<p id ="commento">Non ci sono recensioni per questo pacchetto</p>
 					<%} else{ for(RecensioneBean recensione : recensioni){%>
 						<p id ="commento">''<%= recensione.getTitolo()%>''<br> <%=recensione.getCommento()%></p>
-						<p id = "recensore"> <strong>Fiore</strong> </p>
+						<p id = "recensore"> <strong><%=recensione.getCliente()%></strong> </p>
 					<%} 
 					}%>
 					<i class="fas fa-quote-left" id = "bottomIcon"></i>		
@@ -89,13 +90,13 @@
 					<div id="add">
 						<div id="titoloRecensione">
 							<label for="uname"><b>Titolo recensione: </b></label> 
-							<input id = "titoloR" type="text" required>
+							<input id = "titoloR" placeholder = "Inserire titolo recensione" type="text" required>
 						</div>
 						<div id="testoRecensione">
 							<label for="uname"><b>Recensione: </b></label>
-							<textarea rows="3" cols="55" id="txtRecensione"></textarea>
+							<textarea rows="3" cols="55" placeholder = "Inserire recensione" id="txtRecensione"></textarea>
 						</div>
-						<button data = "aggiungiPacchetto" onClick="addReview()">Aggiungi recensione</button>
+						<button onClick="addReview()">Aggiungi recensione</button>
 					</div>
 				</div>
 			</div>	

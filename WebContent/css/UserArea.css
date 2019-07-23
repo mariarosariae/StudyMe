@@ -239,6 +239,7 @@ textarea{
 .pacchettoOrdineAmministratore{
 	display:grid;
 	grid-template-columns: repeat(12, 1fr);
+	margin: 5px 0;
 }
 
 .pacchettoOrdineAmministratore .titolo{

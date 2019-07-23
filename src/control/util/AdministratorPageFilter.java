@@ -1,4 +1,4 @@
-package control;
+package control.util;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -10,16 +10,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- * Servlet Filter implementation class ProtectedPageFilter
- */
-@WebFilter(urlPatterns = {"/UserArea.jsp", "/Library.jsp"})
-public class ProtectedPageFilter implements Filter {
+import model.bean.AmministratoreBean;
 
+@WebFilter(urlPatterns = {"/AmministratoreServlet", "/OrdiniAmministratore", "/LessonAdministrator.jsp"})
+public class AdministratorPageFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
 		HttpServletRequest httpRequest = null;
 		HttpServletResponse httpResponse = null;
 		
@@ -29,21 +25,22 @@ public class ProtectedPageFilter implements Filter {
 		}
 		
 		if(httpRequest != null) {
-			HttpSession session = httpRequest.getSession();
+			httpRequest = (HttpServletRequest)request;
+			AmministratoreBean utente = (AmministratoreBean) httpRequest.getSession().getAttribute("Amministratore");
 			
-			if(session.getAttribute("User") == null & session.getAttribute("Amministratore") == null ) {
+			if(utente == null) {
 				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 				return;
 			}
 		}
-		
+			
 		chain.doFilter(request, response);
 	}
 
 	@Override
-	public void destroy() { } 
+	public void destroy() {}
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException { }
+	public void init(FilterConfig filterConfig) throws ServletException {}
 
 }

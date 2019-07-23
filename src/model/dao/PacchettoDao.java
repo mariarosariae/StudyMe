@@ -50,7 +50,6 @@ public class PacchettoDao {
 		Connection conn;
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			System.out.println(codiceP);
 			PreparedStatement stm = conn.prepareStatement("SELECT * FROM pacchetto WHERE codicePacchetto = ?");
 			stm.setString(1, codiceP);
 			ResultSet res=stm.executeQuery();
@@ -67,7 +66,6 @@ public class PacchettoDao {
 				return pa;
 			}
 			else {
-				System.out.println("query non eseguita");
 				return null;
 			}
 			
@@ -85,7 +83,6 @@ public class PacchettoDao {
 		Connection conn;
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
-			System.out.println(codiceP);
 			PreparedStatement stm = conn.prepareStatement("DELETE * FROM pacchetto WHERE codicePacchetto = ?");
 			stm.setString(1, codiceP);
 			ResultSet res=stm.executeQuery();

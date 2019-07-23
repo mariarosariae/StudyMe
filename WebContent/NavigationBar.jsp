@@ -72,7 +72,7 @@
 							<a href="LibreriaServlet"><img src="./Icons/libreria.png" alt="logo"></a>
 						</div>
 						<div class="navbar-item-description">
-							<div id="pulsante-accedi" onClick="">Lezioni</div>
+							<a href="LibreriaServlet"><div id="pulsante-accedi" onClick="">Lezioni</div></a>
 						</div>
 					</div>
 				</li>
@@ -84,7 +84,7 @@
 								<img src = "./Icons/carrello.png" alt="logo">
 							</a>			
 						</div>
-						<a href="CarrelloServlet"><div class="navbar-item-description">Carrello</div></a>
+						<a href="Cart.jsp"><div class="navbar-item-description">Carrello</div></a>
 					</div>
 				</li>
 				<%
@@ -151,8 +151,8 @@
 						</div>
 					</div>
 				</li>
-				<li>
 				<%if(request.getRequestURI().equals("/StudyMe/UserArea.jsp")){%>
+				<li>		
 					<div class="navbar-item login ordini">
 						<div class="navbar-item-image">
 							<i class="fas fa-money-check-alt" onClick= "showOrdersAdministrator()"></i>
@@ -160,9 +160,9 @@
 						<div class="navbar-item-description">
 							<div id="pulsante-accedi" onClick= "showOrdersAdministrator()">Ordini</div>
 						</div>
-					</div>
-				<%}%>
+					</div>	
 				</li>
+				<%}%>
 				<%
 					} else if (loggedUser != null) {
 				%>
@@ -206,9 +206,11 @@
 						<div class="navbar-item-image">
 							<a href="LibreriaServlet"><img src="./Icons/libreria.png" alt="logo"></a>
 						</div>
-						<div class="navbar-item-description">
-						<div id="pulsante-accedi" >Lezioni</div>
-						</div>
+						<a href="LibreriaServlet">
+							<div class="navbar-item-description">
+								<div id="pulsante-accedi" >Lezioni</div>
+							</div>
+						</a>
 					</div>
 				</li>
 				<li>
@@ -219,7 +221,7 @@
 								<img src = "./Icons/carrello.png" alt="logo">
 							</a>
 						</div>
-						<div class="navbar-item-description">Carrello</div>
+						<a href = "Cart.jsp"><div class="navbar-item-description">Carrello</div></a>
 					</div>
 				</li>
 				<%
@@ -257,7 +259,7 @@
 								<img src = "./Icons/carrello.png" alt="logo">
 							</a>
 						</div>
-						<div class="navbar-item-description">Carrello</div>
+						<a href = "Cart.jsp"><div class="navbar-item-description">Carrello</div></a>
 					</div>
 				</li>
 				<%
@@ -302,7 +304,7 @@
 
 				<button type="submit">Accedi</button>
 				<span class="remb"> <label> <input type="checkbox"
-						checked="checked" id="remember" onClick="">Ricordami
+						id="remember">Ricordami
 				</label>
 				</span>
 			</form>

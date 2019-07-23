@@ -202,6 +202,27 @@ iframe{
     cursor: pointer;
 }
 
+#immagineNoLezione{
+	width: 20%;
+    margin: 20px auto;
+    display: block;
+}
+
+#noLesson{
+	text-align: center;
+	font-family: 'Mali', cursive;
+}
+
+#messErr{
+	margin: 1px;
+	font-weight: bold;
+    text-align: center;
+    color: red;
+    display: none;
+    transition: opacity .5s;
+    text-shadow: 2px 2px 4px black;
+}
+
 @media only screen and (max-width: 768px){
 	iframe {
     	grid-column: span 12;
@@ -217,6 +238,10 @@ iframe{
 		margin: 0 auto;
 		width: 80%;
 	}
+	
+	#immagineNoLezione{
+		width: 30%;
+	}
 }
 
 @media only screen and (max-width: 425px){
@@ -231,4 +256,8 @@ iframe{
   	#modificaLez input {
   		width: 80% !important;
   	}
+  	
+  	#immagineNoLezione{
+		width: 40%;
+	}
 }

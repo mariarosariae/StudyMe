@@ -228,7 +228,6 @@ public class AmministratoreDao {
 	//Cancella lezione
 	public void deleteLesson(String titolo) {	
 		try {
-			System.out.println(titolo);
 			Connection conn= DriverManagerConnectionPool.getConnection();
 			PreparedStatement stm = conn.prepareStatement("DELETE FROM lezioni WHERE titolo = ?");
 			stm.setString(1, titolo);

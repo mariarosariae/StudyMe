@@ -55,8 +55,9 @@ public class LibreriaServlet extends HttpServlet {
 		try {			
 			pacchettiAcquistati = dao.findByNomeCliente(nomeUtente); // prendo i pacchetti acquistati da un utente  e  mi ritorna un array di pacchetti ascquistati dall'utente		
 			for(OrdineAcquistoBean e: pacchettiAcquistati) {
-				pacchetti = e.getPacchettiAcquistati();// chiamo il metodo getLezioni per prendere le lezioni del pacchetto e gli passo il codice			
-				for(PacchettoBean p : pacchetti) {
+				ArrayList<PacchettoBean> pacchettiOrdineAttuale = e.getPacchettiAcquistati();
+				pacchetti.addAll(pacchettiOrdineAttuale);// chiamo il metodo getLezioni per prendere le lezioni del pacchetto e gli passo il codice			
+				for(PacchettoBean p : pacchettiOrdineAttuale) {
 					//Per ogni pacchetto ottengo tutte le lezioni
 					ArrayList<LezioniBean> lezione = new ArrayList<LezioniBean>();
 					lezione = pacchetto.getLezioni(p.getCodicePacchetto());// aggiungo le lezioni all'arrayList lezioni 	
@@ -68,9 +69,6 @@ public class LibreriaServlet extends HttpServlet {
 		}
 		request.setAttribute("pacchetti", pacchetti);
 		request.setAttribute("lezioni", lezioni);
-		
-		System.out.println(pacchetti);
-		System.out.println(lezioni);
 		
 		RequestDispatcher dispatcher= getServletContext().getRequestDispatcher("/Libreria.jsp");
 		dispatcher.forward(request, response);

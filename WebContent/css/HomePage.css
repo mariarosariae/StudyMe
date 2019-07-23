@@ -118,6 +118,7 @@ a {
 #ricerca {
     position: relative;
     display: block;
+    color: black;
 }
 
 #ricerca i {
@@ -159,9 +160,11 @@ a {
     text-align: center;
     text-transform: uppercase;
     line-height: 37.5px;
-    background-size: cover !important;
+    background-size: 100%;
+    background-position: center;
     border-radius: 7.5px;
     margin-right: 12.5px;
+    background-repeat: no-repeat;
 }
 
 .cartaCategoria h1{
@@ -172,6 +175,7 @@ a {
     transform: translate(-50%, -50%);
     margin: 0;
     font-family: 'Mali', cursive;
+    pointer-events: none; 
 }
 
 #nomeCategoria{
@@ -372,10 +376,12 @@ a {
 
 .closebtn{
 	font-size: 70px;
+	color: black;
 }
 
 #formSearch .fas.fa-search {
 	font-size: 50px;
+	color: black !important;
 }
 
 .fas.fa-plus-square{
@@ -406,6 +412,7 @@ a {
 
 #ricercaResponsive{
 	display: none;
+	color: black;
 }
 
 #ricercaResponsive input{

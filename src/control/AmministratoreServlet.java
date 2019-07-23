@@ -2,6 +2,9 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +18,9 @@ import control.util.JSONResponse;
 import model.bean.LezioniBean;
 import model.bean.PacchettoBean;
 import model.dao.AmministratoreDao;
+import model.dao.CategoriaManager;
+import model.dao.PacchettoDao;
+import model.dao.SottocategoriaManager;
 
 @WebServlet("/AmministratoreServlet")
 public class AmministratoreServlet extends HttpServlet {
@@ -33,8 +39,13 @@ public class AmministratoreServlet extends HttpServlet {
 		PacchettoBean pacchetto = new PacchettoBean();
 		LezioniBean lezione = new LezioniBean();
 		Gson gson = new Gson();
-		System.out.println("Sono nella servlet");
 		String action = request.getParameter("azione");
+		
+		if(action == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+		
 		String vecchioCodice = request.getParameter("vecchioCodice");
 		String vecchioTitolo = request.getParameter("vecchioTitolo");
 
@@ -42,7 +53,16 @@ public class AmministratoreServlet extends HttpServlet {
 		//Cambia codice
 		if(action.equalsIgnoreCase("cambiaCodice")) { 
 			String nuovoCodice = request.getParameter("nuovoCodice");
-			System.out.println(nuovoCodice);
+			
+			PacchettoDao pacchettoDao = new PacchettoDao();
+			PacchettoBean pacchettoEsistente = pacchettoDao.getPacchetto(nuovoCodice);
+			
+			if(pacchettoEsistente != null) {
+				JSONResponse jsonResponse = new JSONResponse(false, INVALID_CODE);
+				out.print(gson.toJson(jsonResponse));
+				return;
+			}
+			
 			pacchetto.setCodicePacchetto(nuovoCodice);
 			AmministratoreDao manager = new AmministratoreDao();
 			manager.updateCode(vecchioCodice, nuovoCodice);		
@@ -58,10 +78,15 @@ public class AmministratoreServlet extends HttpServlet {
 			out.print(gson.toJson(jsonResponse));
 		}//Cambia prezzo
 		else if(action.equalsIgnoreCase("cambiaPrezzo")){
-			System.out.println(action);
-			double nuovoPrezzo = Double.parseDouble(request.getParameter("nuovoPrezzo"));
+			double nuovoPrezzo = 0;
+			try {
+				nuovoPrezzo = Double.parseDouble(request.getParameter("nuovoPrezzo"));
+			} catch(NumberFormatException e) {
+				JSONResponse jsonResponse = new JSONResponse(false, INVALID_PRICE);
+				out.print(gson.toJson(jsonResponse));
+				return;
+			}
 			pacchetto.setPrezzo(nuovoPrezzo);
-			System.out.println(nuovoPrezzo);
 			AmministratoreDao manager = new AmministratoreDao();
 			manager.updatePrice(vecchioCodice, nuovoPrezzo);
 			JSONResponse jsonResponse = new JSONResponse(true, "OK");
@@ -100,10 +125,35 @@ public class AmministratoreServlet extends HttpServlet {
 			}
 			String nuovaDescrizione = request.getParameter("descrizione");
 			
-			if(nuovoCodice == null || nuovaCategoria == null || nuovoPrezzo == 0 || nuovaDescrizione == null || nuovoTitolo == null || nuovaFoto == null) {
+			if(nuovoCodice == null || nuovaSottocategoria == null || nuovaCategoria == null || nuovoPrezzo == 0 || nuovaDescrizione == null || nuovoTitolo == null || nuovaFoto == null) {
 				JSONResponse jsonResponse = new JSONResponse(false, NO_ARGUMENT);
 				out.print(gson.toJson(jsonResponse));
 				return;
+			}
+			
+			CategoriaManager categoriaManager = new CategoriaManager();
+			SottocategoriaManager sottoCategoriaManager = new SottocategoriaManager();
+			
+			//Controllo che i codici di categoria e sottocategoria siano validi
+			try {
+				Object categoria = categoriaManager.findByKey(nuovaCategoria);
+				Object sottocategoria = sottoCategoriaManager.findByKey(nuovaSottocategoria);
+				
+				if(categoria == null) {
+					JSONResponse jsonResponse = new JSONResponse(false, NO_CATEGORY);
+					out.print(gson.toJson(jsonResponse));
+					return;	
+				}
+				
+				if(sottocategoria == null) {
+					JSONResponse jsonResponse = new JSONResponse(false, NO_SOTTOCATEGORY);
+					out.print(gson.toJson(jsonResponse));
+					return;	
+				}
+			} catch (SQLException e) {
+				JSONResponse jsonResponse = new JSONResponse(false, NO_INSERT);
+				out.print(gson.toJson(jsonResponse));
+				return;	
 			}
      
 			AmministratoreDao manager = new AmministratoreDao();
@@ -122,10 +172,19 @@ public class AmministratoreServlet extends HttpServlet {
 			String titolo = request.getParameter("titolo");
 			String durata = request.getParameter("durata");
 			
-			if(vecchioCodice == null || url == null || titolo == null || durata == null) {
+			if(vecchioCodice == null || vecchioCodice.length() == 0 || url == null || url.length() == 0 || titolo == null || titolo.length() == 0 || durata == null || durata.length() == 0) {
 				JSONResponse jsonResponse = new JSONResponse(false, NO_ARGUMENT);
 				out.print(gson.toJson(jsonResponse));
 				return;
+			}
+			
+			Pattern pattern = Pattern.compile("https:\\/\\/www.youtube.com\\/embed\\/\\w+");
+			Matcher matcher = pattern.matcher(url);
+			
+			if(!matcher.find()) {
+				JSONResponse jsonResponse = new JSONResponse(false, NO_URL);
+				out.print(gson.toJson(jsonResponse));
+				return;	
 			}
 			
 			AmministratoreDao manager = new AmministratoreDao();
@@ -151,6 +210,16 @@ public class AmministratoreServlet extends HttpServlet {
 		else if(action.equalsIgnoreCase("modificaVideoLezione")){
 			String nuovoUrlLezione = request.getParameter("nuovoUrlLezione");
 			lezione.setUrl(nuovoUrlLezione);
+			
+			Pattern pattern = Pattern.compile("https:\\/\\/www.youtube.com\\/embed\\/\\w+");
+			Matcher matcher = pattern.matcher(nuovoUrlLezione);
+			
+			if(!matcher.find()) {
+				JSONResponse jsonResponse = new JSONResponse(false, NO_URL);
+				out.print(gson.toJson(jsonResponse));
+				return;	
+			}
+						
 			AmministratoreDao manager = new AmministratoreDao();
 			manager.updateUrlLesson(vecchioTitolo, nuovoUrlLezione);
 			JSONResponse jsonResponse = new JSONResponse(true, "OK");
@@ -164,7 +233,6 @@ public class AmministratoreServlet extends HttpServlet {
 			JSONResponse jsonResponse = new JSONResponse(true, "OK");
 			out.print(gson.toJson(jsonResponse));
 		}else if(action.equalsIgnoreCase("rimuoviLezione")){
-			System.out.println("ciao sono in rimuovi");
 			AmministratoreDao manager = new AmministratoreDao();
 			manager.deleteLesson(vecchioTitolo);
 			JSONResponse jsonResponse = new JSONResponse(true, "OK");
@@ -172,8 +240,13 @@ public class AmministratoreServlet extends HttpServlet {
 		}
 	}
 	
+	private static final String NO_URL = "Url non valido!";
 	private static final String NO_INSERT = "Inserimento non riuscito!";
 	private static final String COMPLETE = "Pacchetto inserito con successo!";
+	private static final String INVALID_PRICE = "Prezzo non valido";
+	private static final String INVALID_CODE = "Codice pacchetto gi&agrave; in uso";
 	private static final String NO_CODE = "Inserire codice per proseguire!";
 	private static final String NO_ARGUMENT = "Tutti i parametri devono essere passati";
+	private static final String NO_CATEGORY = "Categoria non valida";
+	private static final String NO_SOTTOCATEGORY = "Codice sottocategoria non valido";
 }

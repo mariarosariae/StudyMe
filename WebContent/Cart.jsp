@@ -11,11 +11,11 @@
 		<%@ include file="NavigationBar.jsp"%>
 		<%@ include file="BarCategory.jsp"%>
 		
-		<div id = "cart">
 		<%
 			if (carrello.size() != 0) {
 		%>
-		
+		<div id = "cart">
+				
 		<h1 id="yourCart">IL TUO CARRELLO</h1>
 		
 		<div class="nameColumn">
@@ -74,26 +74,32 @@
 		
 			<%}%>
 			</div>
+			<div id="emptyCart">
 		<%
 			} else {
 		%>	
-		
-		<img src="img/utility/carrelloVuoto.png" id = "immagineCarrelloVuoto" alt="Carrello vuoto">
-		<h1 id= "noProduct">Non ci sono prodotti aggiunti al carrello</h1>
-		<a href = "HomePage.jsp">
-			<button id="buyNow">Acquista ora!</button>
-		</a>
+			<div id="emptyCart" style="display:block;">
 		<%
 			}
 		%>
 		
 	<!-- Carrello vuoto -->
-	<div id="emptyCart">
 		<img src="img/utility/carrelloVuoto.png" id = "immagineCarrelloVuoto" alt="Carrello vuoto">
 		<h1 id= "noProduct">Non ci sono prodotti aggiunti al carrello</h1>
-		<a href = "HomePage.jsp">
+		<a href = "SearchServlet?argument=">
 			<button id="buyNow">Acquista ora!</button>
 		</a>
+	</div>
+	
+	<!-- Acquisto effettuato -->
+	<div class = "sfondoMessaggioAcquisto">
+		<div class="sweet-alert">
+	        <p>Pagamento effettuato con successo!</p>
+	        <i class="fas fa-check-circle"></i>
+	        <span class="button" onClick = "closeMessage()">
+	            Chiudi
+	        </span>
+    	</div>
 	</div>
 	
 	<%@ include file="Footer.jsp"%>

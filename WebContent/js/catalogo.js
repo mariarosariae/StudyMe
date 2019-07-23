@@ -116,7 +116,7 @@ function updatePackage(){
     	 }else{
     		const messageError = $("#insuccess");
     		console.log(messageError);
-    		messageError.text(response.message);
+    		messageError.html(response.message);
 	        messageError.css("display", "block");
 	        messageError.css("color", "red");
      		oldCode.style.border = "1px solid red";
@@ -157,7 +157,7 @@ function addReview(){
     	const response = JSON.parse(data);
       	 
       	 if(response.ok == true){
-         	console.log("recesione inserita");
+      		 window.location.reload();
       	 }
       	 else {
       		 console.log("Errore");

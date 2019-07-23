@@ -136,8 +136,9 @@
 }
 
 #buyNow{
+	display: block;
 	width: 30%;
-    margin-left: 35%;
+	margin: 15px auto;
     font-size: 20px;
     cursor: pointer;
 }
@@ -147,16 +148,97 @@
 }
 
 #immagineCarrelloVuoto{
+	display: block;
 	width: 20%;
-    margin-left: 40%;
-    margin-top: 10px;
+    margin: 10px auto;
+}
+
+.sfondoMessaggioAcquisto {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    background: rgba(0,0,0,0.9);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sweet-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+
+    padding: 10px 30px;
+    animation: animation .4s;
+}
+
+.sweet-alert i {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+
+    text-align: center;
+    font-size: 100px;
+    color: #4CAF50;
+}
+
+.sweet-alert p {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.sweet-alert .button {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    padding: 10px 15px;
+
+    border-radius: 5px;
+    background: #13364D;
+
+    text-align: center;
+    color: white;
+
+    transition: all .4s;
+}
+
+.sweet-alert .button:hover {
+    cursor: pointer;
+    background: #3490cd;
+}
+
+@keyframes animation {
+    0% {
+        transform: scale(0) translate(-50%, -50%);
+        opacity: 0;
+    }
+
+    75% {
+        transform: scale(1.2) translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) translate(-50%, -50%);
+    }
 }
 
 @media screen and (max-width: 425px){
 	#immagineCarrelloVuoto{
 		width: 40%;
-	    margin-left: 30%;
 	    margin-top: 10px;
+	}
+	
+	#buyNow{
+		width: 80%;
 	}
 }
 

@@ -57,7 +57,6 @@ public class SignUpServlet extends HttpServlet {
 		}
 		
 		if(!password.equals(confPassword)) {
-			System.out.println("PASSWORD ERRATA");
 			JSONResponse jsonResponse = new JSONResponse(false, NO_PASSWORD);
 			out.print(gson.toJson(jsonResponse));
 			return;	
@@ -68,17 +67,18 @@ public class SignUpServlet extends HttpServlet {
 			out.print(gson.toJson(jsonResponse));
 			return;	
 		}else {
-			System.out.println("utente ok");
 			String passwordBase64format  = Base64.getEncoder().encodeToString(password.getBytes()); 
 			UserManager manager = new UserManager();
 			boolean res = manager.registration(email, nomeUtente, passwordBase64format);
 	
 			if(!res) {
-				System.out.println("EMAIL GIA' ESISTENTE!");
 				JSONResponse jsonResponse = new JSONResponse(false, NO_USER);
 				out.print(gson.toJson(jsonResponse));
 				return;			
 			}else {
+				UserBean user = manager.login(nomeUtente, passwordBase64format);
+				HttpSession session = request.getSession();
+				session.setAttribute("User", user);
 				JSONResponse jsonResponse = new JSONResponse(true, "OK");
 				out.print(gson.toJson(jsonResponse));
 			}

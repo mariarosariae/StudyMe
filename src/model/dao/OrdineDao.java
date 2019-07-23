@@ -28,7 +28,6 @@ public class OrdineDao {
 				if(res.next())
 					auto_id = res.getInt(1);
 				
-				System.out.println(auto_id);
 				ord = new OrdineBean();
 				ord.setNumOrdine(auto_id);
 	

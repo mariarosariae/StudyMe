@@ -49,7 +49,7 @@
 			        	Modifica
 			        </span>
 				    <span class ="catalogo catalogoAmministratore">
-				       <a href = "LessonServlet?codicePacchetto=<%=pacchetto.getCodicePacchetto()%>&nomeAmministratore=<%=administrator.getNomeAmministratore()%>">
+				       <a href = "LessonServlet?codicePacchetto=<%=pacchetto.getCodicePacchetto()%>">
 				        	Lezioni
 				        </a>
 				    </span>	       
@@ -82,26 +82,26 @@
 				<div id="updateCod">
 					<input type="hidden" name="oldCodPacc" value= "" id="code" style = "width:100%" required readonly>
 					<div id="updateCod">
-						<label for="uname"><b>Nuovo codice pacchetto: </b></label> <input type="text" name="codPacc" id="newCode">
+						<label for="uname"><b>Nuovo codice pacchetto: </b></label> <input type="text" placeholder = "Inserire codice pacchetto" name="codPacc" id="newCode">
 						<div id="updateButton" data = "cambiaCodice" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updateTitle">
-						<label for="uname"><b>Nuovo titolo: </b></label> <input type="text" name="titolo" id="newTitle">
+						<label for="uname"><b>Nuovo titolo: </b></label> <input type="text" placeholder = "Inserire titolo" name="titolo" id="newTitle">
 						<div id="updateButton" data = "cambiaTitolo" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updatePrice">
-						<label for="uname"><b>Nuovo prezzo: </b></label> <input type="text" name="prezzo" id="newPrice">
+						<label for="uname"><b>Nuovo prezzo: </b></label> <input type="text" placeholder = "Inserire prezzo" name="prezzo" id="newPrice">
 						<div id="updateButton" data = "cambiaPrezzo" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updateDescr">
 						<label for="uname"><b>Nuova descrizione: </b></label>
-						<textarea rows="3" cols="45" name = "descrizione" id="newDesc"></textarea>
+						<textarea rows="3" cols="45" name = "descrizione" placeholder = "Inserire descrizione" id="newDesc"></textarea>
 						<div id="updateButton" data = "cambiaDescrizione" onClick="updatePackage()">
 							<i class="fas fa-arrow-right"></i>
 						</div>

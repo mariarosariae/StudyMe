@@ -151,6 +151,7 @@
 				</div>
 			</div>
 		</div>
+	
 		<%@ include file="Footer.jsp"%>  
 	</div>
 	 <script type="text/javascript" src="./js/UserArea.js"></script>

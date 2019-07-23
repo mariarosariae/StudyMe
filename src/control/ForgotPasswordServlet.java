@@ -52,14 +52,12 @@ public class ForgotPasswordServlet extends HttpServlet {
 	    
 		EmailSender sender = EmailSender.GetInstance();
 		sender.SendEmail("Recupero password", "Ecco la tua nuova password: " + newPassword , emailUtente);
-		System.out.println("Inviata");
 		
 		String passwordBase64format  = Base64.getEncoder().encodeToString(newPassword.getBytes()); 
 		
 		UserManager manager = new UserManager();	
 		boolean resp = manager.updatePassword(emailUtente, passwordBase64format);
 		if(resp == false) {
-			System.out.println("NESSUN UTENTE");
 			JSONResponse jsonResponse = new JSONResponse(false, NO_USEREMAIL);
 			out.print(gson.toJson(jsonResponse));
 			return;	

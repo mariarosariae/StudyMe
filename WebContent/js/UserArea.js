@@ -29,7 +29,7 @@ function showOrders(){
 		padding: "0"
 	}, 500);
 	
-	const checkElement = document.querySelector(".orderHeader");
+	const checkElement = document.querySelector(".orderHeader") || document.querySelector("#noOrder");
 	
 	if(checkElement != null)
 		return;
@@ -65,13 +65,32 @@ function showOrders(){
 			})
 		}else{
 				const element = document.querySelector(".divTableHeading");
-				let title = "<h1>" + "Non sono ancora stati effettuati ordini!" + "<h1>";
+				let title = "<h1 id='noOrder'>" + "Non sono ancora stati effettuati ordini!" + "<h1>";
 				element.innerHTML = element.innerHTML + title;		
 		}
 	})
 }
 
-function showOrdersAdministrator(){
+function showOrdersAdministrator(){	
+	let nuovoCodice = document.getElementById("newCode");
+	let nuovaCategoria = document.getElementById("newCat");
+	let nuovaSottocategoria = document.getElementById("newSottoCat");
+	let nuovoTitolo = document.getElementById("newTitle");
+	let nuovaFoto = document.getElementById("newPhoto")
+	let nuovoPrezzo = document.getElementById("newPrice");
+	let nuovaDescrizione = document.getElementById("newDesc");
+	let messageError = document.getElementById("success");
+	
+	const datiNuovoPacchetto = [nuovoCodice, nuovaCategoria, nuovaSottocategoria, nuovoTitolo, nuovaFoto, nuovoPrezzo, nuovaDescrizione];
+	console.log(datiNuovoPacchetto);
+	
+	datiNuovoPacchetto.forEach(element =>{
+		element.style.border = "none";
+		element.value = null;
+	});
+	
+	messageError.style.display = "none";
+	
 	document.getElementById("UpdateUserName").style.display = ("none");
 	document.getElementById("ordini").style.display = "block";
 	var name = event.target;
@@ -210,6 +229,8 @@ function addPackage(){
 	let nuovoPrezzo = document.getElementById("newPrice");
 	let nuovaDescrizione = document.getElementById("newDesc");
 	
+	const datiNuovoPacchetto = [nuovoCodice, nuovaCategoria, nuovaSottocategoria, nuovoTitolo, nuovaFoto, nuovoPrezzo, nuovaDescrizione];
+	
 	$.ajax({
         url: "AmministratoreServlet",
         method: 'POST',
@@ -231,39 +252,22 @@ function addPackage(){
          	messageError.text(response.message);
     		document.getElementById("success").style.display = "block";
     		document.getElementById("success").style.color = "#4CAF50";
-    		nuovoCodice.style.border = "1px solid #4CAF50";
- 	        nuovaCategoria.style.border = "1px solid #4CAF50";
- 	    	nuovaSottocategoria.style.border = "1px solid #4CAF50";
- 	    	nuovoTitolo.style.border = "1px solid #4CAF50";
- 	    	nuovaFoto.style.border = "1px solid #4CAF50";
- 	    	nuovoPrezzo.style.border = "1px solid #4CAF50";
- 	    	nuovaDescrizione.style.border = "1px solid #4CAF50";
- 	    	nuovoCodice.value = null;
-         	nuovaCategoria.value = null;
-         	nuovaSottocategoria.value = null;
-         	nuovoTitolo.value = null;
-         	nuovaFoto.value = null;
-         	nuovoPrezzo.value = null;
-         	nuovaDescrizione.value = null;
-    	 }else{
+    		
+    		datiNuovoPacchetto.forEach(element =>{
+    			element.style.border = "1px solid #4CAF50";
+    			element.value = null;
+    		});
+       	 }else{
     		const messageError = $("#success");
           	messageError.text(response.message);
      		document.getElementById("success").style.display = "block";
      		document.getElementById("success").style.color = "red";
-	        nuovoCodice.style.border = "1px solid red";
-	        nuovaCategoria.style.border = "1px solid red";
-	    	nuovaSottocategoria.style.border = "1px solid red";
-	    	nuovoTitolo.style.border = "1px solid red";
-	    	nuovaFoto.style.border = "1px solid red";
-	    	nuovoPrezzo.style.border = "1px solid red";
-	    	nuovaDescrizione.style.border = "1px solid red";
-	    	nuovoCodice.value = null;
-        	nuovaCategoria.value = null;
-        	nuovaSottocategoria.value = null;
-        	nuovoTitolo.value = null;
-        	nuovaFoto.value = null;
-        	nuovoPrezzo.value = null;
-        	nuovaDescrizione.value = null;
+     		
+     		datiNuovoPacchetto.forEach(element => {
+    			element.style.border = "1px solid red";
+    			element.value = null;
+    		});
+
 	        console.log(response.message);
     	 }
     })

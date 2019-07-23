@@ -17,7 +17,8 @@ function nascondiModifiche(){
 function showAddLesson(codicePacchetto){
 	document.getElementById("sfondoAggiungiLezione").style.display = "block";
 	document.getElementById("containerAggiungiLezione").style.display = "block";
-	document.getElementById('codiceP').value = codicePacchetto;
+	document.getElementById("codiceP").value = codicePacchetto;
+	console.log(codicePacchetto);
 }
 
 function nascondiAggiunta(){
@@ -50,9 +51,14 @@ function addLesson(){
    	 if(response.ok == true){
    		 window.location.reload();
    	 }else{
-   		 url.style.border = "1px solid red";
-   		 titolo.style.border = "1px solid red";
-   		 durata.style.border = "1px solid red";
+   		const messageError = $("#messErr");
+      	messageError.text(response.message);
+ 		document.getElementById("messErr").style.display = "block";
+ 		document.getElementById("messErr").style.color = "red";
+ 		
+   		url.style.border = "1px solid red";
+   		titolo.style.border = "1px solid red";
+   		durata.style.border = "1px solid red";
    	 }
    })
 }
@@ -77,6 +83,6 @@ function modificaLezione(){
         	nuovaDurataLezione: nuovaDurataLezione.value,
         }
     }).done(data => {
-   		 window.location.reload();
+   		 alert(data);
    })	
 }

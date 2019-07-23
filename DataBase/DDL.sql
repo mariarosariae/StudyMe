@@ -35,6 +35,7 @@ prezzo double not null,
 descrizione varchar(1000) not null,
 titolo varchar(200) not null,
 foto varchar(300) not null,
+nelCatalogo boolean not null,
 foreign key (categoria) references categoria(nomeCategoria)
 	on update cascade
     on delete cascade,
@@ -79,7 +80,7 @@ foreign key (codiceP) references pacchetto(codicePacchetto)
 
 DROP DATABASE IF EXISTS recensione;
 CREATE TABLE recensione(
-idRecensione varchar(15) primary key,
+idRecensione int auto_increment primary key,
 userCliente varchar(20) not null,
 codiceP varchar(6) not null,
 commento varchar(500) not null,

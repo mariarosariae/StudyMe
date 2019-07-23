@@ -156,8 +156,35 @@ iframe{
     transform: translate(-50%, -50%);
 }
 
+#buyNow{
+	display: block;
+	width: 30%;
+	margin: 15px auto;
+    font-size: 20px;
+    cursor: pointer;
+    height: 50px;
+}
+
+#noAcquisti{
+	 font-weight: bold;
+}
+
+#libreriaVuota{
+	width: 85%;
+}
+
 @media only screen and (max-width: 425px) {
     .wrapper {
         padding: 0 10%;
     }
+}
+
+@media only screen and (max-width: 768px) {
+	#libreriaVuota{
+		width: 60%;
+	}
+	
+	#buyNow{
+		width: 80%;
+	}
 }

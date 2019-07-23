@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String nomeUtente = request.getParameter("NomeUtente");
 		String password = request.getParameter("Password");
+		boolean isChecked = Boolean.parseBoolean(request.getParameter("Ricordami"));
 		
 		if(nomeUtente == null || password == null) {
 			JSONResponse jsonResponse = new JSONResponse(false, NO_ARGUMENT);
@@ -48,7 +49,6 @@ public class LoginServlet extends HttpServlet {
 		String passwordBase64format  = Base64.getEncoder().encodeToString(password.getBytes()); 
 	
 		UserManager manager = new UserManager();
-		System.out.println(passwordBase64format);
 		UserBean user = manager.login(nomeUtente, passwordBase64format);
 				
 		if(user == null) {
@@ -59,13 +59,19 @@ public class LoginServlet extends HttpServlet {
 				return;	
 			} else {
 				HttpSession session = request.getSession();
+				if(isChecked) {
+					session.setMaxInactiveInterval(360 * 60 * 30);
+				}
 				session.setAttribute("Amministratore", amministratore);
 				JSONResponse jsonResponse = new JSONResponse(true, "OK", amministratore.getNomeAmministratore());
 				out.print(gson.toJson(jsonResponse));
 			}
 		}
-		else {
+		else {			
 			HttpSession session = request.getSession();
+			if(isChecked) {
+				session.setMaxInactiveInterval(360 * 60 * 30);
+			}
 			session.setAttribute("User", user);
 			JSONResponse jsonResponse = new JSONResponse(true, "OK", user.getNomeUtente());
 			out.print(gson.toJson(jsonResponse));

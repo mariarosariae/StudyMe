@@ -164,17 +164,25 @@ $(document).ready(() => {
 const onLoginSubmit = event => {
     //Evita di fare il submit
     event.preventDefault();
-
-    //Selezioniamo gli elementi del login
+    
+    let isChecked;
+    if (document.getElementById('remember').checked) {
+        isChecked = true;
+    } else {
+        isChecked = false;
+    }
+    
+  //Selezioniamo gli elementi del login
     let userInput = document.getElementById("myName");
     let userPassword = document.getElementById("myPass");
-
+ 
     $.ajax({
         url: "LoginServlet",
         method: 'POST',
         data: {
             NomeUtente: userInput.value,
-            Password: userPassword.value
+            Password: userPassword.value,
+            Ricordami : isChecked
         }
     }).done(data => {
         const response = JSON.parse(data);
@@ -251,12 +259,11 @@ const recoveryPassword = event => {
 	    		document.getElementById("formRecovery").style.display="none";
 	    		$("#recovery").css("text-align", "center");
 	  	   	}else {
-		  	   	const messageError = $("#signUpMessageError");
+		  	   	const messageError = $(".recuperoPassword #signUpMessageError");
 		        messageError.text(response.message);
 		        messageError.css("opacity", "1");
 		        userEmail.style.border = "1px solid red";
 		        userEmail.value = null;
-		        console.log(response.message);
 	  	   	}     
 	    })
 	}
@@ -264,18 +271,3 @@ const recoveryPassword = event => {
 function redirectUserArea(){
 	window.location = "UserArea.jsp";
 }
-
-/*
-//Funzione per ricordare i dati utente
-function rememberMe(){
-	var userName = document.getElementById("myName");
-	var userPass = document.getElementById("myPass");
-	var checkBox = document.getElementById("remember");
-	 if (checkBox.checked == true){
-		 userName.value = loggedUser.getNomeUtente();
-		 userPass.value = loggedUser.getPassword();
-	 } else{
-		 userName.value = null;
-	 	 userPass.value = null;
-	 }
-}*/

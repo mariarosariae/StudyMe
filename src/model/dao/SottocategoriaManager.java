@@ -15,20 +15,13 @@ public class SottocategoriaManager implements Model_interface<SottocategoriaBean
 	public SottocategoriaManager() {}
 
 	@Override
-	public void insert(SottocategoriaBean entity) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void insert(SottocategoriaBean entity) throws SQLException {}
 
 	@Override
-	public void update(SottocategoriaBean entity) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update(SottocategoriaBean entity) throws SQLException {}
 
 	@Override
 	public boolean remove(Object codiceP) throws SQLException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -23,7 +23,15 @@
 	 	<%@ include file="BarCategory.jsp"%> 	
 	 	
 	 	<%if(result == null || result.size() == 0){%>
-	 		<h1>Nessuna lezione trovata</h1>
+	 		<div id = "pacchetto">
+   				<h1 id = "titoloPacchetto"><%=pacchetto.getTitolo()%></h1>
+   				<div id= "AggiungiLezione" onClick = "showAddLesson('<%=pacchetto.getCodicePacchetto()%>')">
+	   				<i class="fas fa-plus-square"></i>
+	   				<span id = "addL">Aggiungi lezione</span>
+   				</div>
+   			</div>
+	 		<img src = "img/utility/no-lesson.svg" id = "immagineNoLezione" alt = "Lezione non trovata">
+	 		<h1 id = "noLesson">Nessuna lezione trovata</h1>
    		<%}else{%>			
    				<div id = "pacchetto">
    					<h1 id = "titoloPacchetto"><%=pacchetto.getTitolo()%></h1>
@@ -41,7 +49,7 @@
 		   								<%=lezione.getTitolo()%>
 		   								<%nomeTitolo = lezione.getTitolo();%>
 		   							</span>
-				   					<div class = "modificaLezione" onClick = "mostraModificaLezione('<%=lezione.getTitolo()%>')"> Modifica lezione <i class="fas fa-pencil-alt"></i></div>
+				   					<div class = "modificaLezione" onClick = "mostraModificaLezione(`<%=lezione.getTitolo()%>`)"> Modifica lezione <i class="fas fa-pencil-alt"></i></div>
 		   						</div>
 	   						</div>
 	   					<%}%>
@@ -63,19 +71,19 @@
 						<input id = "TitoloLezioneVecchio" type="hidden" readonly required>
 					</div>
 					<div id="updateName">
-						<label for="uname"><b>Nuovo nome: </b></label> <input  id = "nomeModificaLezione" style = "width:85%" type="text" name="newName" required>
+						<label for="uname"><b>Nuovo nome: </b></label> <input  id = "nomeModificaLezione" placeholder = "Inserire nome lezione" style = "width:85%" type="text" name="newName" required>
 						<div id="updateButton" data = "modificaNomeLezione" onClick="modificaLezione()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updateUrl">
-						<label for="uname"><b>Nuovo url: </b></label> <input id = "urlModificaLezione" style = "width:85%" type="text" name="newUrls" required>
+						<label for="uname"><b>Nuovo url: </b></label> <input id = "urlModificaLezione" placeholder = "Inserire url lezione" style = "width:85%" type="text" name="newUrls" required>
 						<div id="updateButton" data = "modificaVideoLezione" onClick="modificaLezione()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
 					</div>
 					<div id="updateDurata">
-						<label for="uname"><b>Nuova durata: </b></label> <input id = "durataModificaLezione" style = "width:85%" type="text" name="newUrls" required>
+						<label for="uname"><b>Nuova durata: </b></label> <input id = "durataModificaLezione" placeholder = "Inserire durata lezione" style = "width:85%" type="text" name="newUrls" required>
 						<div id="updateButton" data = "modificaDurataLezione" onClick="modificaLezione()">
 							<i class="fas fa-arrow-right"></i>
 						</div>
@@ -95,18 +103,19 @@
 			<div id = "containerAggiungiLezione">
 				<div id="modificaLez">
 					<h2>Aggiungi lezione</h2>
+					<div id = "messErr"></div>
 					<form id="add">
 						<div id="addUrl">
 							<label for="url"><b>Codice pacchetto: </b></label> <input id = "codiceP" value = "" readonly type="text" required>
 						</div>
 						<div id="addUrl">
-							<label for="url"><b>Inserire url: </b></label> <input id = "url" type="text" required>
+							<label for="url"><b>Inserire url: </b></label> <input placeholder = "Inserire url nuova lezione" id = "url" type="text" required>
 						</div>
 						<div id="addTitle">
-							<label for="title"><b>Inserire titolo: </b></label> <input  id = "title" type="text" required>
+							<label for="title"><b>Inserire titolo: </b></label> <input placeholder = "Inserire titolo nuova lezione" id = "title" type="text" required>
 						</div>
 						<div id="addTime">
-							<label for="title"><b>Inserire durata: </b></label> <input id = "duration" type="text" required>
+							<label for="title"><b>Inserire durata: </b></label> <input placeholder = "Inserire durata nuova lezione" id = "duration" type="text" required>
 						</div>
 						<div id ="addLesson" data = "aggiungiLezione" onClick = "addLesson()">Aggiungi nuova lezione</div>
 					</form>

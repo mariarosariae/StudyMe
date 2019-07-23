@@ -29,6 +29,16 @@
     	<%@ include file="NavigationBar.jsp"%>
     	<%@ include file="BarCategory.jsp"%> 
         	<div class="wrapper">
+        	
+        	<%if(pacchetti == null || pacchetti.size() == 0){ %>
+        		<div class="information">
+        			<img src="img/utility/libreriaVuota.png" id = "libreriaVuota" alt="Libreria vuota">
+        		 	<h1 id = "noAcquisti">Non hai effettuato acquisti</h1>
+        		 	<a href = "SearchServlet?argument=">
+						<button id="buyNow">Acquista ora!</button>
+					</a>
+        		</div>
+        	<%} else{ %>
 	            <div class="information">
 	                <h1>I TUOI ACQUISTI</h1>
 	                <h4>In questa sezione vengono mostrati i tuoi acquisti</h4>
@@ -52,9 +62,13 @@
 							<% } %>
 						</ul>
 					</div>
-					<%} %>
-				  </div>
+					<%}%>
+				  </div>      
+	            <%}%>
 	            </div>
+	            <br>
+	            <br>
+	            <br>
 	            
 	             <!-- Video -->
 				<div id = "sfondoVideo">
@@ -64,11 +78,7 @@
 				<div id ="video"></div>
 			</div>
 			<%@ include file="Footer.jsp"%>
-			</div>
-			
-        
-       	
-        
+			</div>       
         <script src="js/libreria.js" charset="utf-8"></script>
     </body>
 </html>

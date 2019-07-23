@@ -14,7 +14,7 @@ public class RecensioneDao {
 	public void aggiungiRecensione(String nomeUtente, String codicePacchetto, String titoloRecensione, String testoRecensione) {
 		try {
 			
-			if(!isAlwreadyReviewed(nomeUtente, codicePacchetto)) {
+			if(isAlwreadyReviewed(nomeUtente, codicePacchetto)) {
 				return;
 			}
 			

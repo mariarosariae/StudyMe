@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.bean.AmministratoreBean;
 import model.bean.CarrelloBean;
 import model.bean.LezioniBean;
 import model.bean.OrdineAcquistoBean;
@@ -33,7 +34,11 @@ public class LessonServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String codicePacchetto = request.getParameter("codicePacchetto");
-		String nomeAmministratore = request.getParameter("nomeAmministratore");
+		AmministratoreBean amministratore = (AmministratoreBean) request.getSession().getAttribute("Amministratore");
+		String nomeAmministratore = null;
+		
+		if(amministratore != null)
+			nomeAmministratore = amministratore.getNomeAmministratore();
 
 		ArrayList<OrdineAcquistoBean> ordiniCliente = null;
 		OrdineAcquistoDao dao = new OrdineAcquistoDao();
@@ -58,7 +63,6 @@ public class LessonServlet extends HttpServlet {
 		ArrayList<PacchettoBean> cart = (ArrayList<PacchettoBean>) session.getAttribute("carrello") ;
 		
 		if(cart == null) {
-			System.out.println("Carrello vuoto");
 			cart = new ArrayList<PacchettoBean>();
 			session.setAttribute("carrello", cart);
 		}
@@ -75,10 +79,12 @@ public class LessonServlet extends HttpServlet {
 			for(OrdineAcquistoBean o : ordiniCliente) {
 				pacchettiAcquistati = o.getPacchettiAcquistati();
 				for(PacchettoBean p : pacchettiAcquistati) {
-					if(p.getCodicePacchetto().equals(codicePacchetto))
+					if(p.getCodicePacchetto().equals(codicePacchetto)) {
 						comprato = true;
 						break;
+					}
 				}
+				
 			}
 			if(!comprato) {
 				//Controlla che sia nel carrello

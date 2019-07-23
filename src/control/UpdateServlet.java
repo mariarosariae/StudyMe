@@ -50,9 +50,7 @@ public class UpdateServlet extends HttpServlet {
 			if(nuovaEmailUtente != null && nuovaPasswordUtente == null) {
 				UserManager manager = new UserManager();
 				boolean res = manager.updateEmail(emailUtente, nuovaEmailUtente);
-				System.out.println(res);
 				if(res == false) {
-					System.out.println("NESSUN UTENTE");
 					JSONResponse jsonResponse = new JSONResponse(false, NO_USER);
 					out.print(gson.toJson(jsonResponse));
 					return;	
@@ -66,7 +64,6 @@ public class UpdateServlet extends HttpServlet {
 					String passwordBase64format  = Base64.getEncoder().encodeToString(nuovaPasswordUtente.getBytes()); 
 					boolean res = manager.updatePassword(emailUtente, passwordBase64format);
 					if(res == false) {
-						System.out.println("NESSUN UTENTE");
 						JSONResponse jsonResponse = new JSONResponse(false, NO_USER);
 						out.print(gson.toJson(jsonResponse));
 						return;	

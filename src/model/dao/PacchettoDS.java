@@ -235,8 +235,6 @@ public class PacchettoDS implements Model_interface<PacchettoBean> {
 			ResultSet res = stm.executeQuery();
 			conn.commit();
 			if (res.next()) {
-				System.out.println("DAO--> Query eseguita, torniamo nella servlet" + res.getString(1));
-
 				PacchettoBean pacchetto = new PacchettoBean();
 
 				pacchetto.setCodicePacchetto(res.getString(1));

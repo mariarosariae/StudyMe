@@ -1,5 +1,16 @@
 @charset "ISO-8859-1";
 
+#ricercaTitolo{
+	 font-family: 'Coming Soon', cursive;
+	 text-align: center;
+	 color: white;
+}
+
+#immagineRicerca{
+	height: 350px;
+    margin-left: 40%;
+}
+
 #nomeCategoria{
 	font-size: 15px;
     position: absolute;
@@ -89,9 +100,7 @@
     background-position: center;
     border-top-right-radius: 14px;
     border-top-left-radius: 14px;
-    transition-property: all;
-    transition-delay: 1s;
-    transition-duration: 2s;
+    transition: background-size;
 }
 
 .pacchetto p{
@@ -127,6 +136,7 @@
     font-size: x-large;
     margin: 0;
     color: white;
+    margin-left: 10px;
 }
 
 .catalogo{
@@ -284,7 +294,6 @@
   .pacchetto {
 	grid-column: span 6 !important;
   }
- 
 }
 
 @media only screen and (max-width: 425px) {
@@ -307,5 +316,21 @@
   	
   	#containerModificaPacchetto input{
   		width: 80%;
+  	}
+  	
+  	#immagineRicerca{
+  		margin-left: 20% !important;
+  	}
+}
+
+@media only screen and (max-width: 375px) {
+	#immagineRicerca{
+  		margin-left: 10% !important;
+  	}
+}
+
+@media only screen and (max-width: 768px) {
+	#immagineRicerca{
+  		margin-left: 35%;
   	}
 }
